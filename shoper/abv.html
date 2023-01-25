@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width: 100%;
+            background-color: antiquewhite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main{
+            background-color: aqua;
+            width: 80vh;
+            height:70vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+           
+        }
+        .item{
+            background-color: yellow;
+            width:70vh;
+            height:4vh;
+            margin: 20px 0;
+            border-radius: 6px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .item2{
+            background-color: rgb(190, 190, 190);
+            width:70vh;
+            height:4vh;
+            margin: 20px 0;
+            border-radius: 6px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<script>
+function abcd(){
+   
+    var cc=document.getElementsByClassName('item');
+    cc[0].classList.toggle('item2')
+}
+function abcd2(){
+   
+    var cc=document.getElementsByClassName('item');
+    cc[1].classList.toggle('item2')
+}
+function abcd3(){
+   
+    var cc=document.getElementsByClassName('item');
+    cc[2].classList.toggle('item2')
+}
+function abcd4(){
+   
+    var cc=document.getElementsByClassName('item');
+    cc[3].classList.toggle('item2')
+}
+
+</script>
+    <div class="main">
+        <div onclick=abcd() class="item"> clothes</div>
+        <div  onclick=abcd2() class="item">shoes</div>
+        <div  onclick=abcd3() class="item">bags</div>
+        <div  onclick=abcd4() class="item">toy</div>
+    </div>
+    
+</body>
+</html>

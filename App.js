@@ -1,20 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 
+import React,{useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Bottomtabs from './shoper/Bottomtabs';
+import Home from './shoper/Home';
+
+
+import Drawers from './shoper2/Drawers';
 export default function App() {
+
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+<Drawers/>
+
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
