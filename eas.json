@@ -3,9 +3,7 @@
     "preview":{
       "android":{
         "buildType":"apk"
-      },
-      "extends":"production",
-      "distribution":"internal"
+      }
     },
     "development":{
       "extends":"production",
