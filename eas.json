@@ -1,28 +1,16 @@
 {
-  "cli": {
-    "version": ">= 3.4.1"
-  },
-  "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal",
-      "ios": {
-        "resourceClass": "m1-medium"
-      }
+  "build":{
+    "preview":{
+      "android":{
+        "buildType":"apk"
+      },
+      "extends":"production",
+      "distribution":"internal"
     },
-    "preview": {
-      "distribution": "internal",
-      "ios": {
-        "resourceClass": "m1-medium"
-      }
-    },
-    "production": {
-      "ios": {
-        "resourceClass": "m1-medium"
-      }
+    "development":{
+      "extends":"production",
+      "developmentClient":"true",
+      "distribution":"internal"
     }
-  },
-  "submit": {
-    "production": {}
   }
 }
