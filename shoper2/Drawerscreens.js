@@ -10,7 +10,6 @@ import Bottomtabs from '../shoper/Bottomtabs';
 import Verifynum from '../shoper/Verifynum'
 import Entermpin from '../shoper/Entermpin';
 import Entermpin2 from '../shoper/EnterMpin2';
-import Likedis from '../shoper/Likedis';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Forgotpassword from '../shoper/Forgotpassword';
 import Goldlogin2 from '../shoper/Goldlogin2';
@@ -54,7 +53,6 @@ const Drawerscreens = () => {
     <Drawer.Screen  options={{headerShown:false}}  name="Forgot" component={Forgotmpin} />
     <Drawer.Screen  options={{headerShown:false}}  name="Forgotpass" component={Forgotpassword} />
     <Drawer.Screen  options={{headerShown:false}}  name="Bottomtabs" component={Bottomtabs} />
-    <Drawer.Screen  options={{headerShown:false}}  name="likedis" component={Likedis} />
     <Drawer.Screen  options={{headerShown:false}}  name="likedis2" component={Swiper5} />
  </Drawer.Navigator>
   )
