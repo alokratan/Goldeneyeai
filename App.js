@@ -1,16 +1,11 @@
-
-import React,{useEffect, useState} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Bottomtabs from './shoper/Bottomtabs';
-import Home from './shoper/Home';
-
-
-import Drawers from './shoper2/Drawers';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import Drawerscreens from './shoper2/Drawerscreens';
 export default function App() {
-
-
   return (
-<Drawers/>
+<NavigationContainer>
+      <Drawerscreens/>
+    </NavigationContainer>
 
   );
 }

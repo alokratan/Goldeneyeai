@@ -88,7 +88,7 @@ const alertpassword=(text)=>{
               })
                 .then(result => {
 
-                   console.log(result.data.token)
+                //    console.log(result.data.token)
                   if (result.status == 200) {
                     setPhoneval(true)
                     setPassval(true)
@@ -112,7 +112,7 @@ const alertpassword=(text)=>{
                   }
                 
                 }).catch(err=>{
-                    console.log(err);
+                    // console.log(err);
                     ToastAndroid.show('Make Sure Your Server Is Live', 1000)
                 })
                 

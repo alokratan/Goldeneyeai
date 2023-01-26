@@ -48,17 +48,7 @@ const Setmpin = () => {
 
                
 
-                {/* <View style={styles.checkboxContainer}>
-                    <Checkbox
-                        value={isSelected}
-                        onValueChange={setSelection}
-                        style={styles.checkbox}
-                        color="black"
-                    />
-                    <Text style={styles.title3}>Saved locally</Text>
-                </View> */}
-
-
+    
 
             </View>
 

@@ -59,7 +59,7 @@ const Setpref = ({ navigation }) => {
             return [e.id, e.selected]
 
         })
-        console.log(abcd);
+        // console.log(abcd);
         // alert(abcd)
         ToastAndroid.show('Updated Successfully', 1000);
         setSuccess(true)

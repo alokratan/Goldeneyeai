@@ -60,7 +60,7 @@ const Goldregister = ({ navigation }) => {
       });
       if (response.status === 200) {
         alert(` You have created: ${JSON.stringify(response.data)}`);
-        console.log(` You have created: ${JSON.stringify(response.data)}`);
+        // console.log(` You have created: ${JSON.stringify(response.data)}`);
         setTimeout(() => {
             navigation.navigate('Goldlogin')
         }, 1000);
@@ -76,7 +76,7 @@ const Goldregister = ({ navigation }) => {
       }
     } catch (error) {
       alert("An error has occurred");
-      console.log(error)
+    //   console.log(error)
       setIsLoading(false);
     }
   };

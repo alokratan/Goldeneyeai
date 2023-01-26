@@ -11,7 +11,7 @@ const HomeBottom = () => {
     const [select, setSelect] = useState(data);
     const [redeemed, setRedeemed] = useState(false);
 
-    console.log(select);
+    // console.log(select);
 
     const like = (item) => {
         const newitem = select.map((val) => {

@@ -50,21 +50,21 @@ function loginfun(){
             navigation.navigate('Goldregis2')
         }, 2000);
   
-    console.log(abstr);
+    // console.log(abstr);
     }
     else if(!phone_number){
         ToastAndroid.show('Plese Enter 10 digit mobile number',1000);    
-    console.log(abstr);
+    // console.log(abstr);
     }
     else if(abstr===0){
         ToastAndroid.show('Plese, Enter 4 digit OTP',1000);    
-    console.log(abstr);
+    // console.log(abstr);
     }
     else{
         // ToastAndroid.show(`The OTP you have entered is incorrect:  ${abstr}`,1000); 
        
         // alert(`The OTP you have entered is incorrect:  ${abstr}`)
-        console.log(abstr);
+        // console.log(abstr);
         setCorrectmpin(false)
     }
 

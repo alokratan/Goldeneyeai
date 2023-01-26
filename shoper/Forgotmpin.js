@@ -17,9 +17,9 @@ const Forgotmpin = () => {
 function abcdfun(){
     var bas = Object.values(abcd)
 
-    console.log(bas);
+    // console.log(bas);
     const abstr= Number(bas.join(''));
-    console.log(abstr);
+    // console.log(abstr);
 
 }
 

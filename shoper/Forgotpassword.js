@@ -25,7 +25,7 @@ const Forgotpassword = ({ navigation }) => {
             setPasswordval(false)
         }
         else if(password.toString().length>=6 && password2.toString().length>=6){
-            console.log(` Your Password Successfully Updated`);
+        //    console.log(` Your Password Successfully Updated`);
             setPasswordval(true)
             ToastAndroid.show('Your Password Successfully Updated', 1000)
             setTimeout(() => {

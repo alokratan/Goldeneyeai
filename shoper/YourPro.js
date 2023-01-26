@@ -22,7 +22,7 @@ const YourPro = () => {
     const [visible, setVisible] = useState(false);
 
     const save = () => {
-        console.log();
+        // console.log();
     };
     const visifun = () => setVisible(true);
     const nonvisifun = () => setVisible(false);

@@ -17,37 +17,6 @@ const Entermpin2 = ({navigation}) => {
     const abcd = { ...otp }
 
 
-//     function abcdfun() {
-//         var bas = Object.values(abcd)
-//         const abstr = Number(bas.join(''));
-//         if(abstr===2580){
-//             alert(`.....Welcome User, Your Mpin is this ${abstr}...... `)
-//             ToastAndroid.show('Welcome',2000);
-            
-//             setTimeout(() => {
-//                 navigation.navigate('Bottomtabs')
-//             }, 2000);
-      
-//         console.log(abstr);
-//         }
-//         else if(abstr===0){
-//             ToastAndroid.show('Plese, Enter 4 digit MPIN',1000);    
-//         console.log(abstr);
-//         }
-//         else{
-//             alert(`The MPIN you have entered is incorrect:  ${abstr}`)
-//             console.log(abstr);
-//             setCorrectmpin(false)
-//         }
-
-       
-      
-
-//     }
-// useEffect(()=>{
-//     abcdfun();
-// },[])
-
 
 
 const handleLogin = () => {
@@ -59,7 +28,7 @@ const handleLogin = () => {
             mpin:abstr
       })
         .then(result => {
-          console.log(result)
+        //   console.log(result)
           if (result.status == 200) {
             alert(`.....Welcome User, Your Mpin is this ${abstr}...... `)
             ToastAndroid.show('Authentication succesful',2000);
@@ -71,7 +40,7 @@ const handleLogin = () => {
         })
         .catch(err => {
             alert(`The MPIN you have entered is incorrect:  ${abstr}`)
-            console.log(abstr);
+            // console.log(abstr);
             setCorrectmpin(false)
       
         });

@@ -29,7 +29,7 @@ const Goldregister = ({ navigation }) => {
     });
     setProfile_pic(resultss)
     //  console.log(resultss);
-    // console.warn(resultss.uri)
+   
     if (!resultss.canceled) {
       setImage(resultss.assets[0].uri);
       setImg(false)
@@ -83,7 +83,7 @@ const Goldregister = ({ navigation }) => {
       if (response.status === 200) {
         // alert(` You have created: ${JSON.stringify(response.data)}`);
         setSuccess(true)
-        console.log(` You have created: ${JSON.stringify(response.data)}`);
+        // console.log(` You have created: ${JSON.stringify(response.data)}`);
         setTimeout(() => {
             setSuccess(false)
             navigation.navigate('Goldlogin')
@@ -100,7 +100,7 @@ const Goldregister = ({ navigation }) => {
       }
     } catch (error) {
       alert("An error has occurred");
-      console.log(error)
+    //   console.log(error)
 
     }
   };

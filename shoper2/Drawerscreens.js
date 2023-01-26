@@ -26,7 +26,7 @@ const Drawerscreens = () => {
       const dataToken =await AsyncStorage.getItem('AccessToken');
       
       setDataToken(dataToken)
-      console.log(dataToken);
+      // console.log(dataToken);
       }
   
       handlegetToken();
