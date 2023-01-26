@@ -2,7 +2,7 @@
   "expo": {
     "name": "GoldenEye",
     "slug": "GoldenEye",
-    "version": "2.3.0",
+    "version": "2.3.4",
     "orientation": "portrait",
     "icon": "./assets/eye.png",
     "userInterfaceStyle": "light",
