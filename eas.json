@@ -6,9 +6,9 @@
       }
     },
     "development":{
-      "extends":"production",
       "developmentClient":"true",
       "distribution":"internal"
-    }
+    },
+    "production":{}
   }
 }

@@ -4,7 +4,7 @@
     "slug": "GoldenEye",
     "version": "2.3.4",
     "orientation": "portrait",
-    "icon": "./assets/eye.png",
+    "icon": "./assets/eye2.pngs",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
