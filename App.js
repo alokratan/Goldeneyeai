@@ -1,11 +1,8 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import Drawerscreens from './shoper2/Drawerscreens';
+import App2 from './App2'
 export default function App() {
   return (
-<NavigationContainer>
-      <Drawerscreens/>
-    </NavigationContainer>
+<App2/>
 
   );
 }

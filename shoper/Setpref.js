@@ -61,7 +61,7 @@ const Setpref = ({ navigation }) => {
         })
         // console.log(abcd);
         // alert(abcd)
-        ToastAndroid.show('Updated Successfully', 1000);
+        ToastAndroid.show('Your prefernces has been saved for future', 1000);
         setSuccess(true)
         setTimeout(() => {
             setSuccess(false)

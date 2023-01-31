@@ -1,6 +1,5 @@
 import { StyleSheet, Text, Pressable,ToastAndroid, TextInput, StatusBar, Image, View } from 'react-native'
 import React, { useRef, useState } from 'react';
-
  import loginimg from '../assets/icons/loginimg.jpg'
  import { MaterialCommunityIcons } from '@expo/vector-icons';
 const Verifynum = ({navigation}) => {
@@ -19,9 +18,7 @@ const Verifynum = ({navigation}) => {
     };
     function  sendeotpfun(){
         pin5Ref.current.blur()
-
         if(phone_number.toString().length==10){
-
             ToastAndroid.show('OTP Send Successfully.',2000);
             setCorrectphno(true)
             
@@ -47,7 +44,7 @@ function loginfun(){
         
         setTimeout(() => {
             setSuccess(false)
-            navigation.navigate('Goldregis2')
+            navigation.navigate('RegisterHome')
         }, 2000);
   
     // console.log(abstr);
@@ -61,13 +58,11 @@ function loginfun(){
     // console.log(abstr);
     }
     else{
-        // ToastAndroid.show(`The OTP you have entered is incorrect:  ${abstr}`,1000); 
-       
+        // ToastAndroid.show(`The OTP you have entered is incorrect:  ${abstr}`,1000);      
         // alert(`The OTP you have entered is incorrect:  ${abstr}`)
         // console.log(abstr);
         setCorrectmpin(false)
     }
-
    
 }
     return (
@@ -146,7 +141,6 @@ function loginfun(){
                             onChangeText={text => {
                                 setOtp({ ...otp, 2: text });
                                 text ? pin3Ref.current.focus() : pin1Ref.current.focus()
-
                             }}
                             keyboardType="number-pad"
                             style={[styles.textotpinp,{borderColor:correctmpin?'black':'red'}]}
@@ -217,7 +211,7 @@ function loginfun(){
                         Back to
                     </Text>
                     <Pressable style={styles.txt2}
-                        onPress={loginfun}>
+                        onPress={()=>navigation.navigate('LoginHome')}>
                         <Text style={styles.ttxt3}>
                             LOGIN
                         </Text>
@@ -277,6 +271,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'flex-end',
         flexDirection: 'row',
+        marginBottom:10
 
     },
     midd4: {
@@ -387,7 +382,6 @@ const styles = StyleSheet.create({
     buttonn: {
         width: '100%',
         height: 170,
-
         justifyContent: 'center',
         alignItems: 'center'
 

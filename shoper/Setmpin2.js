@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FontAwesome5 } from '@expo/vector-icons';
 import loginimg from '../assets/icons/loginimg.jpg'
 import { MaterialIcons } from '@expo/vector-icons';
-const Setmpin = ({navigation}) => {
+const Setmpin2 = ({navigation}) => {
 
     const [mpin,setMpin]=useState('');
     const [mpin2,setMpin2]=useState('');
@@ -18,15 +18,12 @@ const Setmpin = ({navigation}) => {
         if(mpin==mpin2){
             setMpinval(true)
             setIcon('green')
-         
-
 
         }
         else{
   
         setMpinval(false)
-    setIcon('white')
-       
+        setIcon('white')
         }
        
     }
@@ -38,7 +35,6 @@ const Setmpin = ({navigation}) => {
             setSuccess(false)
             navigation.navigate('Goldlogin')
         }, 2000);
-       
     }
 
     return (
@@ -49,14 +45,14 @@ const Setmpin = ({navigation}) => {
 
                     <View style={styles.sucess}>
                     <Text style={{fontSize:24,fontWeight:'900',marginVertical:20,color:'white'}}>
-                        MPIN Generated Successfully
+                        MPIN Updated Successfully
                     </Text>
                      
                     </View>
                 </View> : <View></View>
             }
             <View style={styles.top}>
-                <Text style={styles.title}>Set MPIN</Text>
+                <Text style={styles.title}>Reset MPIN</Text>
             </View>
             <View style={styles.midd}>
                 <View style={styles.midd2}>
@@ -94,17 +90,21 @@ const Setmpin = ({navigation}) => {
                 />
 
 <MaterialIcons name="mobile-friendly" size={24} color={icon} />
-            
+               
+                        
                 </View>
                 {
                                 mpinval?  <Text style={{display:'none'}}>
                                
                             </Text>:<Text style={{color:'red',paddingBottom:20,width:'85%'}}>
-                                 MPIN not match
+                              MPIN not match
                             </Text>
                             
                             }
 
+               
+
+    
 
             </View>
 
@@ -114,8 +114,9 @@ const Setmpin = ({navigation}) => {
                     <Text style={styles.txt9}>
                         SUBMIT
                     </Text>
-                </Pressable>              
-                <View style={styles.buttonn2}>
+                </Pressable>
+
+                 <View style={styles.buttonn2}>
                     <Text style={styles.texttimer}>
                         Back to
                     </Text>
@@ -126,13 +127,13 @@ const Setmpin = ({navigation}) => {
                         </Text>
                     </Pressable>
                 </View>
+                
             </View>
-           
         </View>
     )
 }
 
-export default Setmpin
+export default Setmpin2
 
 const styles = StyleSheet.create({
     container: {
@@ -221,6 +222,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase'
     },
 
+
     txt1: {
         color: 'white',
         fontSize: 17,
@@ -250,7 +252,8 @@ const styles = StyleSheet.create({
         height: 70,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
+       
 
     },
     pre: {

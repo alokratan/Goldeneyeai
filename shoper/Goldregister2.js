@@ -86,7 +86,7 @@ const Goldregister = ({ navigation }) => {
         // console.log(` You have created: ${JSON.stringify(response.data)}`);
         setTimeout(() => {
             setSuccess(false)
-            navigation.navigate('Goldlogin')
+            navigation.navigate('LoginHome')
         }, 3000);
     
         setUsername('');
@@ -120,7 +120,7 @@ const Goldregister = ({ navigation }) => {
     function loginfun(){
         ToastAndroid.show('Please Wait...',1000);
         setTimeout(() => {
-                navigation.navigate('Goldlogin')
+                navigation.navigate('LoginHome')
             }, 1000);
     }
     return (

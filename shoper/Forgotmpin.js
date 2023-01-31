@@ -1,157 +1,231 @@
-import { StyleSheet, Text, Pressable, TextInput, StatusBar, Image, View } from 'react-native'
+import { StyleSheet, Text, Pressable,ToastAndroid, TextInput, StatusBar, Image, View } from 'react-native'
 import React, { useRef, useState } from 'react';
  import loginimg from '../assets/icons/forg.jpg'
  import { Entypo } from '@expo/vector-icons';
  import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-const Forgotmpin = () => {
+const Forgotmpin = ({navigation}) => {
     const pin1Ref = useRef(null);
     const pin2Ref = useRef(null);
     const pin3Ref = useRef(null);
     const pin4Ref = useRef(null);
+    const pin5Ref = useRef();
+    const [correctmpin,setCorrectmpin]=useState(true);
+    const [correctphno,setCorrectphno]=useState(true);
     const [otp, setOtp] = useState({ 1: '', 2: '', 3: '', 4: '' });
+    const [phone_number,setPhone_number]=useState('');
+    const [success, setSuccess] = useState(false);
+    const onChangephone_numberHandler = (phone_number) => {
+        setPhone_number(phone_number);
+    };
+    function  sendeotpfun(){
+        pin5Ref.current.blur()
+        if(phone_number.toString().length==10){
+            ToastAndroid.show('OTP Send Successfully.',2000);
+            setCorrectphno(true)
+            
+        }else{
+            // ToastAndroid.show('Please Enter 10 Digit Phone Number',2000);
+            setCorrectphno(false)
+        }
+
+
+    }
 
     const abcd = { ...otp }
 
-    
-function abcdfun(){
+   
+function loginfun(){
     var bas = Object.values(abcd)
-
-    // console.log(bas);
-    const abstr= Number(bas.join(''));
+    const abstr = Number(bas.join(''));
+    if(abstr===2580){
+        // ToastAndroid.show(`Welcome User, Your Mpin is this ${abstr}`,2000);
+        ToastAndroid.show(`Verified Successfully`,1000);
+        setCorrectmpin(true)
+        setSuccess(true)
+        
+        setTimeout(() => {
+            setSuccess(false)
+            navigation.navigate('Setmpin2')
+        }, 2000);
+  
     // console.log(abstr);
+    }
+    else if(!phone_number){
+        ToastAndroid.show('Plese Enter 10 digit mobile number',1000);    
+    // console.log(abstr);
+    }
+    else if(abstr===0){
+        ToastAndroid.show('Plese, Enter 4 digit OTP',1000);    
+    // console.log(abstr);
+    }
+    else{
+        // ToastAndroid.show(`The OTP you have entered is incorrect:  ${abstr}`,1000); 
+       
+        // alert(`The OTP you have entered is incorrect:  ${abstr}`)
+        // console.log(abstr);
+        setCorrectmpin(false)
+    }
 
+   
 }
-
-
-
 
     return (
 
         <View style={styles.container}>
-            <View style={styles.top}>
-                <Text style={styles.title}>Forgot MPIN</Text>
-            </View>
-            <View style={styles.midd}>
-                <View style={styles.midd2}>
+        {
+            success ? <View style={styles.successmain}>
 
-                    <Image
-                        style={[styles.image, { resizeMode: 'contain' }]}
-                        source={loginimg}
+                <View style={styles.sucess}>
+                <Text style={{fontSize:26,fontWeight:'900',marginVertical:20,color:'white'}}>
+                Verified Successfully
+                </Text>
+                 
+                </View>
+            </View> : <View></View>
+        }
+        <View style={styles.top}>
+            <Text style={styles.title}>Forgot MPIN</Text>
+        </View>
+        <View style={styles.midd}>
+            <View style={styles.midd2}>
+                <Image
+                    style={[styles.image, { resizeMode: 'contain' }]}
+                    source={loginimg}
+                />
+            </View>
+            <TextInput
+                style={[styles.input,{borderBottomColor:correctphno?'grey':'red'}]}
+                cursorColor="black"
+                keyboardType="number-pad"
+                placeholder="Enter Mobile Number"
+                fontWeight='700'
+                ref={pin5Ref}
+                value={phone_number}
+                onChangeText={onChangephone_numberHandler}
+            />
+                            {
+                            correctphno?  <Text style={{display:'none'}}>
+                        </Text>:<Text style={{color:'red',paddingBottom:10,width:'84%'}}>
+                        Please Enter 10 Digit Phone Number
+                        </Text>
+                        
+                        }
+            <View style={styles.midd31}>
+
+                <Pressable style={styles.presst}
+                    onPress={sendeotpfun}
+                >
+                    <View style={styles.camicon}>
+                    <MaterialCommunityIcons name="form-textbox-password" size={18} color="black" />
+
+                    </View>
+                    <Text style={[styles.txtake, styles.txtake2]}
+                    >
+                        SEND OTP
+                    </Text>
+                </Pressable>
+                <View style={styles.textotp}>
+
+                    <TextInput
+                        style={[styles.textotpinp,{borderColor:correctmpin?'black':'red'}]}
+                        ref={pin1Ref}
+                        cursorColor="black"
+                        maxLength={1}
+                        onChangeText={text => {
+                            setOtp({ ...otp, 1: text });
+                            text && pin2Ref.current.focus();
+
+                        }}
+                        keyboardType="number-pad"
+                        placeholder='0'
+                    />
+                    <TextInput
+                        ref={pin2Ref}
+                        cursorColor="black"
+                        maxLength={1}
+                        onChangeText={text => {
+                            setOtp({ ...otp, 2: text });
+                            text ? pin3Ref.current.focus() : pin1Ref.current.focus()
+
+                        }}
+                        keyboardType="number-pad"
+                        style={[styles.textotpinp,{borderColor:correctmpin?'black':'red'}]}
+                 
+                        placeholder='0'
+                    />
+                    <TextInput
+                        ref={pin3Ref}
+                        maxLength={1}
+                        cursorColor="black"
+                        onChangeText={text => {
+                            setOtp({ ...otp, 3: text });
+                            text ? pin4Ref.current.focus() : pin2Ref.current.focus();
+                        }}
+                        keyboardType="number-pad"
+                        style={[styles.textotpinp,{borderColor:correctmpin?'black':'red'}]}
+                 
+                        placeholder='0'
+                    />
+                    <TextInput
+                        ref={pin4Ref}
+                        maxLength={1}
+                        cursorColor="black"
+                        
+                        onChangeText={text => {
+                            setOtp({ ...otp, 4: text });
+                            !text && pin3Ref.current.focus();
+
+                        }}
+
+                        keyboardType="number-pad"
+                        style={[styles.textotpinp,{borderColor:correctmpin?'black':'red'}]}
+                 
+                        placeholder='0'
                     />
                 </View>
-
-
-                <View style={styles.inputdiv}>
-                <TextInput
-                    style={styles.input}
-                    keyboardType="number-pad"
-                    cursorColor="black"
-                    placeholder="Enter Mobile Number"
-                    onChangeText={e => console.log(e)}
-                />
-      <FontAwesome5 name="mobile-alt" size={24} color="black" />
-                </View>
-               
-                <View style={styles.midd31}>
-
-                    <Pressable style={styles.presst}
-                        onPress={() => alert("helllo alert")}
-                    >
-                        <View style={styles.camicon}>
-                        <MaterialCommunityIcons name="form-textbox-password" size={18} color="black" />
-
-                        </View>
-                        <Text style={[styles.txtake, styles.txtake2]}
-                        >
-                            SEND OTP
-                        </Text>
-                    </Pressable>
-                    <View style={styles.textotp}>
-
-                        <TextInput
-                            style={styles.textotpinp}
-                            ref={pin1Ref}
-                            maxLength={1}
-                            onChangeText={text => {
-                                setOtp({ ...otp, 1: text });
-                                text && pin2Ref.current.focus();
-
-                            }}
-                            keyboardType="number-pad"
-                            placeholder='0'
-                        />
-                        <TextInput
-                            ref={pin2Ref}
-                            maxLength={1}
-                            onChangeText={text => {
-                                setOtp({ ...otp, 2: text });
-                                text ? pin3Ref.current.focus() : pin1Ref.current.focus()
-
-                            }}
-                            keyboardType="number-pad"
-                            style={styles.textotpinp}
-                            placeholder='0'
-                        />
-                        <TextInput
-                            ref={pin3Ref}
-                            maxLength={1}
-                            onChangeText={text => {
-                                setOtp({ ...otp, 3: text });
-                                text ? pin4Ref.current.focus() : pin2Ref.current.focus();
-                            }}
-                            keyboardType="number-pad"
-                            style={styles.textotpinp}
-                            placeholder='0'
-                        />
-                        <TextInput
-                            ref={pin4Ref}
-                            maxLength={1}
-                            onChangeText={text => {
-                                setOtp({ ...otp, 4: text });
-                                !text && pin3Ref.current.focus();
-
-                            }}
-
-                            keyboardType="number-pad"
-                            style={styles.textotpinp}
-                            placeholder='0'
-                        />
-                    </View>
-                </View>
-
-                <View style={styles.midd3}>
-                    <Pressable style={styles.txt2}
-                        onPress={() => alert("helllo alert")}>
-                        <Text style={styles.txt3}>
-                            Resend OTP
-                        </Text>
-                    </Pressable>
-                </View>
-
             </View>
-           
-            <View style={styles.buttonn}>
-                <Pressable style={styles.pre}
-                    onPress={() => abcdfun()}>
-                    <Text style={styles.txt9}>
-                       VERIFY
-                    </Text>
 
-                </Pressable>
-                <View style={styles.buttonn2}>
-                    <Text style={styles.texttimer}>
-                        Back to
-                    </Text>
-                    <Pressable style={styles.txt2}
-                        onPress={() => alert("helllo alert")}>
-                        <Text style={styles.ttxt3}>
-                            LOGIN
+            <View style={styles.midd3}>
+            {
+                            correctmpin?  <Text style={{display:'none'}}>
+                            Incorrect MPIN, Please try again..
+                        </Text>:<Text style={{color:'red',paddingBottom:10}}>
+                            Please enter the correct OTP.
                         </Text>
-                    </Pressable>
-                </View>
+                        
+                        }
+                <Pressable style={styles.txt2}
+                    onPress={() => alert("helllo alert")}>
+                    <Text style={styles.txt3}>
+                        Resend OTP
+                    </Text>
+                </Pressable>
+            </View>
+
+        </View>
+       
+        <View style={styles.buttonn}>
+            <Pressable style={styles.pre}
+                onPress={loginfun}>
+                <Text style={styles.txt9}>
+                   VERIFY
+                </Text>
+
+            </Pressable>
+            <View style={styles.buttonn2}>
+                <Text style={styles.texttimer}>
+                    Back to
+                </Text>
+                <Pressable style={styles.txt2}
+                    onPress={loginfun}>
+                    <Text style={styles.ttxt3}>
+                        LOGIN
+                    </Text>
+                </Pressable>
             </View>
         </View>
+    </View>
     )
 }
 
@@ -200,9 +274,9 @@ const styles = StyleSheet.create({
     midd31: {
         //  backgroundColor: 'grey',
         width: '90%',
-        height: 90,
+        height: 70,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         flexDirection: 'row',
 
     },
@@ -229,20 +303,15 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 5
     },
-    inputdiv: {
-        flexDirection: 'row',
-        width: '86%',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        borderBottomColor: 'grey',
-        borderBottomWidth: 2,
-        marginVertical:10
-    },
     input: {
+
         width: '85%',
-        height: 30,
+        marginVertical: 4,
+        height: 36,
         fontSize: 18,
-        fontWeight:'700'
+        // borderBottomColor: 'grey',
+        borderBottomWidth: 2,
+        paddingLeft: 4
     },
     title: {
         fontWeight: '900',
@@ -291,26 +360,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         flexDirection: 'row'
     },
-    pressg: {
-        width: 140,
-        height: 40,
-        backgroundColor: '#EA4235',
-        marginHorizontal: 20,
-        borderRadius: 10,
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexDirection: 'row'
-    },
-    pressf: {
-        width: 140,
-        height: 40,
-        backgroundColor: '#3664A2',
-        marginHorizontal: 20,
-        borderRadius: 10,
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexDirection: 'row'
-    },
+  
     presst: {
         width: 140,
         height: 40,
@@ -333,22 +383,8 @@ const styles = StyleSheet.create({
         fontWeight: '700'
     },
 
-    facebook: {
-        width: 34,
-        height: 34,
-        marginHorizontal: 3,
-        backgroundColor: 'white',
-        borderTopRightRadius: 8,
-        borderBottomRightRadius: 8,
-        borderRightColor: '#3664A2',
-        justifyContent: 'center',
-        alignItems: 'center'
-
-    },
-    face: {
-        width: 26,
-        height: 26
-    },
+   
+   
     buttonn: {
         width: '100%',
         height: 170,
@@ -423,6 +459,38 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         textAlign: 'center',
         fontSize: 24,
+    },
+    successmain:{ 
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        position: 'absolute',
+        top: 0,
+        zIndex: 2,
+        borderColor: 'black',
+        shadowColor: "black",
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+   
+    sucess: {
+        backgroundColor: '#0B7B00',
+        width: '90%',
+        height: 100,
+        borderWidth: 3,
+        borderColor:'white',
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius:10,
+        shadowColor: "black",
+        shadowOffset: {
+            width: 20,
+            height: 10,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 3.84,
+        elevation: 8,
     }
 
 })

@@ -68,7 +68,7 @@ const Forgotpassword = ({ navigation }) => {
                         source={loginimg}
                     />
                 </View>
-                <View style={[styles.inputdiv, { borderBottomColor: passwordval ? 'grey' : 'red' }]}>
+                <View style={[styles.inputdiv, { borderBottomColor: passwordval ? 'grey' : 'grey' }]}>
                     <TextInput
                         style={styles.input}
                         cursorColor="black"

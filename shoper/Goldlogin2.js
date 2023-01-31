@@ -129,7 +129,7 @@ const alertpassword=(text)=>{
         ToastAndroid.show('Please Wait...', 1000);
         setTimeout(() => {
             navigation.navigate('Verify')
-        }, 3000);
+        }, 1000);
     }
     return (
 
