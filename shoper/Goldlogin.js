@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Pressable, ScrollView, TextInput, ToastAndroid, Image, View } from 'react-native'
+import { StyleSheet,Dimensions,StatusBar, Text, Pressable, ScrollView, TextInput, ToastAndroid, Image, View } from 'react-native'
 import React, { useState,useEffect } from 'react';
 import Checkbox from 'expo-checkbox';
 import loginimg from '../assets/icons/loginimg.jpg'
@@ -6,6 +6,8 @@ import facebook from '../assets/icons/Facebook_Logo_(2019).png.webp'
 import Google from '../assets/icons/unnamed.png'
 import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import { userapi } from '../userapi';
+const width=Dimensions.get('window').width
+const height=Dimensions.get('window').height
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Goldlogin = ({ navigation }) => {
@@ -322,54 +324,56 @@ export default Goldlogin;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginTop:StatusBar.currentHeight,
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#fff',
+       
 
     },
 
     top: {
 
-        //  backgroundColor: 'red',
+  // backgroundColor: 'grey',
         width: '100%',
-        height: 140,
+        height: '10%',
         justifyContent: 'flex-end',
         alignItems: 'baseline'
     },
     midd: {
 
         width: '100%',
-        height: 460,
-        // backgroundColor: 'red',
+        height: height / 1.8,
+       // backgroundColor: 'red',
         justifyContent: 'flex-start',
         alignItems: 'center'
 
     },
     midd2: {
-        // backgroundColor: 'grey',
-        width: '100%',
-        height: 200,
+      //   backgroundColor: 'grey',
+        width: '90%',
+        height: height/4,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
 
     },
     midd3: {
-        // backgroundColor: 'grey',
+      //  backgroundColor: 'grey',
         width: '100%',
-        height: 70,
+        height: '15%',
         justifyContent: 'flex-start',
         alignItems: 'flex-end',
 
     },
-    midd4: {
-        backgroundColor: 'white',
-        width: '100%',
-        height: 120,
-        justifyContent: 'center',
-        alignItems: 'center',
+    // midd4: {
+    //     backgroundColor: 'red',
+    //     width: '100%',
+    //     height: '40%',
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
 
-    },
+    // },
     checkboxContainer: {
         width: '100%',
         // backgroundColor:'black',
@@ -416,8 +420,8 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        width: 180,
-        height: 180
+        width: '50%',
+        height: height
     },
     txt2: {
         color: "white"
@@ -443,8 +447,8 @@ const styles = StyleSheet.create({
     },
     mediadiv: {
         width: '100%',
-        height: 80,
-        // backgroundColor: 'grey',
+        height: height/10,
+    // backgroundColor: 'grey',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'
@@ -498,16 +502,18 @@ const styles = StyleSheet.create({
     },
     buttonn: {
         width: '100%',
-        height: 200,
+        height: height/4,
+   //  backgroundColor:'green',
         justifyContent: 'center',
         alignItems: 'center'
     },
     buttonn2: {
         width: '100%',
-        height: 70,
+        height: '40%',
+    //    backgroundColor:'red',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'flex-end'
+        alignItems: 'center'
     },
     pre: {
         backgroundColor: 'black',

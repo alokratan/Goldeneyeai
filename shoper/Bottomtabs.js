@@ -49,30 +49,23 @@ function Bottomtabs() {
           }
       })}
     
-    
 
    /* screenOptions={{
- 
        tabBarActiveTintColor:'black',
        tabBarInactiveTintColor:'white',
         tabBarActiveBackgroundColor:'#FFC72C',
         tabBarInactiveBackgroundColor:'black',
-     
         tabBarStyle:{
-            height:60,
-           
+            height:60, 
         },
-
        // tabBarBadge:1,
-      
-    
-       
       }}*/
       
       >
       <Tab.Screen  name="HomeBot" 
       options={{
         title: 'Home',
+        headerShown:false,
       
       }}
      
@@ -84,10 +77,11 @@ function Bottomtabs() {
     //     }}
          component={HomeBottom} />
       <Tab.Screen name="Setpre"  options={{
+       
           title: 'Set Preference',
         }} component={Setpref} />
       <Tab.Screen name="Your"  options={{
-          title: 'Edit Your Profile',
+          title: 'Edit Profile',
         
         }} component={YourPro}
         

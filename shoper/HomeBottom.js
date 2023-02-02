@@ -1,15 +1,16 @@
-import { StyleSheet,ScrollView, Text, View, Button, Pressable, Image } from 'react-native'
+import { StyleSheet,ToastAndroid,ScrollView,StatusBar, Text, View, Button, Pressable, Image } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler';
 import React, { useState } from 'react';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons ,MaterialCommunityIcons} from '@expo/vector-icons';
 import { data } from "./coupans";
 
 import phot from '../assets/icons/imglogo.jpg'
 
-const HomeBottom = () => {
+const HomeBottom = ({navigation}) => {
 
     const [select, setSelect] = useState(data);
     const [redeemed, setRedeemed] = useState(false);
+    const [islog,setIslog]=useState(false);
 
     // console.log(select);
 
@@ -57,10 +58,53 @@ const HomeBottom = () => {
          setSelect(newitem)
     }
 
+    const logoutfn =()=>{
+        setIslog(true)
+        ToastAndroid.show('Logout Successfully', 1000)
+        
+        setTimeout(() => {
+            setIslog(false)
+            navigation.navigate('LoginHome')
+        }, 1000);
+    }
     return (
 
 
         <View style={styles.container}>
+              {islog?
+
+<View style={styles.successmain}>
+
+            <View style={styles.sucess}>
+            <Text style={{fontSize:21,fontWeight:'900',width:'90%',color:'black'}}>
+                
+                LOGOUT</Text>
+            <Text style={{fontSize:17,width:'90%',fontWeight:'700',color:'black'}}>
+                Are you sure want to logout?
+            </Text>
+            <View style={{flexDirection:'row', justifyContent:'space-evenly',alignItems:'center' ,width:'80%',height:50}}>
+                <Pressable onPress={()=>setIslog(false)} style={[styles.presbtnlog,{backgroundColor:'#0008'}]}>
+                    <Text style={styles.textlogout}>
+                        Cancel
+                    </Text>
+                </Pressable>
+                <Pressable onPress={logoutfn} style={[styles.presbtnlog,{backgroundColor:'#D72500'}]}>
+                    <Text  style={styles.textlogout}>
+                        Logout
+                    </Text>
+                </Pressable>
+            </View>
+            </View>
+        </View>
+:<View></View>}
+            <View style={{width:'90%',height:50,backgroundColor:'#fff',justifyContent:'space-between',alignItems:'center',flexDirection:'row'}}>
+                <Text style={{fontSize:20,fontWeight:'700'}}>Home</Text>
+            <Pressable
+            onPress={()=>setIslog(true)} style={{width:50,height:50,justifyContent:'center',alignItems:'center',marginRight:-20}}>
+    <MaterialCommunityIcons name='location-exit' size={30} color='#FFC72C'/>
+  
+</Pressable>
+            </View>
 
             <Image
                 style={styles.phot}
@@ -175,18 +219,7 @@ const HomeBottom = () => {
                 }}
 
             />
-            {/* <View style={styles.main3}>
-                        <View style={styles.maindots}>
-
-                        </View>
-                        <View style={styles.maindots}>
-
-                        </View>
-
-                    </View> */}
-            {/* </View>
-
-            </ScrollView> */}
+          
         </View>
     )
 }
@@ -198,7 +231,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        marginTop:StatusBar.currentHeight,
     },
     h2: {
         fontSize: 18,
@@ -362,5 +396,51 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         justifyContent:'center',
         alignItems:'center'
+    },
+    successmain:{ 
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        position: 'absolute',
+        top: 0,
+        zIndex: 2,
+        borderColor: 'black',
+        shadowColor: "black",
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+   
+    sucess: {
+        backgroundColor: 'white',
+        width: '90%',
+        height: 200,
+   
+        justifyContent:'space-evenly',
+        alignItems:'center',
+        
+        borderRadius:10,
+        shadowColor: "black",
+        shadowOffset: {
+            width: 20,
+            height: 10,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 3.84,
+        elevation: 8,
+    },
+    presbtnlog:{
+        width:'38%',
+         justifyContent:'center',
+         alignItems:'center',
+         height:'75%',
+         borderRadius:4
+    },
+    textlogout:{
+        fontSize:17,
+        textTransform:'uppercase',
+        fontWeight:'700',
+        color:'white'
     }
+
 })

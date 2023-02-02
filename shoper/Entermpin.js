@@ -1,9 +1,12 @@
-import { StyleSheet, Text, Pressable,ToastAndroid, TextInput,  Image, View } from 'react-native'
-import React, { useRef, useState ,useEffect} from 'react';
+import { StyleSheet, Text, Pressable, ToastAndroid, TextInput, Image, View } from 'react-native'
+import React, { useRef, useState, useEffect } from 'react';
 import loginimg from '../assets/icons/loginimg.jpg'
+import { StatusBar, Dimensions } from 'react-native'
+const width = Dimensions.get('window').width
+const height = Dimensions.get('window').height
 
-const Entermpin = ({navigation}) => {
-    const [correctmpin,setCorrectmpin]=useState(true);
+const Entermpin = ({ navigation }) => {
+    const [correctmpin, setCorrectmpin] = useState(true);
     const [success, setSuccess] = useState(false);
     const pin1Ref = useRef(null);
     const pin2Ref = useRef(null);
@@ -17,53 +20,53 @@ const Entermpin = ({navigation}) => {
     function abcdfun() {
         var bas = Object.values(abcd)
         const abstr = Number(bas.join(''));
-        if(abstr===2580){
-            ToastAndroid.show(`Welcome User, Your Mpin is this ${abstr}`,2000);
+        if (abstr === 2580) {
+            ToastAndroid.show(`Welcome User, Your Mpin is this ${abstr}`, 2000);
             setCorrectmpin(true)
             setSuccess(true)
             setTimeout(() => {
                 setSuccess(false)
                 navigation.navigate('Bottomtabs')
             }, 3000);
-      
-        // console.log(abstr);
+
+            // console.log(abstr);
         }
-        else if(abstr===0){
-            ToastAndroid.show('Plese, Enter 4 digit MPIN',1000);    
-      
+        else if (abstr == 0) {
+            ToastAndroid.show('Plese, Enter 4 digit MPIN', 1000);
+
         }
-        else{
+        else {
             // alert(`The MPIN you have entered is incorrect:  ${abstr}`)
             // console.log(abstr);
             setCorrectmpin(false);
-             
+
         }
 
-       
-      
+
+
 
     }
-useEffect(()=>{
-    abcdfun();
-},[])
+    useEffect(() => {
+        abcdfun();
+    }, [])
 
 
 
     return (
 
         <View style={styles.container}>
-                   {
+            {
                 success ? <View style={styles.successmain}>
 
                     <View style={styles.sucess}>
-                    <Text style={{fontSize:26,fontWeight:'900',marginVertical:20,color:'white'}}>
-                        Great!
-                    </Text>
-                     
+                        <Text style={{ fontSize: 26, fontWeight: '900', marginVertical: 20, color: 'white' }}>
+                            Great!
+                        </Text>
+
                     </View>
                 </View> : <View></View>
             }
-   
+
             <View style={styles.top}>
 
             </View>
@@ -75,7 +78,7 @@ useEffect(()=>{
                         source={loginimg}
                     />
                 </View>
-         
+
 
 
                 <View style={styles.inputdiv}>
@@ -83,7 +86,7 @@ useEffect(()=>{
                     <View style={styles.textotp}>
 
                         <TextInput
-                            style={[styles.textotpinp,{borderColor:correctmpin?'black':'red'}]}
+                            style={[styles.textotpinp, { borderColor: correctmpin ? 'black' : 'red' }]}
                             ref={pin1Ref}
                             secureTextEntry={true}
                             maxLength={1}
@@ -105,7 +108,7 @@ useEffect(()=>{
 
                             }}
                             keyboardType="number-pad"
-                            style={[styles.textotpinp,{borderColor:correctmpin?'black':'red'}]}
+                            style={[styles.textotpinp, { borderColor: correctmpin ? 'black' : 'red' }]}
                             placeholder='0'
                         />
                         <TextInput
@@ -117,7 +120,7 @@ useEffect(()=>{
                                 text ? pin4Ref.current.focus() : pin2Ref.current.focus();
                             }}
                             keyboardType="number-pad"
-                            style={[styles.textotpinp,{borderColor:correctmpin?'black':'red'}]}
+                            style={[styles.textotpinp, { borderColor: correctmpin ? 'black' : 'red' }]}
                             placeholder='0'
                         />
                         <TextInput
@@ -131,30 +134,30 @@ useEffect(()=>{
                             }}
 
                             keyboardType="number-pad"
-                            style={[styles.textotpinp,{borderColor:correctmpin?'black':'red'}]}
+                            style={[styles.textotpinp, { borderColor: correctmpin ? 'black' : 'red' }]}
                             placeholder='0'
                         />
                     </View>
-                    
+
                     <View style={styles.midd3}>
-                            {
-                                correctmpin?  <Text style={{display:'none'}}>
+                        {
+                            correctmpin ? <Text style={{ display: 'none' }}>
                                 Incorrect MPIN, Please try again..
-                            </Text>:<Text style={{color:'red',paddingBottom:20}}>
+                            </Text> : <Text style={{ color: 'red', paddingBottom: 20 }}>
                                 Incorrect MPIN, Please try again..
                             </Text>
-                            
-                            }
-                   
-                 
-                    <Pressable style={styles.txt2}
-                    
-                        onPress={() => alert("helllo alert")}>
-                        <Text style={styles.txt3}>
-                            Forgot MPIN
-                        </Text>
-                    </Pressable>
-                </View>
+
+                        }
+
+
+                        <Pressable style={styles.txt2}
+
+                            onPress={() => alert("helllo alert")}>
+                            <Text style={styles.txt3}>
+                                Forgot MPIN
+                            </Text>
+                        </Pressable>
+                    </View>
 
                 </View>
 
@@ -182,7 +185,17 @@ useEffect(()=>{
                         DONE
                     </Text>
                 </Pressable>
-
+                <View style={styles.buttonn2}>
+                    <Text style={styles.texttimer}>
+                        Back to
+                    </Text>
+                    <Pressable style={styles.txt2}
+                        onPress={() => navigation.navigate('LoginHome')}>
+                        <Text style={styles.ttxt3}>
+                            LOGIN
+                        </Text>
+                    </Pressable>
+                </View>
             </View>
         </View>
     )
@@ -195,34 +208,28 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center',
+        marginTop: StatusBar.currentHeight,
         backgroundColor: '#ffffff'
     },
-    top: {
 
-        //  backgroundColor: 'red',
-        width: '100%',
-        height: 100,
-        justifyContent: 'flex-end',
-        alignItems: 'baseline'
-    },
     midd: {
         width: '100%',
-        height: 600,
-        //   backgroundColor: 'red',
-        justifyContent: 'flex-start',
+        height: height / 1.6,
+       // backgroundColor: 'pink',
+        justifyContent: 'center',
         alignItems: 'center'
     },
     midd3: {
-        // backgroundColor: 'grey',
+       // backgroundColor: 'grey',
         width: '90%',
         height: 60,
         justifyContent: 'center',
         alignItems: 'center',
     },
     midd2: {
-        //      backgroundColor: 'grey',
+      //  backgroundColor: 'grey',
         width: '100%',
-        height: 200,
+        height: height / 4,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
@@ -234,19 +241,23 @@ const styles = StyleSheet.create({
         width: '90%',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        flexDirection:'column',
-        marginVertical: 10
+        flexDirection: 'column',
+    //    backgroundColor: 'grey',
+
     },
     input: {
         width: '85%',
         height: 30,
         fontSize: 14,
+
     },
     title: {
         fontWeight: '900',
-        fontSize: 22,
-        marginBottom: 30,
-        marginLeft: 20
+        fontSize: 22, 
+      //  backgroundColor: 'aqua',
+        marginVertical:30
+
+
     },
     title2: {
         fontWeight: '700',
@@ -260,8 +271,8 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        width: 180,
-        height: 180
+        width: '50%',
+        height: height
     },
     txt2: {
         color: "white",
@@ -286,6 +297,14 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: '700'
     },
+    ttxt3: {
+        color: "#F5B716",
+        fontWeight: '900',
+        fontSize: 17,
+        marginHorizontal: 10,
+        textDecorationLine: 'underline',
+        textTransform: 'uppercase'
+    },
 
     face: {
         width: 26,
@@ -293,19 +312,18 @@ const styles = StyleSheet.create({
     },
     buttonn: {
         width: '100%',
-        height: 170,
-
+        height: height / 4,
+       // backgroundColor: 'green',
         justifyContent: 'center',
         alignItems: 'center'
-
     },
     buttonn2: {
         width: '100%',
-        height: 70,
+        height: '40%',
+       // backgroundColor: 'red',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'flex-end'
-
+        alignItems: 'center'
     },
     pre: {
         backgroundColor: 'black',
@@ -344,9 +362,9 @@ const styles = StyleSheet.create({
     txtake2: {
         paddingLeft: 50,
     },
-  
+
     textotp: {
-         
+
         width: '50%',
         height: 46,
         justifyContent: 'space-evenly',
@@ -356,7 +374,7 @@ const styles = StyleSheet.create({
 
     },
     textotpinp: {
-     //   backgroundColor:'red',
+        //   backgroundColor:'red',
         height: 40,
         width: 34,
         borderRadius: 5,
@@ -365,7 +383,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 24,
     },
-    successmain:{ 
+    successmain: {
         height: '100%',
         width: '100%',
         backgroundColor: 'rgba(0,0,0,0.2)',
@@ -383,10 +401,10 @@ const styles = StyleSheet.create({
         width: '90%',
         height: 100,
         borderWidth: 3,
-        borderColor:'white',
-        justifyContent:'center',
-        alignItems:'center',
-        borderRadius:10,
+        borderColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
         shadowColor: "black",
         shadowOffset: {
             width: 20,

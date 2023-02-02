@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Pressable, TextInput,ToastAndroid, StatusBar, Image, View } from 'react-native'
+import { StyleSheet, Text, Pressable, Dimensions, TextInput, ToastAndroid, StatusBar, Image, View } from 'react-native'
 import React, { useRef, useState } from 'react';
 import loginimg from '../assets/icons/registerimg.jpg'
 import facebook from '../assets/icons/Facebook_Logo_(2019).png.webp'
@@ -6,98 +6,100 @@ import Google from '../assets/icons/unnamed.png';
 import { Entypo, MaterialIcons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import { RadioButton } from 'react-native-paper';
 
+const width = Dimensions.get('window').width
+const height = Dimensions.get('window').height
 import axios from 'axios';
 const baseUrl = "http://13.126.41.109:8000/";
 
 const Goldregister = ({ navigation }) => {
     const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [email, setEmail] = useState("");
-  const [gender, setGender] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const onChangeNameHandler = (username) => {
-    setUsername(username);
-  };
-  const onChangepasswordHandler = (password) => {
-    setPassword(password);
-  };
-  const onChangepassword2Handler = (password2) => {
-    setPassword2(password2);
-  };
+    const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
+    const [email, setEmail] = useState("");
+    const [gender, setGender] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const onChangeNameHandler = (username) => {
+        setUsername(username);
+    };
+    const onChangepasswordHandler = (password) => {
+        setPassword(password);
+    };
+    const onChangepassword2Handler = (password2) => {
+        setPassword2(password2);
+    };
 
-  const onChangeEmailHandler = (email) => {
-    setEmail(email);
-  };
+    const onChangeEmailHandler = (email) => {
+        setEmail(email);
+    };
 
-  const onChangegenderHandler = () => {
-    setGender('Male')
-    setChecked('male');
-  };
+    const onChangegenderHandler = () => {
+        setGender('Male')
+        setChecked('male');
+    };
 
-  const onChangegender2Handler = () => {
-    setGender('Female')
-    setChecked('female');
-    
-  };
-  const onSubmitFormHandler = async (event) => {
-    if (!username.trim() || !email.trim() || !password.trim() ||!password2.trim() ) {
-      alert("* All fields are required");
-      return;
+    const onChangegender2Handler = () => {
+        setGender('Female')
+        setChecked('female');
+
+    };
+    const onSubmitFormHandler = async (event) => {
+        if (!username.trim() || !email.trim() || !password.trim() || !password2.trim()) {
+            alert("* All fields are required");
+            return;
+        }
+        setIsLoading(true);
+        try {
+            const response = await axios.post(`${baseUrl}user/register/`, {
+                username,
+                password,
+                password2,
+                email,
+                gender
+
+
+
+
+            });
+            if (response.status === 200) {
+                alert(` You have created: ${JSON.stringify(response.data)}`);
+                // console.log(` You have created: ${JSON.stringify(response.data)}`);
+                setTimeout(() => {
+                    navigation.navigate('Goldlogin')
+                }, 1000);
+                setIsLoading(false);
+                setUsername('');
+                setEmail('');
+                setPassword('');
+                setPassword2('');
+                setGender('');
+
+            } else {
+                throw new Error("An error has occurred");
+            }
+        } catch (error) {
+            alert("An error has occurred");
+            //   console.log(error)
+            setIsLoading(false);
+        }
+    };
+
+    const [showpd, setShowpd] = useState(true)
+    const [showpd2, setShowpd2] = useState(true)
+    const [checked, setChecked] = useState();
+
+    function showpdfun() {
+        showpd ?
+            setShowpd(false) : setShowpd(true)
     }
-    setIsLoading(true);
-    try {
-      const response = await axios.post(`${baseUrl}user/register/`, {
-        username,
-        password,
-        password2,
-        email,
-        gender
-        
-
-      
-
-      });
-      if (response.status === 200) {
-        alert(` You have created: ${JSON.stringify(response.data)}`);
-        // console.log(` You have created: ${JSON.stringify(response.data)}`);
+    function showpdfun2() {
+        showpd2 ?
+            setShowpd2(false) : setShowpd2(true)
+    }
+    function loginfun() {
+        ToastAndroid.show('Please Wait...', 1000);
         setTimeout(() => {
             navigation.navigate('Goldlogin')
         }, 1000);
-        setIsLoading(false);
-        setUsername('');
-        setEmail('');
-        setPassword('');
-        setPassword2('');
-        setGender('');
-        
-      } else {
-        throw new Error("An error has occurred");
-      }
-    } catch (error) {
-      alert("An error has occurred");
-    //   console.log(error)
-      setIsLoading(false);
-    }
-  };
-
-    const [showpd,setShowpd]=useState(true)
-    const [showpd2,setShowpd2]=useState(true)
-    const [checked, setChecked] = useState();
-
-    function showpdfun(){
-        showpd?
-        setShowpd(false):setShowpd(true)
-    }
-    function showpdfun2(){
-        showpd2?
-        setShowpd2(false):setShowpd2(true)
-    }
-    function loginfun(){
-        ToastAndroid.show('Please Wait...',1000);
-        setTimeout(() => {
-                navigation.navigate('Goldlogin')
-            }, 1000);
     }
     return (
         <View style={styles.container}>
@@ -157,17 +159,17 @@ const Goldregister = ({ navigation }) => {
                         fontWeight='700'
                         editable={!isLoading}
                         value={password}
-                        secureTextEntry={showpd?true:false}
+                        secureTextEntry={showpd ? true : false}
                         placeholder="Enter Password"
                         onChangeText={onChangepasswordHandler}
                     />
-                     <MaterialCommunityIcons name={showpd?"eye-off-outline":"eye-outline"} onPress={showpdfun} size={24} color="black" />
+                    <MaterialCommunityIcons name={showpd ? "eye-off-outline" : "eye-outline"} onPress={showpdfun} size={24} color="black" />
                 </View>
 
                 <View style={styles.inputdiv}>
                     <TextInput
                         style={styles.input}
-                        secureTextEntry={showpd2?true:false}
+                        secureTextEntry={showpd2 ? true : false}
                         cursorColor="black"
                         fontWeight='700'
                         editable={!isLoading}
@@ -175,28 +177,28 @@ const Goldregister = ({ navigation }) => {
                         placeholder="Enter Confirm Password"
                         onChangeText={onChangepassword2Handler}
                     />
-            <MaterialCommunityIcons name={showpd2?"eye-off-outline":"eye-outline"} onPress={showpdfun2} size={24} color="black" />
-           </View>
+                    <MaterialCommunityIcons name={showpd2 ? "eye-off-outline" : "eye-outline"} onPress={showpdfun2} size={24} color="black" />
+                </View>
                 <View style={styles.radiobtn}>
-                
-                <RadioButton
-                color='black'
-                    value="male"
-                   
-                    status={checked === 'male' ? 'checked' : 'unchecked'}
-                    onPress={onChangegenderHandler}
-                /><Text style={{fontSize:17,paddingRight:20}}>Male</Text>
-                  
-                <RadioButton
-                 color='black'
-                    value="female"
-                    onChangeText={onChangegender2Handler}
-                    status={checked === 'female' ? 'checked' : 'unchecked'}
-                    onPress={onChangegender2Handler}
-                /><Text style={{fontSize:17}}>Female</Text>
+
+                    <RadioButton
+                        color='black'
+                        value="male"
+
+                        status={checked === 'male' ? 'checked' : 'unchecked'}
+                        onPress={onChangegenderHandler}
+                    /><Text style={{ fontSize: 17, paddingRight: 20 }}>Male</Text>
+
+                    <RadioButton
+                        color='black'
+                        value="female"
+                        onChangeText={onChangegender2Handler}
+                        status={checked === 'female' ? 'checked' : 'unchecked'}
+                        onPress={onChangegender2Handler}
+                    /><Text style={{ fontSize: 17 }}>Female</Text>
+                </View>
             </View>
-            </View>
-          
+
             <View style={styles.mediadiv}>
                 <Pressable style={styles.pressg}
                     onPress={() => alert("Google Auth")}>
@@ -254,50 +256,38 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center',
+        marginTop: StatusBar.currentHeight,
         backgroundColor: '#ffffff'
     },
+
     top: {
 
-        //  backgroundColor: 'red',
+       //    backgroundColor: 'grey',
         width: '100%',
-        height: 140,
+        height: '10%',
         justifyContent: 'flex-end',
         alignItems: 'baseline'
     },
     midd: {
         width: '100%',
-        height: 460,
-        // backgroundColor: 'red',
+        height: height / 1.8,
+        //      backgroundColor: 'red',
         justifyContent: 'flex-start',
         alignItems: 'center'
     },
 
     midd2: {
-        // backgroundColor: 'grey',
-        width: '100%',
-        height: 200,
+        //backgroundColor: 'grey',
+        width: '95%',
+        height: height / 5,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
     },
 
-    midd3: {
-        // backgroundColor: 'grey',
-        width: '90%',
-        height: 30,
-        justifyContent: 'flex-start',
-        alignItems: 'flex-end',
-    },
 
 
-    midd4: {
-        backgroundColor: 'white',
-        width: '100%',
-        height: 120,
-        justifyContent: 'center',
-        alignItems: 'center',
 
-    },
     checkboxContainer: {
         width: '100%',
         // backgroundColor:'black',
@@ -345,8 +335,8 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        width: 180,
-        height: 180
+        width: '45%',
+        height: height
     },
     txt2: {
         color: "white",
@@ -368,10 +358,10 @@ const styles = StyleSheet.create({
     },
     mediadiv: {
         width: '100%',
-        height: 100,
-
+        height: '10%',
+      //  backgroundColor:'green',
         justifyContent: 'center',
-        alignItems: 'flex-end',
+        alignItems: 'center',
         flexDirection: 'row'
     },
     pressg: {
@@ -434,19 +424,18 @@ const styles = StyleSheet.create({
     },
     buttonn: {
         width: '100%',
-        height: 170,
-
+        height: height / 4,
+        //  backgroundColor:'green',
         justifyContent: 'center',
         alignItems: 'center'
-
     },
     buttonn2: {
         width: '100%',
-        height: 70,
+        height: '40%',
+        //    backgroundColor:'red',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'flex-end'
-
+        alignItems: 'center'
     },
     pre: {
         backgroundColor: 'black',
@@ -507,14 +496,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 24,
     },
-    radiobtn:{
-        width:'90%',
-      //  backgroundColor:'red',
-        flexDirection:'row',
-        justifyContent:'flex-start',
-        alignItems:'center',
-        marginTop:10,
-            }
+    radiobtn: {
+        width: '90%',
+        //  backgroundColor:'red',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        marginTop: 10,
+    }
 
 
 })

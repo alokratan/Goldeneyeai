@@ -7,7 +7,7 @@ import Google from '../assets/icons/unnamed.png'
 import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import { userapi } from '../userapi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { SafeAreaContext } from 'react-native-safe-area-context';
 const Goldlogin = ({ navigation }) => {
     
     const [isSelected, setSelection] = useState(false);
@@ -264,7 +264,9 @@ const alertpassword=(text)=>{
                         style={styles.checkbox}
                         color="black"
                     />
-                    <Text style={styles.title3}>Saved locally</Text>
+                    <Text style={styles.title3}
+                     onPress={()=>setSelection}
+                    >Saved locally</Text>
 
                 </View>
                 <View style={styles.checkboxContainer}>
@@ -275,7 +277,10 @@ const alertpassword=(text)=>{
                         style={styles.checkbox}
                         color="black"
                     />
-                    <Text style={styles.title3}>I Agree to Terms & Conditions</Text>
+                    <Text style={styles.title3}
+                    onPress={()=>agree()}
+                 
+                    >I Agree to Terms & Conditions</Text>
                 </View>
 
 

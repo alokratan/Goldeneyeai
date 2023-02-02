@@ -199,7 +199,10 @@ const YourPro = () => {
             <View style={styles.hidebar}>
 
                 
-            <Text style={styles.txthide}>Hide from all</Text><Switch thumbColor={"black"} value={isSwitchOn} onValueChange={onToggleSwitch} />
+            <Text style={styles.txthide}>Hide from all</Text><Switch 
+            trackColor={{true:'black',false:'#0003'}}
+        thumbColor='#FFC72C'
+        value={isSwitchOn} onValueChange={onToggleSwitch} />
         </View>
     
      
@@ -339,7 +342,7 @@ const styles = StyleSheet.create({
     hidebar: {
         width: '90%',
         height: 30,
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         flexDirection: 'row',
         marginVertical: 5,
@@ -347,7 +350,9 @@ const styles = StyleSheet.create({
     },
     txthide: {
         fontSize: 17,
-        fontWeight: '700'
+        fontWeight: '700',
+       marginRight:'40%',
+      
     },
     consr: {
         width: '160%',
