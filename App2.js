@@ -72,7 +72,17 @@ const App2 = () => {
                 data={slides}
                 renderItem={({ item }) => {
                     return (
+                        
                         <View style={styles.container}>
+                            <StatusBar
+            animated={true}
+            backgroundColor='white'
+            showHideTransition={'slide'}
+        //   hidden
+        barStyle={'dark-content'}
+
+
+            />
                             <Image
                                 style={[styles.image, { resizeMode: 'contain' }]}
                                 source={item.image}

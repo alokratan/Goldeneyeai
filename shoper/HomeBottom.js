@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: 'white',
-        marginTop:StatusBar.currentHeight,
+        
     },
     h2: {
         fontSize: 18,

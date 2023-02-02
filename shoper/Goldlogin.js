@@ -9,6 +9,7 @@ import { userapi } from '../userapi';
 const width=Dimensions.get('window').width
 const height=Dimensions.get('window').height
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setStatusBarStyle } from 'expo-status-bar';
 
 const Goldlogin = ({ navigation }) => {
     
@@ -115,6 +116,15 @@ const Goldlogin = ({ navigation }) => {
     return (
 
         <View style={styles.container}>
+             <StatusBar
+            animated={true}
+            backgroundColor='white'
+            showHideTransition={'slide'}
+        //   hidden
+        barStyle={'dark-content'}
+
+
+            />
             {
                 termscon ?
                     <View style={styles.termsdivmain}>
@@ -324,7 +334,6 @@ export default Goldlogin;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop:StatusBar.currentHeight,
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: '#fff',
