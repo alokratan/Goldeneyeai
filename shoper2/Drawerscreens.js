@@ -15,6 +15,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Forgotpassword from '../shoper/Forgotpassword';
 import Goldlogin2 from '../shoper/Goldlogin2';
 import Swiper5 from '../shoper/Animate';
+import Updatepercent from '../shoper/Updatepercent'
+import Updatehide from '../shoper/Upadatehide';
 const Drawer = createDrawerNavigator();
 const Drawerscreens = () => {
 
@@ -58,6 +60,8 @@ const Drawerscreens = () => {
     <Drawer.Screen  options={{headerShown:false}}  name="Goldlogin" component={Goldlogin} />
     <Drawer.Screen  options={{headerShown:false}}  name="Goldregis" component={Goldregister} />
    <Drawer.Screen  options={{headerShown:false}}  name="mpin2" component={Entermpin2} />
+   <Drawer.Screen  options={{headerShown:false}}  name="percent" component={Updatepercent} />
+   <Drawer.Screen  options={{headerShown:false}}  name="hide" component={Updatehide} />
     <Drawer.Screen  options={{headerShown:false}}  name="likedis2" component={Swiper5} />
  </Drawer.Navigator>
   )

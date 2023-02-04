@@ -20,7 +20,7 @@ update password pending
 bottom tab navigation
 home add logout icon on top
 when user click on this their is popup and option to select cancel or logout
-if use select cancel then noting happens, if press logout btn then navigate to login screen
+if use select cancel then nothing happens, if press logout btn then navigate to login screen
 
 set preference
  completed
