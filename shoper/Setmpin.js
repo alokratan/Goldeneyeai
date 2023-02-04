@@ -4,7 +4,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import loginimg from '../assets/icons/loginimg.jpg'
 
 import { MaterialIcons } from '@expo/vector-icons';
-import {styles} from './Stylesetmpin';
+import {styles} from '../Stylesheets/Stylesetmpin';
 const Setmpin = ({navigation}) => {
 
     const [mpin,setMpin]=useState('');

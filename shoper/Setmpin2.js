@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FontAwesome5 } from '@expo/vector-icons';
 import loginimg from '../assets/icons/loginimg.jpg'
 import { MaterialIcons } from '@expo/vector-icons';
-import {styles} from './Stylesetmpin';
+import {styles} from '../Stylesheets/Stylesetmpin';
 const Setmpin2 = ({navigation}) => {
 
     const [mpin,setMpin]=useState('');

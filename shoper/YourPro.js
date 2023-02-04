@@ -1,7 +1,9 @@
-import { StyleSheet, Text, Pressable, TextInput, KeyboardAvoidingView, View, Image } from 'react-native'
+import { StyleSheet, Text, Pressable, TextInput,Dimensions, KeyboardAvoidingView, View, Image } from 'react-native'
 import React, { useState } from 'react';
 import { FontAwesome, } from '@expo/vector-icons';
 import Dropmultiple from './Multiple2'
+const width=Dimensions.get('window').width
+const height=Dimensions.get('window').height
 import phot from '../assets/icons/imglogo.jpg'
 //import DropDownPicker from 'react-native-dropdown-picker'
 import { FontAwesome5, MaterialIcons, MaterialCommunityIcons, Entypo, Ionicons, Feather } from '@expo/vector-icons';
@@ -228,7 +230,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: '#fff',
-        paddingBottom: 100
+        paddingBottom: height/8
     },
     header: {
         backgroundColor: '#FFC72C',
@@ -259,11 +261,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '80%',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+    
     },
     header2: {
      //   backgroundColor: 'grey',
-        height: 460,
+        height: height/2,
         width: '85%',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -297,11 +300,12 @@ const styles = StyleSheet.create({
     input: {
         width: '80%',
         marginVertical: 4,
-        height: 36,
+        height: '60%',
         fontSize: 16,
         borderBottomColor: '#0004',
         borderBottomWidth: 2,
-        paddingLeft: 4
+        paddingLeft: 4,
+       
     },
     icondiv: {
         width: 46,
@@ -332,7 +336,7 @@ const styles = StyleSheet.create({
     pre: {
         backgroundColor: 'black',
         width: '90%',
-        height: 50,
+        height: '7%',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
@@ -341,11 +345,12 @@ const styles = StyleSheet.create({
 
     hidebar: {
         width: '90%',
-        height: 30,
+        height: '5%',
         justifyContent: 'flex-end',
         alignItems: 'center',
         flexDirection: 'row',
         marginVertical: 5,
+    //    backgroundColor:'red'
 
     },
     txthide: {
@@ -358,14 +363,15 @@ const styles = StyleSheet.create({
         width: '160%',
         position: 'absolute',
         top: 80,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor:'red'
     },
     header5: {
         height: '25%',
         width: '90%',
         borderWidth: 2,
         borderColor: '#0011',
-        marginTop: -54,
+        top:'-3%',
         position: 'relative',
         zIndex: -1,
         borderBottomRightRadius: 6,
@@ -373,7 +379,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
         marginBottom: '70%',
-       // backgroundColor:'red'
     },
     dropdiv: {
         width: '80%',
@@ -383,8 +388,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 3,
 
-
-        // backgroundColor:'#0001'
     },
     droptxt: {
 

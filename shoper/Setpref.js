@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View, Pressable, Image, TextInput, ToastAndroid } from 'react-native'
 import React, { useState } from 'react';
+
 import { Ionicons } from '@expo/vector-icons';
 import { FlatList } from 'react-native-gesture-handler';
 import { prefers } from './prefdata';
 import { AntDesign } from '@expo/vector-icons';
 import { Dimensions, ScrollView } from 'react-native';
+
 import ass from '../assets/icons/adidas.png'
 import ass1 from '../assets/icons/bata.png'
 import ass2 from '../assets/icons/domi.png'
@@ -12,6 +14,8 @@ import ass3 from '../assets/icons/rebook.png'
 import ass4 from '../assets/icons/mcdd.png'
 import logg1 from '../assets/icons/eye.png'
 import special from '../assets/icons/special.jpeg'
+const width2=Dimensions.get('window').width
+const height=Dimensions.get('window').height
 const arrimg = [
     {
         id:0,
@@ -111,15 +115,14 @@ const Setpref = ({ navigation }) => {
 
                     
                         <View style={styles.brandmain}>
-                            <Image source={abc.logo} style={{width:'50%',height:26,marginBottom:5}} />
-                            <Text style={{fontSize:14,fontWeight:'900',marginVertical:8}}>GOLDEN EYE</Text>
-                            <Image source={special} style={{width:40,height:40,borderRadius:10}} />
+                            <Image source={abc.logo} style={{width:'50%',height:'20%',marginBottom:5}} />
+                            <Text style={{fontSize:13,fontWeight:'700',marginVertical:8}}>GOLDEN EYE</Text>
+                            <Image source={special} style={{width:'40%',height:'30%',borderRadius:10}} />
                         </View>
                         <View style={styles.brandmain2}>
                             <Image source={abc.image} style={styles.brand} />
                             <View style={{width:'80%',backgroundColor:'green',height:30,borderRadius:8,justifyContent:'center',alignItems:'center'}}>
-
-                                <Text style={{fontSize:15,color:'white',fontWeight:'900'}}>
+                                <Text style={{fontSize:14,color:'white',fontWeight:'500'}}>
                                     {abc.text}
                                 </Text>
                             </View>
@@ -146,21 +149,15 @@ const Setpref = ({ navigation }) => {
                             <Text style={styles.txtit}>{item.itemname}</Text><AntDesign name="checkcircle" size={item.selected ? 24 : 20} color={item.selected ? "green" : "#0004"} />
                         </Pressable></View>
 
-
                     }}
                 />
             </View>
-
-
-
             <Pressable style={styles.pre}
                 onPress={() => save()}>
                 <Text style={styles.txt9}>
                     SAVE
                 </Text>
             </Pressable>
-
-
         </View>
     )
 }
@@ -251,7 +248,7 @@ const styles = StyleSheet.create({
     },
     txtit: {
         color: 'black',
-        fontWeight: '700'
+        fontWeight: '500'
     },
     successmain: {
         height: '110%',
@@ -303,9 +300,9 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     brand: {
-        backgroundColor: 'white',
-        width: 80,
-        height: 80,
+       
+        width: '40%',
+        height:'50%',
         borderRadius: 10,
 
 

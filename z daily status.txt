@@ -1,0 +1,35 @@
+3 feb 
+
+bottom tabs pref slider responsive , there is size problems occurs in some devices
+and check on monday.
+
+
+
+
+4 feb 
+
+d login done
+d register done
+verify num done
+setmpin done
+reset mpin done
+login mpin done
+forgot mpin pending
+update password pending
+
+bottom tab navigation
+home add logout icon on top
+when user click on this their is popup and option to select cancel or logout
+if use select cancel then noting happens, if press logout btn then navigate to login screen
+
+set preference
+ completed
+
+edit profile
+six main fields , three input type and other three still incomplete
+it is impossible to set all data in particular area , 
+i am try to posible on another screen .... pending.
+
+expired coupans 
+all done. 
+
