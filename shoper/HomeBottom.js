@@ -101,7 +101,7 @@ const HomeBottom = ({navigation}) => {
                 <Text style={{fontSize:20,fontWeight:'700'}}>Home</Text>
             <Pressable
             onPress={()=>setIslog(true)} style={{width:50,height:50,justifyContent:'center',alignItems:'center',marginRight:-20}}>
-    <MaterialCommunityIcons name='location-exit' size={30} color='#FFC72C'/>
+    <MaterialCommunityIcons name='location-exit' style={{transform:[{rotate:'-90deg'}]}} size={30} color='#FFC72C'/>
   
 </Pressable>
             </View>

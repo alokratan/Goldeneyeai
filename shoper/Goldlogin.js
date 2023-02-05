@@ -304,7 +304,11 @@ const Goldlogin = ({ navigation }) => {
                 </Pressable>
             </View>
             <View style={styles.buttonn}>
-                <Pressable style={styles.pre}
+                <Pressable style={
+                        ({pressed})=>[
+                         {backgroundColor:pressed?'rgba(0,0,0,0.6)':'black'}, styles.pre
+                        ]
+                    }
                     onPress={loginfun}
                 >
                     <Text style={styles.txt9}>

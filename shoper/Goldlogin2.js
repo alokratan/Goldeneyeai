@@ -328,8 +328,13 @@ const alertpassword=(text)=>{
                 </Pressable>
             </View>
             <View style={styles.buttonn}>
-                <Pressable style={styles.pre}
+                <Pressable 
                     onPress={loginfun}
+                    style={
+                        ({pressed})=>[
+                         {backgroundColor:pressed?'rgba(0,0,0,0.6)':'black'}, styles.pre
+                        ]
+                    }
                 >
                     <Text style={styles.txt9}>
                         LOGIN

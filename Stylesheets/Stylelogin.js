@@ -200,7 +200,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center'
     },
     pre: {
-        backgroundColor: 'black',
+        // backgroundColor: 'black',
         width: '90%',
         height: 50,
         justifyContent: 'center',
