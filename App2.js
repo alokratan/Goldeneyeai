@@ -117,12 +117,8 @@ const styles = StyleSheet.create({
         flex: 0.65,
         alignItems: 'center',
         justifyContent:'flex-end',
-   
-     
-
     },
     image: {
-        
         width: 330,
         height: 330,
     },
