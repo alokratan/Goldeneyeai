@@ -194,10 +194,11 @@ const HomeBottom = ({navigation}) => {
                                 } />
                             </View>
 
-                            <Pressable
+                            {
+                                item.isredeem?
+                                <Pressable
                                 style={styles.txt2}
-                                onPress={() => isredd(item)
-                                }
+                              
                                 backgroundColor={
                                     item.isredeem ? "#FFC72C" : "black"
                                 }
@@ -210,7 +211,26 @@ const HomeBottom = ({navigation}) => {
                               </Text>
                                 }
                                 
-                            </Pressable>
+                            </Pressable>:
+                            <Pressable
+                            style={styles.txt2}
+                            onPress={() => isredd(item)
+                            }
+                            backgroundColor={
+                                item.isredeem ? "#FFC72C" : "black"
+                            }
+                        >
+                            {
+                              item.isredeem?  <Text style={[styles.txt3,{color:'black',fontWeight:'700'}]}>
+                                {item.redcode}
+                            </Text>:<Text style={styles.txt3}>
+                              Redeem
+                          </Text>
+                            }
+                            
+                        </Pressable>
+                            }    
+                            
 
                         </View>
 

@@ -33,3 +33,17 @@ i am try to posible on another screen .... pending.
 expired coupans 
 all done. 
 
+
+
+
+6 feb 
+
+on dated 4 feb , edit profile screen pending..
+today i make some changes on pending three option
+like select preference, Discount percent and hide from 
+Individual 
+
+replace to update preference, update Discount percent
+and when user press on button it will redirect to new screen where user can
+update data preference or Discount percent
+and hide from button is active when hide for all button is disable

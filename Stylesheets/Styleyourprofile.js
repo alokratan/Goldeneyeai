@@ -13,9 +13,11 @@ export const styles = StyleSheet.create({
     },
     header: {
         backgroundColor: '#FFC72C',
-        height: 70,
+        height: height/13,
         width: '90%',
-        marginTop: -14,
+        position:'absolute',
+       top:0,
+       marginTop: '4%',
         borderTopRightRadius: 6,
         borderTopLeftRadius: 6,
         justifyContent: 'flex-start',
@@ -26,9 +28,9 @@ export const styles = StyleSheet.create({
     },
     nonheader: {
         backgroundColor: '#FFC72C',
-        height: 70,
+        height: height/13,
         width: '90%',
-        marginTop: '5%',
+    
         borderRadius: 6,
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -44,18 +46,17 @@ export const styles = StyleSheet.create({
     
     },
     header2: {
-     //   backgroundColor: 'grey',
-        height: height/2,
+     //  backgroundColor: 'grey',
+        height: height/1.8,
         width: '85%',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingBottom: 30,
-        marginBottom: 30
+        
     },
     midd3: {
    //  backgroundColor: 'grey',
         width: '90%',
-        height: 40,
+        height: '4%',
         justifyContent: 'center',
         alignItems: 'flex-end',
     },
@@ -71,7 +72,7 @@ export const styles = StyleSheet.create({
     inputdiv: {
         // backgroundColor: 'red',
         width: '100%',
-        height: '18%',
+        height: '10%',
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row'
@@ -97,8 +98,8 @@ export const styles = StyleSheet.create({
     },
 
     phot: {
-        width: 50,
-        height: 50,
+        width: '13%',
+        height: '75%',
         borderRadius: 50,
         marginLeft: 20,
     },
@@ -123,14 +124,12 @@ export const styles = StyleSheet.create({
     },
 
     hidebar: {
-        width: '90%',
+        width: '100%',
         height: '5%',
         justifyContent: 'flex-end',
         alignItems: 'center',
         flexDirection: 'row',
-        marginVertical: 5,
-    //    backgroundColor:'red'
-
+       
     },
     txthide: {
         fontSize: 17,
@@ -138,26 +137,20 @@ export const styles = StyleSheet.create({
        marginRight:'40%',
       
     },
-    consr: {
-        width: '160%',
-        position: 'absolute',
-        top: 80,
-        justifyContent: 'center',
-        backgroundColor:'red'
-    },
+   
     header5: {
         height: '25%',
         width: '90%',
         borderWidth: 2,
         borderColor: '#0011',
-        top:'-3%',
-        position: 'relative',
+        position: 'absolute',
+        marginTop:'16%',
         zIndex: -1,
         borderBottomRightRadius: 6,
         borderBottomLeftRadius: 6,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        marginBottom: '70%',
+        
     },
     dropdiv: {
         width: '80%',
@@ -166,21 +159,15 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingTop: 3,
-
     },
     droptxt: {
-
         fontSize: 17,
         color: 'black',
-        fontWeight: '700',
+        fontWeight: '600',
         paddingLeft: 10
     },
-    dropmenuicon: {
-        backgroundColor: 'red',
-
-    },
-     successmain:{ 
-        height: '120%',
+    successmain: {
+        height: '110%',
         width: '100%',
         backgroundColor: 'rgba(0,0,0,0.2)',
         position: 'absolute',
@@ -189,20 +176,20 @@ export const styles = StyleSheet.create({
         borderColor: 'black',
         shadowColor: "black",
         flex: 1,
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignItems: 'center'
     },
-  
+
     sucess: {
-        marginTop:100,
-        backgroundColor: '#FFC72C',
+        backgroundColor: 'green',
         width: '90%',
-        height: 500,
+        height: 100,
+        marginBottom: 100,
         borderWidth: 3,
-        borderColor:'black',
-        justifyContent:'center',
-        alignItems:'center',
-        borderRadius:10,
+        borderColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
         shadowColor: "black",
         shadowOffset: {
             width: 20,
@@ -211,6 +198,6 @@ export const styles = StyleSheet.create({
         shadowOpacity: 1,
         shadowRadius: 3.84,
         elevation: 8,
-    }
+    },
   
 })

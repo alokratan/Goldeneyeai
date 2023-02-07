@@ -1,29 +1,35 @@
-import { StyleSheet, Text, Pressable, TextInput,Dimensions, KeyboardAvoidingView, View, Image } from 'react-native'
+import { StyleSheet, Text, Pressable, TextInput,ToastAndroid, Dimensions, KeyboardAvoidingView, View, Image } from 'react-native'
 import React, { useState } from 'react';
 import { FontAwesome, } from '@expo/vector-icons';
 import Dropmultiple from './Multiple2'
-import {styles} from '../Stylesheets/Styleyourprofile'
+import { styles } from '../Stylesheets/Styleyourprofile'
 import phot from '../assets/icons/imglogo.jpg'
 //import DropDownPicker from 'react-native-dropdown-picker'
 import { FontAwesome5, MaterialIcons, MaterialCommunityIcons, Entypo, Ionicons, Feather } from '@expo/vector-icons';
 
 import { Switch } from 'react-native-paper';
-const YourPro = ({navigation}) => {
-    const [hideitem,setHideitem]=useState(false);
-    const [ishide, setIshide]=useState(true)
-    const hidefun=()=>{
+const YourPro = ({ navigation }) => {
+    const [hideitem, setHideitem] = useState(false);
+    const [ishide, setIshide] = useState(true)
+    const [success, setSuccess] = useState(false);
+    const hidefun = () => {
         setHideitem(true)
         // setTimeout(() => {
         //     setHideitem(false)
         // }, 3000);
     }
-    const  closedrop=()=>{
+    const closedrop = () => {
         setHideitem(false)
     }
     const [visible, setVisible] = useState(false);
 
     const save = () => {
-        // console.log();
+        ToastAndroid.show('Updated Successfully', 1000);
+        setSuccess(true)
+        setTimeout(() => {
+            setSuccess(false)
+            navigation.navigate('HomeBot')
+        }, 2000);
     };
     const visifun = () => setVisible(true);
     const nonvisifun = () => setVisible(false);
@@ -32,16 +38,16 @@ const YourPro = ({navigation}) => {
     const [isSwitchOn, setIsSwitchOn] = useState(false);
     const [isSwitchOn2, setIsSwitchOn2] = useState(false);
 
-    const onToggleSwitch = () =>{
+    const onToggleSwitch = () => {
         setIsSwitchOn(!isSwitchOn);
-        if(isSwitchOn){
+        if (isSwitchOn) {
             setIshide(true)
         }
-        else{
+        else {
             setIshide(false)
         }
-      
-    } 
+
+    }
 
     return (
         <KeyboardAvoidingView style={styles.container}
@@ -50,16 +56,27 @@ const YourPro = ({navigation}) => {
             {
                 hideitem ? <View style={styles.successmain}>
                     <View style={styles.sucess}>
-                    <Dropmultiple/>
-                    <Pressable onPress={closedrop} style={{justifyContent:'center',alignItems:'center', width:'60%',borderRadius:10,height:40,backgroundColor:'black'}}>
-                    <Text style={{color:'white',fontWeight:'700',fontSize:16}}>
-                        CLOSE
-                    </Text>
-                    </Pressable>
-                    </View> 
-                    </View> : <View></View>
+                        <Dropmultiple />
+                        <Pressable onPress={closedrop} style={{ justifyContent: 'center', alignItems: 'center', width: '60%', borderRadius: 10, height: 40, backgroundColor: 'black' }}>
+                            <Text style={{ color: 'white', fontWeight: '700', fontSize: 16 }}>
+                                CLOSE
+                            </Text>
+                        </Pressable>
+                    </View>
+                </View> : <View></View>
             }
-           
+ {
+                success ? <View style={styles.successmain}>
+
+                    <View style={styles.sucess}>
+                        <Text style={{ fontSize: 26, fontWeight: '900', marginVertical: 20, color: 'white' }}>
+                            Updated Successfully
+                        </Text>
+
+                    </View>
+                </View> : <View></View>
+            }
+
             <View style={visible ? styles.header : styles.nonheader} >
 
                 <Image
@@ -88,9 +105,9 @@ const YourPro = ({navigation}) => {
             </View>
 
             {visible ?
-            
+
                 <View style={styles.header5}>
-            
+
                     <Pressable style={styles.dropdiv}
                         onPress={() => alert("delete photo")}>
                         <Feather name="camera" size={23} color="black" />
@@ -168,64 +185,57 @@ const YourPro = ({navigation}) => {
                         </View>
 
                         <View style={styles.inputdiv}>
-                            <View style={[styles.icondiv,{backgroundColor:'rgba(255,248,224,1)'}]}>
+                            <View style={[styles.icondiv, { backgroundColor: 'rgba(255,248,224,1)' }]}>
                                 <Entypo name="star" size={24} color="black" />
                             </View>
-                               <Pressable onPress={()=>navigation.navigate('Setpre')} style={{  width: '80%',height:40, backgroundColor:'rgba(255,248,224,0.9)',borderBottomColor:'#FFC72C',borderBottomWidth:2  }}>
-                                <Text style={{fontSize:15,fontWeight:'500',marginTop:10,paddingLeft:10}}>
-                                    Update Your Preference 
+                            <Pressable onPress={() => navigation.navigate('Setpre')} style={{ width: '80%', height: 40, backgroundColor: 'rgba(255,248,224,0.9)', borderBottomColor: '#FFC72C', borderBottomWidth: 2 }}>
+                                <Text style={{ fontSize: 15, fontWeight: '500', marginTop: 10, paddingLeft: 10 }}>
+                                    Update Your Preference
                                 </Text>
                             </Pressable>
                         </View>
                         <View style={styles.inputdiv}>
-                            <View style={[styles.icondiv,{backgroundColor:'rgba(255,248,224,1)'}]}>
+                            <View style={[styles.icondiv, { backgroundColor: 'rgba(255,248,224,1)' }]}>
                                 <FontAwesome5 name="percent" size={16} color="black" />
                             </View>
-                            <Pressable onPress={()=>navigation.navigate('percent')} style={{  width: '80%',height:40, backgroundColor:'rgba(255,248,224,0.9)',borderBottomColor:'#FFC72C',borderBottomWidth:2  }}>
-                                <Text style={{fontSize:15,fontWeight:'500',marginTop:10,paddingLeft:10}}>
-                                    Update Discount Percent 
+                            <Pressable onPress={() => navigation.navigate('percent')} style={{ width: '80%', height: 40, backgroundColor: 'rgba(255,248,224,0.9)', borderBottomColor: '#FFC72C', borderBottomWidth: 2 }}>
+                                <Text style={{ fontSize: 15, fontWeight: '500', marginTop: 10, paddingLeft: 10 }}>
+                                    Update Discount Percent
                                 </Text>
                             </Pressable>
                         </View>
 
                         <View style={styles.inputdiv}>
-                            <View onValueChange={onToggleSwitch} style={ishide?[styles.icondiv,{backgroundColor:'rgba(255,248,224,1)'}]:[styles.icondiv,{backgroundColor:'#F3F3F3'}]}>
-                            <MaterialCommunityIcons name={ishide?"eye-outline":"eye-off-outline"} size={24} color="black" />
+                            <View onValueChange={onToggleSwitch} style={ishide ? [styles.icondiv, { backgroundColor: 'rgba(255,248,224,1)' }] : [styles.icondiv, { backgroundColor: '#F3F3F3' }]}>
+                                <MaterialCommunityIcons name={ishide ? "eye-outline" : "eye-off-outline"} size={24} color="black" />
                             </View>
-                            {ishide?
-                            <Pressable  onPress={()=>navigation.navigate('hide')} style={{  width: '80%',height:40, backgroundColor:'rgba(255,248,224,0.9)',borderBottomColor:'#FFC72C',borderBottomWidth:2  }}>
-                                <Text style={{fontSize:15,fontWeight:'500',marginTop:10,paddingLeft:10}}>
-                                    Hide From Individual 
-                                </Text>
-                            </Pressable>:
-                               <Pressable  style={{  width: '80%',height:40, backgroundColor:'#F3F3F3',borderBottomColor:'#0004',borderBottomWidth:2  }}>
-                               <Text style={{fontSize:15,fontWeight:'500',marginTop:10,paddingLeft:10}}>
-                                   Hide From Individual 
-                               </Text>
-                           </Pressable>}
+                            {ishide ?
+                                <Pressable onPress={() => navigation.navigate('hide')} style={{ width: '80%', height: 40, backgroundColor: 'rgba(255,248,224,0.9)', borderBottomColor: '#FFC72C', borderBottomWidth: 2 }}>
+                                    <Text style={{ fontSize: 15, fontWeight: '500', marginTop: 10, paddingLeft: 10 }}>
+                                        Hide From Individual
+                                    </Text>
+                                </Pressable> :
+                                <Pressable style={{ width: '80%', height: 40, backgroundColor: '#F3F3F3', borderBottomColor: '#0004', borderBottomWidth: 2 }}>
+                                    <Text style={{ fontSize: 15, fontWeight: '500', marginTop: 10, paddingLeft: 10 }}>
+                                        Hide From Individual
+                                    </Text>
+                                </Pressable>}
+
+                        </View>
+                        <View style={styles.hidebar}>
+
+
+                            <Text style={styles.txthide}>Hide from all</Text><Switch
+                                trackColor={{ true: 'black', false: '#0003' }}
+                                thumbColor='#FFC72C'
+                                value={isSwitchOn} onValueChange={onToggleSwitch} />
                         </View>
 
                     </View></>}
-           {
-            visible?<View style={styles.hidebar}>
 
-                
-            </View>:
-            <View style={styles.hidebar}>
-
-                
-            <Text style={styles.txthide}>Hide from all</Text><Switch 
-            trackColor={{true:'black',false:'#0003'}}
-        thumbColor='#FFC72C'
-        value={isSwitchOn} onValueChange={onToggleSwitch} />
-        </View>
-    
-     
-
-           }
             <Pressable style={styles.pre}
 
-                onPress={() => save()}>
+                onPress={save}>
                 <Text style={styles.txt9}>
                     SAVE CHANGES
                 </Text>

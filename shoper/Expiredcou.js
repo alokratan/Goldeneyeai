@@ -65,27 +65,20 @@ const Expiredcou = () => {
                         </View>
                     </View>
                 }}
-
             />
+
             {/* <View style={styles.main3}>
                         <View style={styles.maindots}>
-
                         </View>
                         <View style={styles.maindots}>
-
                         </View>
-
                     </View> */}
             {/* </View>
-
             </ScrollView> */}
         </View>
     )
 }
-
 export default Expiredcou
-
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -117,7 +110,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         // borderBottomWidth: 2,
         // borderBottomColor: 'white'
-
     },
     main3: {
         width: '80%',
@@ -137,7 +129,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.55,
         shadowRadius: 3.84,
         elevation: 6,
-
     },
     main3l: {
         //  backgroundColor:'green',
@@ -156,23 +147,19 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'flex-start',
         marginLeft: 10
-
     },
     textdis: {
         color: 'grey',
         fontWeight: '700'
-
     },
     textper: {
         color: 'black',
         fontSize: 20,
         fontWeight: '700'
-
     },
     textval: {
         color: 'red',
         fontWeight: '700'
-
     },
     main32: {
          //  backgroundColor: 'green',
@@ -208,7 +195,7 @@ const styles = StyleSheet.create({
     txt3: {
         color: 'red',
         fontStyle:'italic',
-        fontWeight:'700'
+        fontWeight:'500'
     },
     photodiv: {
         width: 80,
@@ -221,13 +208,10 @@ const styles = StyleSheet.create({
         marginTop: 20,
         width: 65,
         height: 60,
-
     },
     phot2: {
-
         width: 44,
         height: 44
-
     },
     textval2:{
         color:'grey',

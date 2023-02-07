@@ -89,17 +89,17 @@ const Setpref = ({ navigation }) => {
     }
     return (
         <View style={styles.container}>
-            {
-                success ? <View style={styles.successmain}>
+        {
+            success ? <View style={styles.successmain}>
 
-                    <View style={styles.sucess}>
-                        <Text style={{ fontSize: 26, fontWeight: '900', marginVertical: 20, color: 'white' }}>
-                            Updated Successfully
-                        </Text>
+                <View style={styles.sucess}>
+                    <Text style={{ fontSize: 26, fontWeight: '900', marginVertical: 20, color: 'white' }}>
+                        Updated Successfully
+                    </Text>
 
-                    </View>
-                </View> : <View></View>
-            }
+                </View>
+            </View> : <View></View>
+        }
 
 
             <ScrollView
