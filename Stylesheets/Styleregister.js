@@ -255,7 +255,40 @@ export const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: 10,
+    },
+    successmain:{ 
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        position: 'absolute',
+        top: 0,
+        zIndex: 2,
+        borderColor: 'black',
+        shadowColor: "black",
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+   
+    sucess: {
+        backgroundColor: '#0B7B00',
+        width: '90%',
+        height: 100,
+        borderWidth: 3,
+        borderColor:'white',
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius:10,
+        shadowColor: "black",
+        shadowOffset: {
+            width: 20,
+            height: 10,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 3.84,
+        elevation: 8,
     }
+
 
 
 })

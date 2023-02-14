@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Goldlogin from '../shoper/Goldlogin';
 import Goldregister from '../shoper/Goldregister';
@@ -21,49 +21,55 @@ const Drawer = createDrawerNavigator();
 const Drawerscreens = () => {
 
 
-  const [dataToken,setDataToken]=useState(false);
-  useEffect(()=>{
-    
-    const handlegetToken= async ()=>{
-      const dataToken =await AsyncStorage.getItem('AccessToken');
-      
-      setDataToken(dataToken)
-      // console.log(dataToken);
+  const [dataToken, setDataToken] = useState(false);
+  useEffect(() => {
+    AsyncStorage.getItem('AccessToken').then(value => {
+      if (value == undefined) {
+        setDataToken(true);
+        console.log('AccessToken');
       }
-  
-      handlegetToken();
-      
-    
+      else {
+        setDataToken(false);
+      }
+    })
+    // const handlegetToken= async ()=>{
+    //   const dataToken =await AsyncStorage.getItem('AccessToken');
+
+    //   setDataToken(dataToken)
+    //    console.log(dataToken);
+    //   }
+
+    //   handlegetToken();
+
+
   })
-  
-  
+
+
   return (
 
-    
-   <Drawer.Navigator initialRouteName={
-    !dataToken?
-   "LoginHome": "Bottomtabs"
-   } useLegacyImplementation>
 
-<Drawer.Screen  options={{headerShown:false}}  name="LoginHome" component={Goldlogin2} />
-<Drawer.Screen  options={{headerShown:false}}  name="RegisterHome" component={Goldregister2} />
-  
-              <Drawer.Screen  options={{headerShown:false}}  name="Verify" component={Verifynum} />
-    <Drawer.Screen  options={{headerShown:false}}  name="mpin" component={Entermpin} />
-    
-    <Drawer.Screen  options={{headerShown:false}}  name="Setmpin" component={Setmpin} />
-    <Drawer.Screen  options={{headerShown:false}}  name="Resetmpin" component={Setmpin2} />
-    <Drawer.Screen  options={{headerShown:false}}  name="Forgotmpin" component={Forgotmpin} />
-    <Drawer.Screen  options={{headerShown:false}}  name="Forgotpass" component={Forgotpassword} />
-    <Drawer.Screen  options={{headerShown:false}}  name="Bottomtabs" component={Bottomtabs} />
-   
-    <Drawer.Screen  options={{headerShown:false}}  name="Goldlogin" component={Goldlogin} />
-    <Drawer.Screen  options={{headerShown:false}}  name="Goldregis" component={Goldregister} />
-   <Drawer.Screen  options={{headerShown:false}}  name="mpin2" component={Entermpin2} />
-   <Drawer.Screen  options={{headerShown:false}}  name="percent" component={Updatepercent} />
-   <Drawer.Screen  options={{headerShown:false}}  name="hide" component={Updatehide} />
-    <Drawer.Screen  options={{headerShown:false}}  name="likedis2" component={Swiper5} />
- </Drawer.Navigator>
+    <Drawer.Navigator initialRouteName={
+      dataToken ?
+        "mpin2" : "LoginHome"
+    } useLegacyImplementation>
+
+      <Drawer.Screen options={{ headerShown: false }} name="LoginHome" component={Goldlogin2} />
+      <Drawer.Screen options={{ headerShown: false }} name="RegisterHome" component={Goldregister2} />
+      <Drawer.Screen options={{ headerShown: false }} name="Verify" component={Verifynum} />
+      <Drawer.Screen options={{ headerShown: false }} name="mpin" component={Entermpin} />
+      <Drawer.Screen options={{ headerShown: false }} name="Setmpin" component={Setmpin} />
+      <Drawer.Screen options={{ headerShown: false }} name="Resetmpin" component={Setmpin2} />
+      <Drawer.Screen options={{ headerShown: false }} name="Forgotmpin" component={Forgotmpin} />
+      <Drawer.Screen options={{ headerShown: false }} name="Forgotpass" component={Forgotpassword} />
+      <Drawer.Screen options={{ headerShown: false }} name="Bottomtabs" component={Bottomtabs} />
+      <Drawer.Screen options={{ headerShown: false }} name="percent" component={Updatepercent} />
+      <Drawer.Screen options={{ headerShown: false }} name="hide" component={Updatehide} />
+      <Drawer.Screen options={{ headerShown: false }} name="Goldlogin" component={Goldlogin} />
+      <Drawer.Screen options={{ headerShown: false }} name="Goldregis" component={Goldregister} />
+      <Drawer.Screen options={{ headerShown: false }} name="mpin2" component={Entermpin2} />
+      <Drawer.Screen options={{ headerShown: false }} name="likedis2" component={Swiper5} />
+
+    </Drawer.Navigator>
   )
 }
 

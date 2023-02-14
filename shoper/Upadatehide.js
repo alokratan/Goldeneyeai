@@ -28,8 +28,8 @@ const Updatehide = ({ navigation }) => {
         setSuccess(true)
         setTimeout(() => {
             setSuccess(false)
-            navigation.navigate('HomeBot')
-        }, 2000);
+            navigation.navigate('Your')
+        }, 1000);
 
 
     }

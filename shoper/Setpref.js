@@ -69,7 +69,7 @@ const Setpref = ({ navigation }) => {
         setSuccess(true)
         setTimeout(() => {
             setSuccess(false)
-            navigation.navigate('HomeBot')
+            navigation.navigate('Your')
         }, 2000);
 
 
@@ -222,21 +222,18 @@ const styles = StyleSheet.create({
     flatlisst: {
         width: '90%',
         height: '100%',
-        // backgroundColor: 'green',
 
     },
     flatliss: {
         width: '100%',
-        height: 40,
-
-        // backgroundColor: 'red',
+        height: 42,
         marginBottom: 2,
         justifyContent: 'center',
         alignItems: 'center'
     },
     itempress: {
         width: '90%',
-        height: 36,
+        height: 38,
         //  backgroundColor: '#FFC72C',
         borderRadius: 6,
         justifyContent: 'space-between',

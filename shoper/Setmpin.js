@@ -1,46 +1,94 @@
 import { StyleSheet, Text,Dimensions, Pressable, TextInput, StatusBar, Image, View } from 'react-native'
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { FontAwesome5 } from '@expo/vector-icons';
 import loginimg from '../assets/icons/loginimg.jpg'
-
+import axios from 'axios';
 import { MaterialIcons } from '@expo/vector-icons';
 import {styles} from '../Stylesheets/Stylesetmpin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const Setmpin = ({navigation}) => {
+    const [tok,setTok]=useState(null);
+    useEffect(()=>{
+        AsyncStorage.getItem('AccessToken').then(value=>{
+            console.log('this console',value);
+             setTok(value)
+         })
+            console.log('value',tok);
+    },[])
+      
+
 
     const [mpin,setMpin]=useState('');
-    const [mpin2,setMpin2]=useState('');
+    const [confirm_mpin,setConfirm_mpin]=useState('');
     const [mpinval,setMpinval]=useState(true);
     const [success, setSuccess] = useState(false);
     const [icon,setIcon]=useState('white')
     const onchangempin=(mpin)=>{
         setMpin(mpin)
     }
-    const onchangempin2=(mpin2)=>{
-        setMpin2(mpin2)
-        if(mpin==mpin2){
+    const onchangeconfirm_mpin=(confirm_mpin)=>{
+        setConfirm_mpin(confirm_mpin)
+        if(mpin==confirm_mpin){
             setMpinval(true)
             setIcon('green')
-         
-
-
         }
         else{
-  
         setMpinval(false)
     setIcon('white')
        
         }
        
     }
-    const onsubmit=()=>{
+
+    const onsubmit=async ()=>{
+        if (!mpin.trim() || !confirm_mpin.trim() ) {
+            alert("* All fields are required");
+            return;
+          }
+      
+          try {
+            const response = await axios.post('http://13.232.193.117:8000/user/set-mpin/', {
+              mpin,
+              confirm_mpin,
+            },{
+                headers:{
+                    'Authorization':`token ${tok}`
+                }
+            });
+            if (response.status === 200) {
+              // alert(` You have created: ${JSON.stringify(response.data)}`);
+              setSuccess(true)
+               console.log(` You have created: ${JSON.stringify(response.data)}`);
+              setTimeout(() => {
+                  setSuccess(false)
+                  navigation.navigate('Bottomtabs')
+              }, 3000);
+          
+              setMpin('');
+              setConfirm_mpin('');
+            
+              
+            } else {
+              throw new Error("some errors");
+            }
+          } catch (error) {
+            
+            console.log(error)
+      
+          }
+
+        if(mpin==confirm_mpin){
+            
         setMpin(null)
-        setMpin2(null)
-        setSuccess(true)
-        setTimeout(() => {
-            setSuccess(false)
-            navigation.navigate('Goldlogin')
-        }, 2000);
-       
+        setConfirm_mpin(null)
+            setSuccess(true)
+            setTimeout(() => {
+                setSuccess(false)
+                navigation.navigate('Goldlogin')
+            }, 2000);
+        }
+  
     }
 
     return (
@@ -89,10 +137,10 @@ const Setmpin = ({navigation}) => {
                     style={styles.input}
                     maxLength={4}
                     cursorColor="black"
-                    value={mpin2}
+                    value={confirm_mpin}
                     keyboardType="number-pad"
                     placeholder="Confirm MPIN"
-                    onChangeText={onchangempin2}
+                    onChangeText={onchangeconfirm_mpin}
                 />
 
 <MaterialIcons name="mobile-friendly" size={24} color={icon} />

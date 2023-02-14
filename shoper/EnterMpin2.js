@@ -1,14 +1,25 @@
-import { StyleSheet, Text, Pressable,ToastAndroid, TextInput, StatusBar, Image, View } from 'react-native'
+import { StyleSheet, Text, Pressable,ToastAndroid,Dimensions, TextInput, StatusBar, Image, View } from 'react-native'
 import React, { useRef, useState ,useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
+const height = Dimensions.get('window').height
 import loginimg from '../assets/icons/loginimg.jpg'
 import { userapi2 } from '../userapi';
+import axios from 'axios';
 const Entermpin2 = ({navigation}) => {
+    const [tok,setTok]=useState(null);
+    useEffect(()=>{
+        AsyncStorage.getItem('AccessToken').then(value=>{
+            console.log('mpin',value);
+             setTok(value)
+         })
+            
+    },[])
     const [correctmpin,setCorrectmpin]=useState(true);
 
+    const [success, setSuccess] = useState(false);
 
-    const [mpin,setMpin]=useState('')
+     const [mpin,setMpin]=useState('')
     const pin1Ref = useRef(null);
     const pin2Ref = useRef(null);
     const pin3Ref = useRef(null);
@@ -16,43 +27,68 @@ const Entermpin2 = ({navigation}) => {
     const [otp, setOtp] = useState({ 1: '', 2: '', 3: '', 4: '' });
     const abcd = { ...otp }
 
+  
 
 
-
-const handleLogin = () => {
-    var bas = Object.values(abcd)
-    const abstr = Number(bas.join(''));
-
-    if (true) {
-        userapi2({
-            mpin:abstr
-      })
-        .then(result => {
-        //   console.log(result)
-          if (result.status == 200) {
-            alert(`.....Welcome User, Your Mpin is this ${abstr}...... `)
-            ToastAndroid.show('Authentication succesful',2000);
-            
-            setTimeout(() => {
-                navigation.navigate('Bottomtabs')
-            }, 2000);
+const handleLogin = async() => {
+     var bas = Object.values(abcd)
+     const abstr = bas.join('');
+     console.log(abstr);
+try{
+    const response = await axios.post('http://13.232.193.117:8000/user/log-in-mpin/', {
+        mpin:abstr,
+      },{
+          headers:{
+              'Authorization':`token ${tok}`
           }
-        })
-        .catch(err => {
-            alert(`The MPIN you have entered is incorrect:  ${abstr}`)
-            // console.log(abstr);
-            setCorrectmpin(false)
-      
-        });
-    } else {
-      alert("checkPassowrd");
+      })
+  
+    if (response.status === 200) {
+    //   alert(`.....Welcome User, Your Mpin is this ${abstr}...... `)
+      setCorrectmpin(true)
+            setSuccess(true)
+           
+      ToastAndroid.show('Authentication successfully',2000);
+      setTimeout(() => {
+        setSuccess(false)
+          navigation.navigate('Bottomtabs')
+      }, 2000);
     }
+    else{
+    //   alert(`The MPIN you have entered is incorrect:  ${abstr}`)
+       console.log(abstr);
+      setCorrectmpin(false)
+    
+      console.log(response.status);
+    }
+}
+   
+catch (error) {
+    // alert("An error has occurred");
+    ToastAndroid.show(`The MPIN you have entered is incorrect`,2000)
+       console.log(abstr);
+      setCorrectmpin(false)
+      
+    console.log(error)
+
+  }      
   };
 
 
     return (
 
         <View style={styles.container}>
+                {
+                success ? <View style={styles.successmain}>
+
+                    <View style={styles.sucess}>
+                        <Text style={{ fontSize: 26, fontWeight: '900', marginVertical: 20, color: 'white' }}>
+                            WELCOME
+                        </Text>
+
+                    </View>
+                </View> : <View></View>
+            }
             <View style={styles.top}>
 
             </View>
@@ -172,8 +208,19 @@ const handleLogin = () => {
                         DONE
                     </Text>
                 </Pressable>
-
+                <View style={styles.buttonn2}>
+                    <Text style={styles.texttimer}>
+                        Back to
+                    </Text>
+                    <Pressable style={styles.txt2}
+                        onPress={() => navigation.navigate('LoginHome')}>
+                        <Text style={styles.ttxt3}>
+                            LOGIN
+                        </Text>
+                    </Pressable>
+                </View>
             </View>
+
         </View>
     )
 }
@@ -187,32 +234,25 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#ffffff'
     },
-    top: {
 
-        //  backgroundColor: 'red',
-        width: '100%',
-        height: 100,
-        justifyContent: 'flex-end',
-        alignItems: 'baseline'
-    },
     midd: {
         width: '100%',
-        height: 600,
-        //   backgroundColor: 'red',
-        justifyContent: 'flex-start',
+        height: height / 1.6,
+       // backgroundColor: 'pink',
+        justifyContent: 'center',
         alignItems: 'center'
     },
     midd3: {
-        // backgroundColor: 'grey',
+       // backgroundColor: 'grey',
         width: '90%',
         height: 60,
         justifyContent: 'center',
         alignItems: 'center',
     },
     midd2: {
-        //      backgroundColor: 'grey',
+      //  backgroundColor: 'grey',
         width: '100%',
-        height: 200,
+        height: height / 4,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
@@ -224,19 +264,23 @@ const styles = StyleSheet.create({
         width: '90%',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        flexDirection:'column',
-        marginVertical: 10
+        flexDirection: 'column',
+    //    backgroundColor: 'grey',
+
     },
     input: {
         width: '85%',
         height: 30,
         fontSize: 14,
+
     },
     title: {
         fontWeight: '900',
-        fontSize: 22,
-        marginBottom: 30,
-        marginLeft: 20
+        fontSize: 22, 
+      //  backgroundColor: 'aqua',
+        marginVertical:30
+
+
     },
     title2: {
         fontWeight: '700',
@@ -250,8 +294,8 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        width: 180,
-        height: 180
+        width: '50%',
+        height: height
     },
     txt2: {
         color: "white",
@@ -276,6 +320,14 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: '700'
     },
+    ttxt3: {
+        color: "#F5B716",
+        fontWeight: '900',
+        fontSize: 17,
+        marginHorizontal: 10,
+        textDecorationLine: 'underline',
+        textTransform: 'uppercase'
+    },
 
     face: {
         width: 26,
@@ -283,19 +335,18 @@ const styles = StyleSheet.create({
     },
     buttonn: {
         width: '100%',
-        height: 170,
-
+        height: height / 4,
+       // backgroundColor: 'green',
         justifyContent: 'center',
         alignItems: 'center'
-
     },
     buttonn2: {
         width: '100%',
-        height: 70,
+        height: '40%',
+       // backgroundColor: 'red',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'flex-end'
-
+        alignItems: 'center'
     },
     pre: {
         backgroundColor: 'black',
@@ -334,9 +385,9 @@ const styles = StyleSheet.create({
     txtake2: {
         paddingLeft: 50,
     },
-  
+
     textotp: {
-         
+
         width: '50%',
         height: 46,
         justifyContent: 'space-evenly',
@@ -346,7 +397,7 @@ const styles = StyleSheet.create({
 
     },
     textotpinp: {
-     //   backgroundColor:'red',
+        //   backgroundColor:'red',
         height: 40,
         width: 34,
         borderRadius: 5,
@@ -354,6 +405,37 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         textAlign: 'center',
         fontSize: 24,
+    },
+    successmain: {
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        position: 'absolute',
+        top: 0,
+        zIndex: 2,
+        borderColor: 'black',
+        shadowColor: "black",
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    sucess: {
+        backgroundColor: 'green',
+        width: '90%',
+        height: 100,
+        borderWidth: 3,
+        borderColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        shadowColor: "black",
+        shadowOffset: {
+            width: 20,
+            height: 10,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 3.84,
+        elevation: 8,
     }
 
 })

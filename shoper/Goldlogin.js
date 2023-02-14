@@ -23,7 +23,9 @@ const Goldlogin = ({ navigation }) => {
     const [termscon, setTermscon] = useState(false);
     const [success, setSuccess] = useState(false);
 
-
+    AsyncStorage.getItem('AccessToken').then(value=>{
+        console.log(value);
+    })
     
     function termfn(){
         setTermscon(false)
@@ -79,7 +81,7 @@ const Goldlogin = ({ navigation }) => {
                     setSuccess(true)
                     setTimeout(() => {
                         setSuccess(false)
-                        navigation.navigate('mpin')
+                        navigation.togg('mpin')
                     }, 1000);
                   }else if(!result.status==200){
              
@@ -94,7 +96,7 @@ const Goldlogin = ({ navigation }) => {
                   }
                 
                 }).catch(err=>{
-                    // console.log(err);
+                     console.log(err);
                     ToastAndroid.show('Make Sure Your Server Is Live', 1000)
                 })
                 

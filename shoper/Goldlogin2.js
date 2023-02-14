@@ -33,7 +33,7 @@ const alertusername=(text)=>{
 }
 const alertpassword=(text)=>{
     setPassword(text)
-    if (text.toString().length<=8){
+    if (text.toString().length<=7){
         setPassval(false)    
         }
 
@@ -75,12 +75,11 @@ const alertpassword=(text)=>{
             setPhoneval(false)    
             ToastAndroid.show('* username may not be blank', 1000)
             }
-            else if(password=='' && password.toString().length<=8){
+            else if(password=='' && password.toString().length<=7){
                 setPassval(false)
                 ToastAndroid.show('Password length must be 8 character', 1000)
             }
             else{
-
             if (isSelected2) {
                 userapi({
                 username: username,
@@ -88,16 +87,16 @@ const alertpassword=(text)=>{
               })
                 .then(result => {
 
-                //    console.log(result.data.token)
+                   console.log(result.data.token)
                   if (result.status == 200) {
                     setPhoneval(true)
                     setPassval(true)
-                //    AsyncStorage.setItem('AccessToken', result.data.token);
+                   AsyncStorage.setItem('AccessToken', result.data.token);
                     ToastAndroid.show('Login Successfully...', 1000)
                     setSuccess(true)
                     setTimeout(() => {
                         setSuccess(false)
-                        navigation.navigate('mpin')
+                          navigation.jumpTo('mpin2')
                     }, 1000);
                   }else if(!result.status==200){
              

@@ -108,7 +108,7 @@ const YourPro = ({ navigation }) => {
 
                 <View style={styles.header5}>
 
-                    <Pressable style={styles.dropdiv}
+<Pressable style={[styles.dropdiv,{marginLeft:'-5%'}]}
                         onPress={() => alert("delete photo")}>
                         <Feather name="camera" size={23} color="black" />
                         <Text style={styles.droptxt}>

@@ -28,7 +28,7 @@ const Updatepercent = ({ navigation }) => {
         setSuccess(true)
         setTimeout(() => {
             setSuccess(false)
-            navigation.navigate('HomeBot')
+            navigation.navigate('Your')
         }, 2000);
 
 

@@ -7,7 +7,7 @@ import { Entypo, MaterialIcons, MaterialCommunityIcons, FontAwesome5 } from '@ex
 import { RadioButton } from 'react-native-paper';
 import {styles} from '../Stylesheets/Styleregister'
 import axios from 'axios';
-const baseUrl = "http://13.126.41.109:8000/";
+const baseURL='http://13.232.193.117:8000'
 
 const Goldregister = ({ navigation }) => {
     const [username, setUsername] = useState("");
@@ -47,7 +47,7 @@ const Goldregister = ({ navigation }) => {
         }
         setIsLoading(true);
         try {
-            const response = await axios.post(`${baseUrl}user/register/`, {
+            const response = await axios.post(`${baseURL}/user/register/`, {
                 username,
                 password,
                 password2,

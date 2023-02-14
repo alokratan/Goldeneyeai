@@ -9,8 +9,10 @@ import { Entypo, MaterialIcons, MaterialCommunityIcons, FontAwesome5 } from '@ex
 import { RadioButton } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
-const baseUrl = "http://13.126.41.109:8000/";
-const baseurl2 = "http://13.126.41.109:8000/user/register/"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { userapi2 } from '../userapi';
+const baseURL='http://13.232.193.117:8000'
+
 const Goldregister = ({ navigation }) => {
     const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +32,6 @@ const Goldregister = ({ navigation }) => {
       quality: 1,
     });
     setProfile_pic(resultss)
-    //  console.log(resultss);
    
     if (!resultss.canceled) {
       setImage(resultss.assets[0].uri);
@@ -66,44 +67,45 @@ const Goldregister = ({ navigation }) => {
     setChecked('female');
     
   };
-  const onSubmitFormHandler = async (event) => {
+  const onSubmitFormHandler = async () => {
     if (!username.trim() || !email.trim() || !password.trim() ||!password2.trim() ) {
       alert("* All fields are required");
       return;
     }
 
     try {
-      const response = await axios.post(`${baseUrl}user/register/`, {
+      
+      const response = await axios.post(`${baseURL}/user/register/`, {
         username,
         password,
         password2,
         email,
-        gender,
-        profile_pic
+         gender,
+        // profile_pic
 
       });
       if (response.status === 200) {
         // alert(` You have created: ${JSON.stringify(response.data)}`);
         setSuccess(true)
-        // console.log(` You have created: ${JSON.stringify(response.data)}`);
+        AsyncStorage.setItem('AccessToken', response.data.token);
+         console.log(` You have created: ${JSON.stringify(response.data)}`);
         setTimeout(() => {
             setSuccess(false)
-            navigation.navigate('LoginHome')
+            navigation.navigate('Setmpin')
         }, 3000);
     
         setUsername('');
         setEmail('');
         setPassword('');
         setPassword2('');
-        setGender('');
+         setGender('');
         
       } else {
         throw new Error("some errors");
       }
     } catch (error) {
-      alert("An error has occurred");
-    //   console.log(error)
-
+      console.log(error)
+      console.log(error)
     }
   };
 
@@ -126,17 +128,16 @@ const Goldregister = ({ navigation }) => {
             }, 1000);
     }
     return (
-        <View style={styles.container}>
+                <View style={styles.container}>
                    {
-                success ? <View style={styles.successmain}>
-
+                     success ? <View style={styles.successmain}>
                     <View style={styles.sucess}>
                     <Text style={{fontSize:26,fontWeight:'900',marginVertical:20,color:'white'}}>
                         Register Successfully
                     </Text>
-                     
                     </View>
-                </View> : <View></View>
+                </View> :
+                 <View></View>
             }
    
             <View style={styles.top}>
@@ -193,7 +194,6 @@ const Goldregister = ({ navigation }) => {
                         keyboardType="email-address"
                         placeholder="Email"
                         fontWeight='700'
-                    
                         value={email}
                         onChangeText={onChangeEmailHandler}
                     />
@@ -232,7 +232,7 @@ const Goldregister = ({ navigation }) => {
                 
                 <RadioButton
                 color='black'
-                    value="male"
+                    value="Male"
                    
                     status={checked === 'male' ? 'checked' : 'unchecked'}
                     onPress={onChangegenderHandler}
@@ -240,7 +240,7 @@ const Goldregister = ({ navigation }) => {
                   
                 <RadioButton
                  color='black'
-                    value="female"
+                    value="Female"
                    
                     status={checked === 'female' ? 'checked' : 'unchecked'}
                     onPress={onChangegender2Handler}

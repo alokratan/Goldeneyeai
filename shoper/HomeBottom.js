@@ -3,7 +3,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import React, { useState } from 'react';
 import { MaterialIcons ,MaterialCommunityIcons} from '@expo/vector-icons';
 import { data } from "./coupans";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import phot from '../assets/icons/imglogo.jpg'
 
 const HomeBottom = ({navigation}) => {
@@ -61,7 +61,7 @@ const HomeBottom = ({navigation}) => {
     const logoutfn =()=>{
         setIslog(true)
         ToastAndroid.show('Logout Successfully', 1000)
-        
+        AsyncStorage.removeItem('AccessToken', (err) => console.log('AccessToken', err));
         setTimeout(() => {
             setIslog(false)
             navigation.navigate('LoginHome')
@@ -71,6 +71,16 @@ const HomeBottom = ({navigation}) => {
 
 
         <View style={styles.container}>
+         
+             <StatusBar
+            animated={true}
+            backgroundColor='white'
+            showHideTransition={'slide'}
+     
+        barStyle={'dark-content'}
+
+
+            />
               {islog?
 
 <View style={styles.successmain}>
