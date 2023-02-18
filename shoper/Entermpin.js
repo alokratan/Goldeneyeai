@@ -51,7 +51,6 @@ const Entermpin = ({ navigation }) => {
     }, [])
 
 
-
     return (
 
         <View style={styles.container}>

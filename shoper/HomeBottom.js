@@ -1,16 +1,37 @@
 import { StyleSheet,ToastAndroid,ScrollView,StatusBar, Text, View, Button, Pressable, Image } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler';
-import React, { useState } from 'react';
+import React, { useState,useEffect,useCallback } from 'react';
 import { MaterialIcons ,MaterialCommunityIcons} from '@expo/vector-icons';
 import { data } from "./coupans";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import phot from '../assets/icons/imglogo.jpg'
-
+import { useFocusEffect } from '@react-navigation/native';
 const HomeBottom = ({navigation}) => {
 
     const [select, setSelect] = useState(data);
     const [redeemed, setRedeemed] = useState(false);
     const [islog,setIslog]=useState(false);
+    const [full_name,setFull_name]=useState('');
+    useFocusEffect(
+        useCallback(
+          () => {
+                fetchdata();
+     
+          },
+          [],
+        )
+        
+    )
+  
+  const fetchdata = async()=>{
+     await AsyncStorage.getItem('AccessTokendata').then(value => {
+          console.log('userid', typeof(value));
+          const bad=JSON.parse(value);
+          console.log('userid', typeof(bad));
+          setFull_name(bad.full_name)
+                   
+      })
+    } 
 
     // console.log(select);
 
@@ -60,8 +81,12 @@ const HomeBottom = ({navigation}) => {
 
     const logoutfn =()=>{
         setIslog(true)
+       
         ToastAndroid.show('Logout Successfully', 1000)
-        AsyncStorage.removeItem('AccessToken', (err) => console.log('AccessToken', err));
+
+         AsyncStorage.removeItem('AccessToken', (err) => console.log('AccessToken', err));
+         AsyncStorage.removeItem('Accessuserid', (err) => console.log('AccessTokendata', err));
+         AsyncStorage.clear();
         setTimeout(() => {
             setIslog(false)
             navigation.navigate('LoginHome')
@@ -121,7 +146,7 @@ const HomeBottom = ({navigation}) => {
                 source={phot}
             />
             <Text style={styles.h2}>
-                Namaste</Text>
+                Namaste, {full_name.split(" ")[0]}</Text>
 
             <Text style={styles.h4}>Here some surprise coupons for you only</Text>
             {

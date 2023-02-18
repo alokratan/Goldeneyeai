@@ -1,18 +1,30 @@
 import { StyleSheet, Text, Pressable,ToastAndroid,Dimensions, TextInput, StatusBar, Image, View } from 'react-native'
 import React, { useRef, useState ,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import {useNavigation} from '@react-navigation/native'
 const height = Dimensions.get('window').height
 import loginimg from '../assets/icons/loginimg.jpg'
 import { userapi2 } from '../userapi';
 import axios from 'axios';
-const Entermpin2 = ({navigation}) => {
+
+const Entermpin2 = ({navigation,route}) => {
+   
+    const {mydata} =route.params
+    console.log("datttaa",mydata);
     const [tok,setTok]=useState(null);
+    const [tok2,setTok2]=useState(null);
     useEffect(()=>{
+     
         AsyncStorage.getItem('AccessToken').then(value=>{
             console.log('mpin',value);
              setTok(value)
          })
+         AsyncStorage.getItem('Accessuserid').then(value => {
+            console.log('userid', value);
+            setTok2(value)
+
+        })
+        
             
     },[])
     const [correctmpin,setCorrectmpin]=useState(true);
@@ -27,10 +39,13 @@ const Entermpin2 = ({navigation}) => {
     const [otp, setOtp] = useState({ 1: '', 2: '', 3: '', 4: '' });
     const abcd = { ...otp }
 
-  
-
-
 const handleLogin = async() => {
+    const response = await axios.get(`http://13.232.193.117:8000/user/register/${mydata}`);
+    console.log("all data",JSON.stringify(response.data.full_name));
+    const tokedata=JSON.stringify(response.data)
+    console.log('ttt',tokedata);
+      AsyncStorage.setItem('AccessTokendata', tokedata);
+
      var bas = Object.values(abcd)
      const abstr = bas.join('');
      console.log(abstr);
@@ -51,7 +66,7 @@ try{
       ToastAndroid.show('Authentication successfully',2000);
       setTimeout(() => {
         setSuccess(false)
-          navigation.navigate('Bottomtabs')
+          navigation.navigate('Bottomtabs',{mydata:mydata,tokedat:tokedata})          
       }, 2000);
     }
     else{
@@ -71,7 +86,12 @@ catch (error) {
       
     console.log(error)
 
-  }      
+  }    
+  
+
+ 
+  
+
   };
 
 
@@ -169,7 +189,7 @@ catch (error) {
                  
                     <Pressable style={styles.txt2}
                     
-                        onPress={() => alert("helllo alert")}>
+                        onPress={() => navigation.navigate('Resetmpin')}>
                         <Text style={styles.txt3}>
                             Forgot MPIN
                         </Text>

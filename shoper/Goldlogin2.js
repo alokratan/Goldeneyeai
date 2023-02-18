@@ -1,5 +1,5 @@
-import { StyleSheet,StatusBar, Text, Pressable, ScrollView, TextInput, ToastAndroid, Image, View } from 'react-native'
-import React, { useState,useEffect } from 'react';
+import { StyleSheet, StatusBar, Text, Pressable, ScrollView, TextInput, ToastAndroid, Image, View } from 'react-native'
+import React, { useState, useEffect } from 'react';
 import Checkbox from 'expo-checkbox';
 import loginimg from '../assets/icons/loginimg.jpg'
 import facebook from '../assets/icons/Facebook_Logo_(2019).png.webp'
@@ -7,9 +7,10 @@ import Google from '../assets/icons/unnamed.png'
 import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import { userapi } from '../userapi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {styles} from '../Stylesheets/Stylelogin';
+import { styles } from '../Stylesheets/Stylelogin';
+import axios from 'axios';
 const Goldlogin = ({ navigation }) => {
-    
+
     const [isSelected, setSelection] = useState(false);
     const [isSelected2, setSelection2] = useState(false);
     const [showpd, setShowpd] = useState(true)
@@ -20,33 +21,33 @@ const Goldlogin = ({ navigation }) => {
     const [termscon, setTermscon] = useState(false);
     const [success, setSuccess] = useState(false);
 
-const alertusername=(text)=>{
-    setUsername(text)
-    if (text==''){
-        setPhoneval(false)    
-        
+    const alertusername = (text) => {
+        setUsername(text)
+        if (text == '') {
+            setPhoneval(false)
+
         }
-        else{
-            setPhoneval(true)  
+        else {
+            setPhoneval(true)
         }
 
-}
-const alertpassword=(text)=>{
-    setPassword(text)
-    if (text.toString().length<=7){
-        setPassval(false)    
+    }
+    const alertpassword = (text) => {
+        setPassword(text)
+        if (text.toString().length <= 7) {
+            setPassval(false)
         }
 
-        else{
-            setPassval(true)  
+        else {
+            setPassval(true)
         }
 
-}
-    
-    function termfn(){
+    }
+
+    function termfn() {
         setTermscon(false)
     }
-    function termfnd(){
+    function termfnd() {
         setSelection2(false)
         setTermscon(false)
     }
@@ -58,7 +59,7 @@ const alertpassword=(text)=>{
         else {
             setSelection2(true);
             setTermscon(true)
-           
+
         }
 
     }
@@ -68,61 +69,93 @@ const alertpassword=(text)=>{
             setShowpd(false) : setShowpd(true)
     }
 
-   
+
     function loginfun() {
-       
-        if (username==''){
-            setPhoneval(false)    
+
+        if (username == '') {
+            setPhoneval(false)
             ToastAndroid.show('* username may not be blank', 1000)
-            }
-            else if(password=='' && password.toString().length<=7){
-                setPassval(false)
-                ToastAndroid.show('Password length must be 8 character', 1000)
-            }
-            else{
+        }
+        else if (password == '' && password.toString().length <= 7) {
+            setPassval(false)
+            ToastAndroid.show('Password length must be 8 character', 1000)
+        }
+        else {
             if (isSelected2) {
                 userapi({
-                username: username,
-                password: password,
-              })
-                .then(result => {
-
-                   console.log(result.data.token)
-                  if (result.status == 200) {
-                    setPhoneval(true)
-                    setPassval(true)
-                   AsyncStorage.setItem('AccessToken', result.data.token);
-                    ToastAndroid.show('Login Successfully...', 1000)
-                    setSuccess(true)
-                    setTimeout(() => {
-                        setSuccess(false)
-                          navigation.jumpTo('mpin2')
-                    }, 1000);
-                  }else if(!result.status==200){
-             
-                    setPhoneval(false)
-                    setPassval(false)
-                    
-                    ToastAndroid.show('Invalid Credentials', 1000)
-                    
-                  }
-                  else{
-                    ToastAndroid.show('Please check the login credentials!!!', 1000)
-                  }
-                
-                }).catch(err=>{
-                    // console.log(err);
-                    ToastAndroid.show('Make Sure Your Server Is Live', 1000)
+                    username: username,
+                    password: password,
                 })
-                
+                    .then(result => {
+                        const userid = result.data.user_id
+                        
+                     
+                        AsyncStorage.setItem("Accessuserid", JSON.stringify(userid));
+
+                        console.log(result.data.token)
+                        console.log(result.data)
+                        console.log(result.data.user_id)
+
+
+                        if (result.status == 200) {
+                            setPhoneval(true)
+                            setPassval(true)
+                            AsyncStorage.setItem('AccessToken', result.data.token);
+
+                            ToastAndroid.show('Login Successfully...', 1000)
+                            setSuccess(true)
+                            setTimeout(() => {
+                                setSuccess(false)
+                                navigation.navigate('mpin2',{mydata:userid})
+                              
+                            }, 1000);
+                        } else if (!result.status == 200) {
+
+                            setPhoneval(false)
+                            setPassval(false)
+
+                            ToastAndroid.show('Invalid Credentials', 1000)
+
+                        }
+                        else {
+                            ToastAndroid.show('Please check the login credentials!!!', 1000)
+                        }
+
+                    }).catch(err => {
+                        // console.log(err);
+                        ToastAndroid.show('Make Sure Your Server Is Live', 1000)
+                    })
+
             }
-            else{
+            else {
                 ToastAndroid.show('Please accept terms & conditions', 1000)
             }
         }
-         
+
+
+
+        // .then(response => {
+        // //   console.log(response.data.full_name);
+        // //   const fullname=response.data.full_name;
+        // //   setFull_name(fullname);
+
+        // //   const emails=response.data.email;
+        // //   setEmail(emails);
+
+        // //   const usernames=response.data.username;
+        // //   setUsername(usernames);
+
+        // })
+        // .catch(error => {
+        //   console.log(error);
+        // })
+
+
+
+
+
     }
-    
+
 
     function regisfun() {
         ToastAndroid.show('Please Wait...', 1000);
@@ -133,12 +166,12 @@ const alertpassword=(text)=>{
     return (
 
         <View style={styles.container}>
-               <StatusBar
-            animated={true}
-            backgroundColor='white'
-            showHideTransition={'slide'}
-        //   hidden
-        barStyle={'dark-content'}
+            <StatusBar
+                animated={true}
+                backgroundColor='white'
+                showHideTransition={'slide'}
+                //   hidden
+                barStyle={'dark-content'}
 
 
             />
@@ -147,47 +180,47 @@ const alertpassword=(text)=>{
                     <View style={styles.termsdivmain}>
 
                         <View style={styles.termsdiv}>
-                            
-                            <View style={{ width: '100%', backgroundColor: '#FFC72C', height: 60,borderBottomWidth:2}}>
-                            <Text style={{ fontSize: 24, fontWeight: '700', paddingLeft: 20,paddingTop: 20,}}>
-                                Terms & Conditions
-                            </Text>
+
+                            <View style={{ width: '100%', backgroundColor: '#FFC72C', height: 60, borderBottomWidth: 2 }}>
+                                <Text style={{ fontSize: 24, fontWeight: '700', paddingLeft: 20, paddingTop: 20, }}>
+                                    Terms & Conditions
+                                </Text>
 
                             </View>
-                            <View style={{ width: '100%', height: 370,backgroundColor:'#fff', justifyContent: 'center', alignItems: 'center' }}>
+                            <View style={{ width: '100%', height: 370, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center' }}>
                                 <ScrollView showsVerticalScrollIndicator={false} style={{ width: '90%' }}>
-                               
-                                    <Text style={{ fontSize: 18, color: '#0009', fontWeight: '400'}}>
-                                       Golden Eye AI, Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum magni iure ducimus voluptatem id tenetur incidunt molestiae. Omnis aperiam odit, earum possimus, alias ex ut deleniti culpa tempora tenetur architecto cupiditate, molestiae enim rerum saepe dolorum illum. Atque fugiat soluta eos eum quos amet quas ab facere accusantium excepturi aspernatur similique quae, consequuntur vel velit quisquam officiis expedita a praesentium dicta quo quis? Velit quidem voluptatibus cupiditate. Nisi dolorem ipsum ut fugit natus dolores dolore tenetur sed eos eligendi, numquam doloremque expedita voluptatibus architecto maiores animi quaerat accusamus delectus debitis exercitationem ratione! Deserunt dolores officia ipsum. Officiis corrupti cumque voluptatibus fuga consectetur sequi recusandae, et itaque dignissimos molestiae vel error doloremque magnam animi voluptate. Tempore beatae natus ducimus soluta nesciunt nemo perferendis labore architecto quia magni nam cum nihil, voluptates aut ullam fugit molestiae et possimus excepturi porro adipisci sequi! Molestias temporibus consequatur omnis deleniti aliquid corporis, possimus voluptate? Suscipit, soluta! Rem quia repellendus minima? Architecto, officiis. Autem unde facilis at aliquam, iste consequatur atque facere nobis ut vel. Assumenda recusandae nesciunt esse cum. Rem minima ipsa, quia porro nisi unde velit at praesentium explicabo? Odio natus magnam commodi eius, laborum error. Ex ut vitae ad quam quae aperiam dolor!
+
+                                    <Text style={{ fontSize: 18, color: '#0009', fontWeight: '400' }}>
+                                        Golden Eye AI, Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum magni iure ducimus voluptatem id tenetur incidunt molestiae. Omnis aperiam odit, earum possimus, alias ex ut deleniti culpa tempora tenetur architecto cupiditate, molestiae enim rerum saepe dolorum illum. Atque fugiat soluta eos eum quos amet quas ab facere accusantium excepturi aspernatur similique quae, consequuntur vel velit quisquam officiis expedita a praesentium dicta quo quis? Velit quidem voluptatibus cupiditate. Nisi dolorem ipsum ut fugit natus dolores dolore tenetur sed eos eligendi, numquam doloremque expedita voluptatibus architecto maiores animi quaerat accusamus delectus debitis exercitationem ratione! Deserunt dolores officia ipsum. Officiis corrupti cumque voluptatibus fuga consectetur sequi recusandae, et itaque dignissimos molestiae vel error doloremque magnam animi voluptate. Tempore beatae natus ducimus soluta nesciunt nemo perferendis labore architecto quia magni nam cum nihil, voluptates aut ullam fugit molestiae et possimus excepturi porro adipisci sequi! Molestias temporibus consequatur omnis deleniti aliquid corporis, possimus voluptate? Suscipit, soluta! Rem quia repellendus minima? Architecto, officiis. Autem unde facilis at aliquam, iste consequatur atque facere nobis ut vel. Assumenda recusandae nesciunt esse cum. Rem minima ipsa, quia porro nisi unde velit at praesentium explicabo? Odio natus magnam commodi eius, laborum error. Ex ut vitae ad quam quae aperiam dolor!
                                     </Text>
-                                    
+
                                 </ScrollView>
                             </View>
-                            <View style={{justifyContent:'flex-end',flexDirection:'row',alignItems:'center',height:60,backgroundColor:'#fff'}}>
-                            <Pressable onPress={termfnd} style={{backgroundColor:'#0002',borderRadius:20,width:100,height:36,justifyContent:'center',alignItems:'center',marginHorizontal:12}}>
-                                <Text style={{fontSize:16,fontWeight:'900'}}>
-                                    Disagree
-                                </Text>
-                            </Pressable>
-                            <Pressable onPress={termfn} style={{backgroundColor:'#FFC72C',borderRadius:20,width:100,height:36,justifyContent:'center',alignItems:'center',marginRight:16}}>
-                                <Text style={{fontSize:16,fontWeight:'900'}}>
-                                    Agree
-                                </Text>
-                            </Pressable>
-                        </View>
+                            <View style={{ justifyContent: 'flex-end', flexDirection: 'row', alignItems: 'center', height: 60, backgroundColor: '#fff' }}>
+                                <Pressable onPress={termfnd} style={{ backgroundColor: '#0002', borderRadius: 20, width: 100, height: 36, justifyContent: 'center', alignItems: 'center', marginHorizontal: 12 }}>
+                                    <Text style={{ fontSize: 16, fontWeight: '900' }}>
+                                        Disagree
+                                    </Text>
+                                </Pressable>
+                                <Pressable onPress={termfn} style={{ backgroundColor: '#FFC72C', borderRadius: 20, width: 100, height: 36, justifyContent: 'center', alignItems: 'center', marginRight: 16 }}>
+                                    <Text style={{ fontSize: 16, fontWeight: '900' }}>
+                                        Agree
+                                    </Text>
+                                </Pressable>
+                            </View>
                         </View>
                     </View>
                     : <View></View>
             }
 
-{
+            {
                 success ? <View style={styles.successmain}>
 
                     <View style={styles.sucess}>
-                    <Text style={{fontSize:26,fontWeight:'900',marginVertical:20,color:'white'}}>
-                        Login Successfully
-                    </Text>
-                     
+                        <Text style={{ fontSize: 26, fontWeight: '900', marginVertical: 20, color: 'white' }}>
+                            Login Successfully
+                        </Text>
+
                     </View>
                 </View> : <View></View>
             }
@@ -219,13 +252,13 @@ const alertpassword=(text)=>{
                 </View>
 
                 {
-                    phonval?
-                    <Text style={{display:'none'}}>  
-                   
-                    </Text>:
-                     <Text style={{color:'red',width:'84%',marginTop:-5}}>
-                       * username may not be blank
-                 </Text>
+                    phonval ?
+                        <Text style={{ display: 'none' }}>
+
+                        </Text> :
+                        <Text style={{ color: 'red', width: '84%', marginTop: -5 }}>
+                            * username may not be blank
+                        </Text>
 
                 }
 
@@ -239,17 +272,17 @@ const alertpassword=(text)=>{
                         fontWeight='700'
                         onChangeText={text => alertpassword(text)}
                     />
-                    <MaterialCommunityIcons name={showpd ? "eye-off-outline":"eye-outline" } onPress={showpdfun} size={24} color="black" />
+                    <MaterialCommunityIcons name={showpd ? "eye-off-outline" : "eye-outline"} onPress={showpdfun} size={24} color="black" />
                 </View>
                 {
 
-                    passval?
-                    <Text style={{display:'none'}}>  
-                   
-                    </Text>:
-                     <Text style={{color:'red',width:'84%',marginTop:-5}}>
-                       * Password length must be atleast 8 character
-                 </Text>
+                    passval ?
+                        <Text style={{ display: 'none' }}>
+
+                        </Text> :
+                        <Text style={{ color: 'red', width: '84%', marginTop: -5 }}>
+                            * Password length must be atleast 8 character
+                        </Text>
 
                 }
 
@@ -273,7 +306,7 @@ const alertpassword=(text)=>{
                         color="black"
                     />
                     <Text style={styles.title3}
-                     onPress={()=>setSelection}
+                        onPress={() => setSelection}
                     >Saved locally</Text>
 
                 </View>
@@ -286,8 +319,8 @@ const alertpassword=(text)=>{
                         color="black"
                     />
                     <Text style={styles.title3}
-                    onPress={()=>agree()}
-                 
+                        onPress={() => agree()}
+
                     >I Agree to Terms & Conditions</Text>
                 </View>
 
@@ -327,11 +360,11 @@ const alertpassword=(text)=>{
                 </Pressable>
             </View>
             <View style={styles.buttonn}>
-                <Pressable 
+                <Pressable
                     onPress={loginfun}
                     style={
-                        ({pressed})=>[
-                         {backgroundColor:pressed?'rgba(0,0,0,0.6)':'black'}, styles.pre
+                        ({ pressed }) => [
+                            { backgroundColor: pressed ? 'rgba(0,0,0,0.6)' : 'black' }, styles.pre
                         ]
                     }
                 >

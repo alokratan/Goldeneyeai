@@ -5,7 +5,7 @@ import {styles} from '../Stylesheets/Styleregister'
 import loginimg from '../assets/icons/registerimg.jpg'
 import facebook from '../assets/icons/Facebook_Logo_(2019).png.webp'
 import Google from '../assets/icons/unnamed.png';
-import { Entypo, MaterialIcons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
+import { Entypo, MaterialIcons, MaterialCommunityIcons, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons';
 import { RadioButton } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
@@ -14,6 +14,7 @@ import { userapi2 } from '../userapi';
 const baseURL='http://13.232.193.117:8000'
 
 const Goldregister = ({ navigation }) => {
+    const [full_name, setFull_name] = useState("");
     const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -43,7 +44,10 @@ const Goldregister = ({ navigation }) => {
   
 
 
-  const onChangeNameHandler = (username) => {
+  const onChangeNameHandler = (full_name) => {
+    setFull_name(full_name);
+  };
+  const onChangeuserNameHandler = (username) => {
     setUsername(username);
   };
   const onChangepasswordHandler = (password) => {
@@ -68,7 +72,7 @@ const Goldregister = ({ navigation }) => {
     
   };
   const onSubmitFormHandler = async () => {
-    if (!username.trim() || !email.trim() || !password.trim() ||!password2.trim() ) {
+    if (!full_name.trim() || !username.trim() || !email.trim() || !password.trim() ||!password2.trim() ) {
       alert("* All fields are required");
       return;
     }
@@ -76,11 +80,12 @@ const Goldregister = ({ navigation }) => {
     try {
       
       const response = await axios.post(`${baseURL}/user/register/`, {
+        full_name,
         username,
         password,
         password2,
         email,
-         gender,
+        gender,
         // profile_pic
 
       });
@@ -93,7 +98,7 @@ const Goldregister = ({ navigation }) => {
             setSuccess(false)
             navigation.navigate('Setmpin')
         }, 3000);
-    
+    setFull_name('');
         setUsername('');
         setEmail('');
         setPassword('');
@@ -178,10 +183,21 @@ const Goldregister = ({ navigation }) => {
                     <TextInput
                         style={styles.input}
                         cursorColor="black"
+                        placeholder="Enter Full Name"
+                        fontWeight='700'
+                        value={full_name}
+                        onChangeText={onChangeNameHandler}
+                    />
+                    <SimpleLineIcons name="pencil" size={22} color="black" />
+                </View>
+                <View style={styles.inputdiv}>
+                    <TextInput
+                        style={styles.input}
+                        cursorColor="black"
                         placeholder="Username"
                         fontWeight='700'
                         value={username}
-                        onChangeText={onChangeNameHandler}
+                        onChangeText={onChangeuserNameHandler}
                     />
                     <FontAwesome5 name="user" size={22} color="black" />
                 </View>

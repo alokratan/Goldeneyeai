@@ -1,17 +1,49 @@
-import { StyleSheet, Text, Pressable, TextInput,ToastAndroid, Dimensions, KeyboardAvoidingView, View, Image } from 'react-native'
-import React, { useState } from 'react';
+import { StyleSheet, Text, Pressable, TextInput, ToastAndroid, Dimensions, KeyboardAvoidingView, View, Image } from 'react-native'
+import React, { useState, useEffect ,useCallback} from 'react';
 import { FontAwesome, } from '@expo/vector-icons';
 import Dropmultiple from './Multiple2'
 import { styles } from '../Stylesheets/Styleyourprofile'
 import phot from '../assets/icons/imglogo.jpg'
+import axios from 'axios';
+const baseURL = 'http://13.232.193.117:8000'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 //import DropDownPicker from 'react-native-dropdown-picker'
 import { FontAwesome5, MaterialIcons, MaterialCommunityIcons, Entypo, Ionicons, Feather } from '@expo/vector-icons';
 
 import { Switch } from 'react-native-paper';
-const YourPro = ({ navigation }) => {
+import { useFocusEffect } from '@react-navigation/native';
+const YourPro = ({ navigation}) => {
+    // const rout=useRoute();
+    //     const {mydata2} =rout.params
+    //     console.log("your data:",mydata2)
     const [hideitem, setHideitem] = useState(false);
     const [ishide, setIshide] = useState(true)
     const [success, setSuccess] = useState(false);
+    const [full_name,setFull_name]=useState('');
+     const [email,setEmail]=useState('');
+     const [username,setUsername]=useState('');
+  
+     useFocusEffect(
+        useCallback(
+          () => {
+                fetchdata();
+     
+          },
+          [],
+        )
+        
+    )
+    const fetchdata = async()=>{
+       await AsyncStorage.getItem('AccessTokendata').then(value => {
+            console.log('userid', typeof(value));
+            const bad=JSON.parse(value);
+            console.log('userid', typeof(bad));
+            setFull_name(bad.full_name)
+            setEmail(bad.email)
+            setUsername(bad.username)           
+        })
+      } 
+  
     const hidefun = () => {
         setHideitem(true)
         // setTimeout(() => {
@@ -22,6 +54,7 @@ const YourPro = ({ navigation }) => {
         setHideitem(false)
     }
     const [visible, setVisible] = useState(false);
+  
 
     const save = () => {
         ToastAndroid.show('Updated Successfully', 1000);
@@ -65,7 +98,7 @@ const YourPro = ({ navigation }) => {
                     </View>
                 </View> : <View></View>
             }
- {
+            {
                 success ? <View style={styles.successmain}>
 
                     <View style={styles.sucess}>
@@ -85,7 +118,8 @@ const YourPro = ({ navigation }) => {
                 />
                 <View style={styles.textandmenudiv}>
                     <Text style={styles.headertxt}>
-                        Your Profile
+              
+                    {full_name}
                     </Text>
 
                     <Pressable style={{ paddingHorizontal: 20, paddingVertical: 20 }}
@@ -108,7 +142,7 @@ const YourPro = ({ navigation }) => {
 
                 <View style={styles.header5}>
 
-<Pressable style={[styles.dropdiv,{marginLeft:'-5%'}]}
+                    <Pressable style={[styles.dropdiv, { marginLeft: '-5%' }]}
                         onPress={() => alert("delete photo")}>
                         <Feather name="camera" size={23} color="black" />
                         <Text style={styles.droptxt}>
@@ -153,6 +187,7 @@ const YourPro = ({ navigation }) => {
                             <TextInput
 
                                 style={styles.input}
+                                value={username}
                                 placeholder="User Name"
                                 cursorColor='black'
                                 onChangeText={e => console.log(e)}
@@ -166,6 +201,7 @@ const YourPro = ({ navigation }) => {
                             <TextInput
                                 style={styles.input}
                                 cursorColor='black'
+                                value={email}
                                 placeholder="username123@gmail.com"
                                 onChangeText={e => console.log(e)}
                             />

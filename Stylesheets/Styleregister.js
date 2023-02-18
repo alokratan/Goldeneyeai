@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
 
     top: {
 
-       //    backgroundColor: 'grey',
+       //   backgroundColor: 'grey',
         width: '100%',
         height: '10%',
         justifyContent: 'flex-end',
@@ -22,8 +22,8 @@ export const styles = StyleSheet.create({
     },
     midd: {
         width: '100%',
-        height: height / 1.8,
-        //      backgroundColor: 'red',
+        height: height / 1.7,
+        //     backgroundColor: 'red',
         justifyContent: 'flex-start',
         alignItems: 'center'
     },
@@ -110,8 +110,8 @@ export const styles = StyleSheet.create({
     },
     mediadiv: {
         width: '100%',
-        height: '10%',
-      //  backgroundColor:'green',
+        height: '6%',
+       // backgroundColor:'green',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'
