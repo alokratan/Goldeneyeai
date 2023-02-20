@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback} from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Goldlogin from '../shoper/Goldlogin';
 import Goldregister from '../shoper/Goldregister';
@@ -17,39 +17,60 @@ import Goldlogin2 from '../shoper/Goldlogin2';
 import Swiper5 from '../shoper/Animate';
 import Updatepercent from '../shoper/Updatepercent'
 import Updatehide from '../shoper/Upadatehide';
+import { useFocusEffect } from '@react-navigation/native';
 const Drawer = createDrawerNavigator();
-const Drawerscreens = () => {
+const Drawerscreens = (props) => {
+
+  const [dataToken, setDataToken] = useState(null);
+
+  useFocusEffect(
+    useCallback(
+      () => {
+            fetchdata();
+            console.log('darawerscree',props.islog);
+            console.log('darawerscree2',props.islo);
+            
+ 
+      },
+      [],
+    )
+    
+)
+
+const fetchdata=()=>{
+
+    if (props.islog === true) {
+      setDataToken(true);
+      console.log('hi login',props.islog)
+      console.log('on remove token');
+    }
+    else if(props.islo === true){
+      setDataToken(false);
+      console.log('hi mpin',props.islo)
+      console.log('AccessToken');
+    }
+
+}
+  // useEffect(() => {
+   
+  //   // const handlegetToken= async ()=>{
+  //   //   const dataToken =await AsyncStorage.getItem('AccessToken');
+
+  //   //   setDataToken(dataToken)
+  //   //    console.log(dataToken);
+  //   //   }
+
+  //   //   handlegetToken();
 
 
-  const [dataToken, setDataToken] = useState(false);
-  useEffect(() => {
-    AsyncStorage.getItem('AccessToken').then(value => {
-      if (value == undefined) {
-        setDataToken(true);
-        console.log('AccessToken');
-      }
-      else {
-        setDataToken(false);
-      }
-    })
-    // const handlegetToken= async ()=>{
-    //   const dataToken =await AsyncStorage.getItem('AccessToken');
-
-    //   setDataToken(dataToken)
-    //    console.log(dataToken);
-    //   }
-
-    //   handlegetToken();
-
-
-  })
+  // })
 
 
   return (
 
 
     <Drawer.Navigator initialRouteName={
-      dataToken ?
+      false ?
         "mpin2" : "LoginHome"
     } useLegacyImplementation>
 

@@ -11,19 +11,19 @@ import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
-function Bottomtabs({ route }) {
+function Bottomtabs() {
   
-  useEffect(() => {
+  // useEffect(() => {
 
-    const { mydata } = route.params;
-    console.log('home', mydata);
-    const {tokedat} =route.params;
-    console.log('home',tokedat);
+  //   const { mydata } = route.params;
+  //   console.log('home', mydata);
+  //   const {tokedat} =route.params;
+  //   console.log('home',tokedat);
 
-    // AsyncStorage.setItem('AccessTokenidd', mydata);
-    console.log("hello,mydata", mydata);
+  //   // AsyncStorage.setItem('AccessTokenidd', mydata);
+  //   console.log("hello,mydata", mydata);
 
-  }, [])
+  // }, [])
 
 
   return (

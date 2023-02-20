@@ -91,13 +91,13 @@ const Goldlogin = ({ navigation }) => {
                         
                      
                         AsyncStorage.setItem("Accessuserid", JSON.stringify(userid));
-
+                        console.log(result);
                         console.log(result.data.token)
                         console.log(result.data)
                         console.log(result.data.user_id)
 
 
-                        if (result.status == 200) {
+                        if (result.status === 200) {
                             setPhoneval(true)
                             setPassval(true)
                             AsyncStorage.setItem('AccessToken', result.data.token);
@@ -106,10 +106,20 @@ const Goldlogin = ({ navigation }) => {
                             setSuccess(true)
                             setTimeout(() => {
                                 setSuccess(false)
+                                setUsername('');
+                                setPassword('');
                                 navigation.navigate('mpin2',{mydata:userid})
                               
                             }, 1000);
-                        } else if (!result.status == 200) {
+                        }
+                        else if (result.status === 400){
+                            console.log('error is 400 or invalid creadentials')
+                         ToastAndroid.show('Please check the login credentials!!!', 1000)
+                       
+                        }
+
+
+                         else if (!result.status == 200) {
 
                             setPhoneval(false)
                             setPassval(false)
@@ -117,13 +127,24 @@ const Goldlogin = ({ navigation }) => {
                             ToastAndroid.show('Invalid Credentials', 1000)
 
                         }
-                        else {
-                            ToastAndroid.show('Please check the login credentials!!!', 1000)
-                        }
+                        
+                      
 
                     }).catch(err => {
-                        // console.log(err);
-                        ToastAndroid.show('Make Sure Your Server Is Live', 1000)
+                         ToastAndroid.show('Please check the login credentials!!!', 1000)
+                       console.log(err);
+                       
+
+                    // ToastAndroid.show('Make Sure Your Server Is Live', 1000)
+                      if (err.status === 400){
+                        console.log(err.status);
+                            console.log('error is 400 or invalid creadentials')
+                         ToastAndroid.show('Please check the login credentials!!!', 1000)
+                       
+                        }
+                    
+                 
+                       
                     })
 
             }

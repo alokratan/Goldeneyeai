@@ -1,10 +1,10 @@
 import { StyleSheet, Text, Pressable,ToastAndroid,Dimensions, TextInput, StatusBar, Image, View } from 'react-native'
 import React, { useRef, useState ,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation} from '@react-navigation/native'
+
 const height = Dimensions.get('window').height
 import loginimg from '../assets/icons/loginimg.jpg'
-import { userapi2 } from '../userapi';
+
 import axios from 'axios';
 
 const Entermpin2 = ({navigation,route}) => {
@@ -39,6 +39,8 @@ const Entermpin2 = ({navigation,route}) => {
     const [otp, setOtp] = useState({ 1: '', 2: '', 3: '', 4: '' });
     const abcd = { ...otp }
 
+
+   
 const handleLogin = async() => {
     const response = await axios.get(`http://13.232.193.117:8000/user/register/${mydata}`);
     console.log("all data",JSON.stringify(response.data.full_name));
@@ -59,14 +61,19 @@ try{
       })
   
     if (response.status === 200) {
+   
     //   alert(`.....Welcome User, Your Mpin is this ${abstr}...... `)
       setCorrectmpin(true)
             setSuccess(true)
-           
+       
       ToastAndroid.show('Authentication successfully',2000);
+      console.log(otp);
+    //   setOtp(0)
       setTimeout(() => {
         setSuccess(false)
-          navigation.navigate('Bottomtabs',{mydata:mydata,tokedat:tokedata})          
+        
+          navigation.navigate('Bottomtabs',{mydata:mydata,tokedat:tokedata})
+        
       }, 2000);
     }
     else{
@@ -81,16 +88,13 @@ try{
 catch (error) {
     // alert("An error has occurred");
     ToastAndroid.show(`The MPIN you have entered is incorrect`,2000)
-       console.log(abstr);
+    //    console.log(abstr);
       setCorrectmpin(false)
       
     console.log(error)
 
   }    
-  
-
- 
-  
+    
 
   };
 
@@ -130,6 +134,7 @@ catch (error) {
                             style={[styles.textotpinp,{borderColor:correctmpin?'black':'red'}]}
                             ref={pin1Ref}
                             maxLength={1}
+                            secureTextEntry
                             onChangeText={text => {
                                 setOtp({ ...otp, 1: text });
                                 text && pin2Ref.current.focus();
@@ -141,6 +146,7 @@ catch (error) {
                         <TextInput
                             ref={pin2Ref}
                             maxLength={1}
+                            secureTextEntry
                             onChangeText={text => {
                                 setOtp({ ...otp, 2: text });
                                 text ? pin3Ref.current.focus() : pin1Ref.current.focus()
@@ -153,6 +159,7 @@ catch (error) {
                         <TextInput
                             ref={pin3Ref}
                             maxLength={1}
+                            secureTextEntry
                             onChangeText={text => {
                                 setOtp({ ...otp, 3: text });
                                 text ? pin4Ref.current.focus() : pin2Ref.current.focus();
@@ -164,6 +171,7 @@ catch (error) {
                         <TextInput
                             ref={pin4Ref}
                             maxLength={1}
+                            secureTextEntry
                             onChangeText={text => {
                                 setOtp({ ...otp, 4: text });
                                 !text && pin3Ref.current.focus();
