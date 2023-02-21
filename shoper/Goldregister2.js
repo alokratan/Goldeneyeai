@@ -41,7 +41,6 @@ const Goldregister = ({ navigation }) => {
     }
   };
 
-  
 
 
   const onChangeNameHandler = (full_name) => {
@@ -77,16 +76,33 @@ const Goldregister = ({ navigation }) => {
       return;
     }
 
+
+//     const formData=new FormData();
+//     formData.append('image',{
+//         uri:image,
+//         type:'image/jpeg',
+//         name:'image.jpg',
+//     });
+//     const config ={
+//         headers:{
+//             'Content-Type':'multipart/form-data',
+    
+//         },
+// };
+    
+
+
+
     try {
       
-      const response = await axios.post(`${baseURL}/user/register/`, {
+      const response = await axios.post(`${baseURL}/user/register/`,{
         full_name,
         username,
         password,
         password2,
         email,
         gender,
-        // profile_pic
+        //  profile_pic
 
       });
       if (response.status === 200) {
@@ -188,7 +204,7 @@ const Goldregister = ({ navigation }) => {
                         value={full_name}
                         onChangeText={onChangeNameHandler}
                     />
-                    <SimpleLineIcons name="pencil" size={22} color="black" />
+                          <FontAwesome5 name="user" size={22} color="black" />
                 </View>
                 <View style={styles.inputdiv}>
                     <TextInput

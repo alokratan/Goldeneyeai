@@ -1,5 +1,5 @@
 import { StyleSheet, Text, Pressable,ToastAndroid,Dimensions, TextInput, StatusBar, Image, View } from 'react-native'
-import React, { useRef, useState ,useEffect} from 'react';
+import React, { useRef, useState ,useEffect,useCallback} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const height = Dimensions.get('window').height
@@ -7,50 +7,43 @@ import loginimg from '../assets/icons/loginimg.jpg'
 
 import axios from 'axios';
 
+
+import { useFocusEffect } from '@react-navigation/native';
 const Entermpin2 = ({navigation,route}) => {
-   
-    const {mydata} =route.params
-    console.log("datttaa",mydata);
-    const [tok,setTok]=useState(null);
-    const [tok2,setTok2]=useState(null);
-    useEffect(()=>{
-     
+    useFocusEffect(
+        useCallback(
+          () => {
+            handleLogin
         AsyncStorage.getItem('AccessToken').then(value=>{
             console.log('mpin',value);
              setTok(value)
-         })
-         AsyncStorage.getItem('Accessuserid').then(value => {
-            console.log('userid', value);
-            setTok2(value)
-
         })
+        AsyncStorage.getItem('Accessuserid').then(value=>{
+            console.log('id',value);
+             setTok2(value)
+        })
+          },
+          [],
+        )
         
-            
-    },[])
+    )
+   
+    const [tok,setTok]=useState(null);
+    const [tok2,setTok2]=useState(null);
     const [correctmpin,setCorrectmpin]=useState(true);
-
     const [success, setSuccess] = useState(false);
-
-     const [mpin,setMpin]=useState('')
+    //  const [mpin,setMpin]=useState('')
     const pin1Ref = useRef(null);
     const pin2Ref = useRef(null);
     const pin3Ref = useRef(null);
     const pin4Ref = useRef(null);
     const [otp, setOtp] = useState({ 1: '', 2: '', 3: '', 4: '' });
     const abcd = { ...otp }
-
-
-   
-const handleLogin = async() => {
-    const response = await axios.get(`http://13.232.193.117:8000/user/register/${mydata}`);
-    console.log("all data",JSON.stringify(response.data.full_name));
-    const tokedata=JSON.stringify(response.data)
-    console.log('ttt',tokedata);
-      AsyncStorage.setItem('AccessTokendata', tokedata);
-
-     var bas = Object.values(abcd)
-     const abstr = bas.join('');
-     console.log(abstr);
+    const handleLogin = async() => {
+    const response = await axios.get(`http://13.232.193.117:8000/user/register/${tok2}`);
+    var bas = Object.values(abcd)
+    const abstr = bas.join('');
+    console.log(abstr);
 try{
     const response = await axios.post('http://13.232.193.117:8000/user/log-in-mpin/', {
         mpin:abstr,
@@ -65,14 +58,15 @@ try{
     //   alert(`.....Welcome User, Your Mpin is this ${abstr}...... `)
       setCorrectmpin(true)
             setSuccess(true)
-       
+            console.log(JSON.stringify(response.data));
       ToastAndroid.show('Authentication successfully',2000);
       console.log(otp);
+     
     //   setOtp(0)
       setTimeout(() => {
         setSuccess(false)
         
-          navigation.navigate('Bottomtabs',{mydata:mydata,tokedat:tokedata})
+          navigation.navigate('Bottomtabs')
         
       }, 2000);
     }
@@ -90,11 +84,15 @@ catch (error) {
     ToastAndroid.show(`The MPIN you have entered is incorrect`,2000)
     //    console.log(abstr);
       setCorrectmpin(false)
-      
+      console.log(error)
     console.log(error)
 
   }    
     
+  console.log("all data",JSON.stringify(response.data.full_name));
+  const tokedata=JSON.stringify(response.data)
+  console.log('ttt',tokedata);
+    AsyncStorage.setItem('AccessTokendata', tokedata);
 
   };
 

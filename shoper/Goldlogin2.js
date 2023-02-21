@@ -108,7 +108,7 @@ const Goldlogin = ({ navigation }) => {
                                 setSuccess(false)
                                 setUsername('');
                                 setPassword('');
-                                navigation.navigate('mpin2',{mydata:userid})
+                                navigation.navigate('mpin2')
                               
                             }, 1000);
                         }

@@ -18,6 +18,7 @@ import Swiper5 from '../shoper/Animate';
 import Updatepercent from '../shoper/Updatepercent'
 import Updatehide from '../shoper/Upadatehide';
 import { useFocusEffect } from '@react-navigation/native';
+import HomeBottom from '../shoper/Apicoupansget';
 const Drawer = createDrawerNavigator();
 const Drawerscreens = (props) => {
 
@@ -70,7 +71,7 @@ const fetchdata=()=>{
 
 
     <Drawer.Navigator initialRouteName={
-      false ?
+      props.islo ?
         "mpin2" : "LoginHome"
     } useLegacyImplementation>
 
@@ -89,6 +90,8 @@ const fetchdata=()=>{
       <Drawer.Screen options={{ headerShown: false }} name="Goldregis" component={Goldregister} />
       <Drawer.Screen options={{ headerShown: false }} name="mpin2" component={Entermpin2} />
       <Drawer.Screen options={{ headerShown: false }} name="likedis2" component={Swiper5} />
+      <Drawer.Screen options={{ headerShown: false }} name="homebutt" component={HomeBottom} />
+      
 
     </Drawer.Navigator>
   )

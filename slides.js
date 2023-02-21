@@ -13,7 +13,7 @@ export default [
     },
     {
         id: '3',
-        title: "Check Your Discount Coupons",
+        title: "Check Your Discount \n Coupons",
         image: require('./assets/icons/screen_3.png'),
     
     },

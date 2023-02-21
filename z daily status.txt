@@ -46,4 +46,4 @@ Individual
 replace to update preference, update Discount percent
 and when user press on button it will redirect to new screen where user can
 update data preference or Discount percent
-and hide from button is active when hide for all button is disable
+and hide from button is activeu when hide for all button is disable

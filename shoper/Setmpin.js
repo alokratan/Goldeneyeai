@@ -62,7 +62,7 @@ const Setmpin = ({navigation}) => {
                console.log(` You have created: ${JSON.stringify(response.data)}`);
               setTimeout(() => {
                   setSuccess(false)
-                  navigation.navigate('Bottomtabs')
+                //   navigation.navigate('Bottomtabs')
               }, 3000);
           
               setMpin('');

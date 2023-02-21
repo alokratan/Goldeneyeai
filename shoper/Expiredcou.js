@@ -10,12 +10,16 @@ const Expiredcou = () => {
     return (
         <View style={styles.container}>
             {/* <Ionicons name="home-outline" size={24} color="black" /> */}
-            <Image
-                style={styles.phot}
-                source={phot}
-            />
-            <Text style={styles.h2}>Namaste</Text>
-            <Text style={styles.h4}>Here some surprise coupons for you only</Text>
+            <View style ={styles.expired}>
+            <View style={styles.main322}>
+                            <View style={styles.maindots22}>
+                        </View>
+                        <Text style={{color:'white', fontSize:16 ,letterSpacing:1 , fontWeight:'500'}}>EXPIRED</Text>
+                            <View style={styles.maindots22}>
+                        </View>
+            </View>
+            </View>
+            <Text style={styles.h4}>Here some expired coupons</Text>
             {/* <ScrollView style={styles.main}>
                 <View style={styles.main2}> */}
             <FlatList
@@ -130,6 +134,23 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 6,
     },
+    main322: {
+        width: '80%',
+        height: 36,
+        backgroundColor: 'red',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderRadius: 5,
+        flexDirection: 'row',
+        shadowColor: "black",
+        shadowOffset: {
+            width: 7,
+            height: 2,
+        },
+        shadowOpacity: 0.55,
+        shadowRadius: 3.84,
+        elevation: 6,
+    },
     main3l: {
         //  backgroundColor:'green',
         borderRightWidth: 2,
@@ -184,6 +205,13 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         marginHorizontal: -10
     },
+    maindots22: {
+        backgroundColor: 'white',
+        width: 16,
+        height: 16,
+        borderRadius: 50,
+        marginHorizontal: -10
+    },
     txt2: {
         width: 100,
         height: 30,
@@ -217,5 +245,14 @@ const styles = StyleSheet.create({
         color:'grey',
         fontSize:13,
         paddingLeft:20
+    },
+    expired:{
+        // backgroundColor:'green',
+        // borderWidth:1,
+        width:120,
+        height:120,
+        borderRadius:100,
+        justifyContent:'center',
+        alignItems:'center'
     }
 })
