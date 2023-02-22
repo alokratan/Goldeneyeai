@@ -1,5 +1,5 @@
 import { StyleSheet, Text, Pressable, TextInput, ToastAndroid, Dimensions, KeyboardAvoidingView, View, Image } from 'react-native'
-import React, { useState, useEffect ,useCallback} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { FontAwesome, } from '@expo/vector-icons';
 import Dropmultiple from './Multiple2'
 import { styles } from '../Stylesheets/Styleyourprofile'
@@ -7,54 +7,91 @@ import phot from '../assets/icons/imglogo.jpg'
 import axios from 'axios';
 const baseURL = 'http://13.232.193.117:8000'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-//import DropDownPicker from 'react-native-dropdown-picker'
+
 import { FontAwesome5, MaterialIcons, MaterialCommunityIcons, Entypo, Ionicons, Feather } from '@expo/vector-icons';
 
 import { Switch } from 'react-native-paper';
 import { useFocusEffect } from '@react-navigation/native';
-const YourPro = ({ navigation}) => {
-    // const rout=useRoute();
-    //     const {mydata2} =rout.params
-    //     console.log("your data:",mydata2)
+const YourPro = ({ navigation }) => {
+
     const [hideitem, setHideitem] = useState(false);
     const [ishide, setIshide] = useState(true)
     const [success, setSuccess] = useState(false);
-    const [full_name,setFull_name]=useState('');
-     const [email,setEmail]=useState('');
-     const [username,setUsername]=useState('');
-  
-     useFocusEffect(
+    const [full_name, setFull_name] = useState('');
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [textdelete, setTextdelete] = useState('');
+    const [idd, setIdd] = useState('');
+    
+
+    useFocusEffect(
         useCallback(
-          () => {
+            () => {
                 fetchdata();
-     
-          },
-          [],
+
+             
+                AsyncStorage.getItem('Accessuserid').then(value=>{
+                    console.log('id',value);
+                    setIdd(value)
+                })
+                logoutfn
+
+            },
+            [],
         )
-        
+
     )
-    const fetchdata = async()=>{
-       await AsyncStorage.getItem('AccessTokendata').then(value => {
-            console.log('userid', typeof(value));
-            const bad=JSON.parse(value);
-            console.log('userid', typeof(bad));
+    const fetchdata = async () => {
+        
+        await AsyncStorage.getItem('AccessTokendata').then(value => {
+            console.log('userid', typeof (value));
+            const bad = JSON.parse(value);
+            console.log('userid', typeof (bad));
             setFull_name(bad.full_name)
             setEmail(bad.email)
-            setUsername(bad.username)           
+            setUsername(bad.username)
         })
-      } 
-  
+    }
+    const handletextdele=(text)=>{
+        setTextdelete(text)
+    }
+
     const hidefun = () => {
         setHideitem(true)
-        // setTimeout(() => {
-        //     setHideitem(false)
-        // }, 3000);
+
     }
     const closedrop = () => {
         setHideitem(false)
     }
     const [visible, setVisible] = useState(false);
-  
+
+   
+    const logoutfn = async() => {
+       
+        if(textdelete==='DELETE'){
+            const response = await axios.delete(`http://13.232.193.117:8000/user/register/${idd}`);
+        console.log(response.data);
+            console.log('user account delete') 
+            removetoken();
+                    setIslog(true)
+
+        ToastAndroid.show('Your Account Delete Successfully', 1000)
+       
+            AsyncStorage.removeItem('AccessToken', (err) => console.log('AccessToken', err));
+            AsyncStorage.removeItem('Accessuserid', (err) => console.log('AccessTokendata', err));
+        setTimeout(() => {
+            setIslog(false)
+            navigation.navigate('LoginHome')
+        }, 1000);
+               }
+               else{
+                ToastAndroid.show('Plese type DELETE to delete your account', 1000)
+                console.log(textdelete);
+               }
+
+    }
+
+
 
     const save = () => {
         ToastAndroid.show('Updated Successfully', 1000);
@@ -70,7 +107,7 @@ const YourPro = ({ navigation}) => {
 
     const [isSwitchOn, setIsSwitchOn] = useState(false);
     const [isSwitchOn2, setIsSwitchOn2] = useState(false);
-
+    const [islog, setIslog] = useState(false);
     const onToggleSwitch = () => {
         setIsSwitchOn(!isSwitchOn);
         if (isSwitchOn) {
@@ -86,6 +123,47 @@ const YourPro = ({ navigation}) => {
         <KeyboardAvoidingView style={styles.container}
             behavior="height"
         >
+            {islog ?
+
+                <KeyboardAvoidingView style={styles.successmain2}  behavior="height">
+
+                    <View style={styles.sucess2}>
+                        <View style={{backgroundColor: '#D72500',width:'100%',justifyContent:'center',alignItems:'center',borderTopLeftRadius:10,borderTopRightRadius:10,}}>
+                        <Text style={{marginVertical:'4%', fontSize: 18, fontWeight: '900', color: 'white' }}>
+
+DELETE ACCOUNT</Text>
+                        </View>
+                       
+                        <Text style={{ fontSize: 17, width: '90%', fontWeight: '700', color: 'black' }}>
+                            Are you sure want to delete your account?
+                        </Text>
+                        <Text style={{ fontSize: 16, width: '90%', fontWeight: '500', color: 'black' }}>
+                            Plese type DELETE to confirm
+                        </Text>
+
+                        <TextInput
+
+                            style={styles.input2}
+                            onChangeText={handletextdele}
+                            placeholder="DELETE"
+                            cursorColor='black'
+                          
+                        />
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', width: '80%', height: '20%',marginBottom:'3%'}}>
+                            <Pressable onPress={() => setIslog(false)} style={[styles.presbtnlog, { backgroundColor: '#0008' }]}>
+                                <Text style={styles.textlogout}>
+                                    Cancel
+                                </Text>
+                            </Pressable>
+                            <Pressable onPress={logoutfn} style={[styles.presbtnlog, { backgroundColor: '#D72500' }]}>
+                                <Text style={styles.textlogout}>
+                                    DELETE
+                                </Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </KeyboardAvoidingView>
+                : <View></View>}
             {
                 hideitem ? <View style={styles.successmain}>
                     <View style={styles.sucess}>
@@ -118,8 +196,8 @@ const YourPro = ({ navigation}) => {
                 />
                 <View style={styles.textandmenudiv}>
                     <Text style={styles.headertxt}>
-              
-                    {full_name}
+
+                        {full_name}
                     </Text>
 
                     <Pressable style={{ paddingHorizontal: 20, paddingVertical: 20 }}
@@ -157,6 +235,15 @@ const YourPro = ({ navigation}) => {
                         <MaterialCommunityIcons name="image-search-outline" size={24} color="black" />
                         <Text style={styles.droptxt}>
                             Choose Photo
+                        </Text>
+                    </Pressable>
+                    <Text style={{ width: '80%', height: 1, backgroundColor: '#0013' }}></Text>
+
+                    <Pressable style={styles.dropdiv}
+                        onPress={() => setIslog(true)}>
+                        <MaterialCommunityIcons name="delete-outline" size={26} color="red" />
+                        <Text style={styles.droptxt2}>
+                            Delete Account
                         </Text>
                     </Pressable>
 

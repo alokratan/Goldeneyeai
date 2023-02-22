@@ -6,9 +6,11 @@ import { MaterialIcons ,MaterialCommunityIcons} from '@expo/vector-icons';
 import { data } from "./coupans";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import phot from '../assets/icons/imglogo.jpg'
-
+import * as Location from 'expo-location';
 import { useFocusEffect } from '@react-navigation/native';
 const HomeBottom = ({navigation}) => {
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
 
     const [select, setSelect] = useState(data);
     const [redeemed, setRedeemed] = useState(false);
@@ -18,13 +20,34 @@ const HomeBottom = ({navigation}) => {
         useCallback(
           () => {
                 fetchdata();
+                locations();
+
+                
      
           },
           [],
         )
         
     )
-   
+   const locations  = async ()=>{
+    let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+   }
+    
+   let text = 'Waiting..';
+   if (errorMsg) {
+     text = errorMsg;
+   } else if (location) {
+     text = JSON.stringify(location);
+     console.log("this is latitude ",location.coords.latitude);
+     console.log("this is longitude ",location.coords.longitude);
+   }
   const fetchdata = async()=>{
      await AsyncStorage.getItem('AccessTokendata').then(value => {
           console.log('userid', typeof(value));
@@ -150,8 +173,9 @@ const HomeBottom = ({navigation}) => {
                 source={phot}
             />
             <Text style={styles.h2}>
-                Namaste, {full_name.split(" ")[0]}</Text>
-
+                Namaste, {full_name.split(" ")[0]}
+                </Text>
+<Text>{text}</Text>
             <Text style={styles.h4}>Here some surprise coupons for you only</Text>
             {
                 redeemed ? <View style={styles.termsdivmain}>

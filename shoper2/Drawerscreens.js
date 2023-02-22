@@ -71,7 +71,7 @@ const fetchdata=()=>{
 
 
     <Drawer.Navigator initialRouteName={
-      props.islo ?
+      props.islo?
         "mpin2" : "LoginHome"
     } useLegacyImplementation>
 

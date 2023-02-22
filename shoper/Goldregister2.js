@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userapi2 } from '../userapi';
 const baseURL='http://13.232.193.117:8000'
 
+
 const Goldregister = ({ navigation }) => {
     const [full_name, setFull_name] = useState("");
     const [username, setUsername] = useState("");

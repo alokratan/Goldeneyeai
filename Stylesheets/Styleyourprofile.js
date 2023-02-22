@@ -12,11 +12,13 @@ export const styles = StyleSheet.create({
         paddingBottom: height/8
     },
     header: {
-        backgroundColor: '#FFC72C',
+        
+         backgroundColor: '#FFC72C',
         height: height/13,
+
         width: '90%',
         position:'absolute',
-       top:0,
+       top:6,
        marginTop: '4%',
         borderTopRightRadius: 6,
         borderTopLeftRadius: 6,
@@ -30,7 +32,6 @@ export const styles = StyleSheet.create({
         backgroundColor: '#FFC72C',
         height: height/13,
         width: '90%',
-    
         borderRadius: 6,
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -139,12 +140,12 @@ export const styles = StyleSheet.create({
     },
    
     header5: {
-        height: '25%',
+        height: '30%',
         width: '90%',
         borderWidth: 2,
         borderColor: '#0011',
         position: 'absolute',
-        marginTop:'16%',
+        marginTop:'20%',
         zIndex: -1,
         borderBottomRightRadius: 6,
         borderBottomLeftRadius: 6,
@@ -163,6 +164,12 @@ export const styles = StyleSheet.create({
     droptxt: {
         fontSize: 17,
         color: 'black',
+        fontWeight: '600',
+        paddingLeft: 10
+    },
+    droptxt2: {
+        fontSize: 17,
+        color: 'red',
         fontWeight: '600',
         paddingLeft: 10
     },
@@ -199,5 +206,61 @@ export const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 8,
     },
+    successmain2:{ 
+        height: '105%',
+        width: '100%',
+        backgroundColor: 'rgba(0,0,0,0.6)',
+        position: 'absolute',
+        top: 0,
+        zIndex: 2,
+        borderColor: 'black',
+        shadowColor: "black",
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+   
+    sucess2: {
+        backgroundColor: 'white',
+        width: '90%',
+        height: '35%',
+   
+        justifyContent:'space-between',
+        alignItems:'center',
+        
+        borderRadius:10,
+        shadowColor: "black",
+        shadowOffset: {
+            width: 20,
+            height: 10,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 3.84,
+        elevation: 8,
+    },
+    presbtnlog:{
+        width:'38%',
+         justifyContent:'center',
+         alignItems:'center',
+         height:'75%',
+         borderRadius:4
+    },
+    textlogout:{
+        fontSize:17,
+        textTransform:'uppercase',
+        fontWeight:'700',
+        color:'white'
+    },
+    input2: {
+        width: '90%',
+        height: '15%',
+        fontSize: 16,
+        borderRadius:6,
+        backgroundColor:'#0001',
+        paddingLeft:5
+      
+       
+    },
+
   
 })

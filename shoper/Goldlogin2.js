@@ -109,6 +109,7 @@ const Goldlogin = ({ navigation }) => {
                                 setUsername('');
                                 setPassword('');
                                 navigation.navigate('mpin2')
+                                
                               
                             }, 1000);
                         }
