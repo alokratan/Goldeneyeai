@@ -71,8 +71,9 @@ const YourPro = ({ navigation }) => {
         if(textdelete==='DELETE'){
             const response = await axios.delete(`http://13.232.193.117:8000/user/register/${idd}`);
         console.log(response.data);
+        ToastAndroid.show('Your Account Delete Successfully', 1000)
             console.log('user account delete') 
-            removetoken();
+      
                     setIslog(true)
 
         ToastAndroid.show('Your Account Delete Successfully', 1000)
@@ -81,6 +82,8 @@ const YourPro = ({ navigation }) => {
             AsyncStorage.removeItem('Accessuserid', (err) => console.log('AccessTokendata', err));
         setTimeout(() => {
             setIslog(false)
+            setTextdelete('');
+            setHideitem(false)
             navigation.navigate('LoginHome')
         }, 1000);
                }
@@ -138,7 +141,7 @@ DELETE ACCOUNT</Text>
                             Are you sure want to delete your account?
                         </Text>
                         <Text style={{ fontSize: 16, width: '90%', fontWeight: '500', color: 'black' }}>
-                            Plese type DELETE to confirm
+                            Plese type <Text style={{color:'#D72500', fontWeight:'600'}}>DELETE</Text> to confirm
                         </Text>
 
                         <TextInput

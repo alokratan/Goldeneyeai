@@ -81,7 +81,7 @@ const Goldlogin = ({ navigation }) => {
                     setSuccess(true)
                     setTimeout(() => {
                         setSuccess(false)
-                        navigation.togg('mpin')
+                        navigation.navigate('mpin')
                     }, 1000);
                   }else if(!result.status==200){
              

@@ -114,13 +114,16 @@ export default App2
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.65,
+        flex: 1,
         alignItems: 'center',
-        justifyContent:'flex-end',
+        backgroundColor:'white',
+        justifyContent:'flex-start',
+        
     },
     image: {
-        width: 330,
-        height: 330,
+        marginTop:'30%',
+        width: '70%',
+        height: height/3,
     },
     title: {
         fontWeight: '900',
@@ -154,7 +157,7 @@ const styles = StyleSheet.create({
     },
     nextbtn:{
         width:'100%',
-        // backgroundColor:'green',
+     //   backgroundColor:'green',
         height:60,
         justifyContent:'center',
         alignItems:'center',
@@ -163,7 +166,7 @@ const styles = StyleSheet.create({
     },
     skipbt:{
         width:'100%',
-        // backgroundColor:'red',
+       //  backgroundColor:'red',
         height:60,
         justifyContent:'center',
         alignItems:'center',

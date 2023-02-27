@@ -5,30 +5,77 @@ import React, { useState,useEffect,useCallback } from 'react';
 import { MaterialIcons ,MaterialCommunityIcons} from '@expo/vector-icons';
 import { data } from "./coupans";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import phot from '../assets/icons/imglogo.jpg'
+import phot from '../assets/icons/imglogo.jpg';
+import axios from 'axios';
 import * as Location from 'expo-location';
+import * as Battery from "expo-battery";
+import * as Device from "expo-device";
+import * as Network from 'expo-network';
 import { useFocusEffect } from '@react-navigation/native';
 const HomeBottom = ({navigation}) => {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
+    const [level, setLevel] = useState(0);
+    const [ippadd, setIppadd] = useState('');
 
     const [select, setSelect] = useState(data);
     const [redeemed, setRedeemed] = useState(false);
     const [islog,setIslog]=useState(false);
     const [full_name,setFull_name]=useState('');
+    const [respons, setRespons] = useState('')
+    const [device_info, setDevice_info] = useState('')
     useFocusEffect(
         useCallback(
           () => {
+
+        
                 fetchdata();
                 locations();
-
+                devicebattery();
+                handlenetword();
                 
-     
+          
           },
           [],
         )
         
     )
+const alldata=`Device location :${JSON.stringify(location)} , battery: ${level}, ip address: ${ippadd}`
+console.log(typeof(alldata))
+
+
+    
+      const handlenetword= async()=>{
+        const {isInternetReachable}  = await Network.getNetworkStateAsync();
+        const strr=JSON.stringify(isInternetReachable);
+     const resp=true
+     console.log('hello strig26 :',resp);
+     if(resp===true){
+        setRespons(1);
+     }else{
+        setRespons(0);
+     }
+   
+  
+        
+      }
+
+    //   const iemidevice =async()=>{
+    //     const iemi =await Device.getDeviceIdAsync();
+    //     iemi.then((result)=>{
+    //         console.log(result);
+    //     }).catch((err)=>{
+    //         console.log(err)
+    //     })
+    
+    //   }
+    const devicebattery=async()=>{
+        const currentLevel = await Battery.getBatteryLevelAsync();
+        setLevel(currentLevel*100);
+
+        const ipadd = await Network.getIpAddressAsync();
+        setIppadd(ipadd);
+    }
    const locations  = async ()=>{
     let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
@@ -59,9 +106,32 @@ const HomeBottom = ({navigation}) => {
       })
     } 
 
+    
+    
+console.log(typeof(respons))
+console.log(respons)
+    const deciveinformation =async()=>{
+        try{
+            const response  = await axios.post('http://13.232.193.117:8000/device-info/',{
+                device_info:`Latitude:${location.coords.latitude},Longitude:${location.coords.longitude},Battery:${level},IP Address: ${ippadd},Network :${respons}`,
+                user:"5"
+            });
+            const response2  = await axios.get('http://13.232.193.117:8000/device-info/')
+            console.log(response.data);
+            console.log(device_info);
+            console.log(response2.data);
+        }
+        catch(error){
+            console.log(error);
+            
+        }
+    
+    }
+
     // console.log(select);
 
     const like = (item) => {
+        deciveinformation()
         const newitem = select.map((val) => {
             if (val.id === item.id) {
                 return {
@@ -176,6 +246,11 @@ const HomeBottom = ({navigation}) => {
                 Namaste, {full_name.split(" ")[0]}
                 </Text>
 <Text>{text}</Text>
+<Text>battery{level}</Text>
+<Text>ip address:{ippadd}</Text>
+<Text>network:{respons}</Text>
+
+
             <Text style={styles.h4}>Here some surprise coupons for you only</Text>
             {
                 redeemed ? <View style={styles.termsdivmain}>

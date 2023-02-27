@@ -36,7 +36,7 @@ export default function Drawers() {
   else if(islogin === true){
 return(
 
-  <Drawerscreens islog={islogin2}/>
+  <Drawerscreens islo={true}/>
 
 )
   }

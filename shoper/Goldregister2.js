@@ -146,7 +146,7 @@ const Goldregister = ({ navigation }) => {
     function loginfun(){
         ToastAndroid.show('Please Wait...',1000);
         setTimeout(() => {
-                navigation.navigate('LoginHome')
+                navigation.push('LoginHome')
             }, 1000);
     }
     return (

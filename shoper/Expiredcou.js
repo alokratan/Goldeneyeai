@@ -19,7 +19,7 @@ const Expiredcou = () => {
                         </View>
             </View>
             </View>
-            <Text style={styles.h4}>Here some expired coupons</Text>
+           
             {/* <ScrollView style={styles.main}>
                 <View style={styles.main2}> */}
             <FlatList

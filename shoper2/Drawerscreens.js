@@ -28,7 +28,7 @@ const Drawerscreens = (props) => {
     useCallback(
       () => {
             fetchdata();
-            console.log('darawerscree',props.islog);
+            console.log('darawerscree');
             console.log('darawerscree2',props.islo);
             
  
@@ -72,13 +72,13 @@ const fetchdata=()=>{
 
     <Drawer.Navigator initialRouteName={
       props.islo?
-        "mpin2" : "LoginHome"
+        "LoginHome": "mpin2"
     } useLegacyImplementation>
 
       <Drawer.Screen options={{ headerShown: false }} name="LoginHome" component={Goldlogin2} />
       <Drawer.Screen options={{ headerShown: false }} name="RegisterHome" component={Goldregister2} />
       <Drawer.Screen options={{ headerShown: false }} name="Verify" component={Verifynum} />
-      <Drawer.Screen options={{ headerShown: false }} name="mpin" component={Entermpin} />
+      {/* <Drawer.Screen options={{ headerShown: false }} name="mpin" component={Entermpin} /> */}
       <Drawer.Screen options={{ headerShown: false }} name="Setmpin" component={Setmpin} />
       <Drawer.Screen options={{ headerShown: false }} name="Resetmpin" component={Setmpin2} />
       <Drawer.Screen options={{ headerShown: false }} name="Forgotmpin" component={Forgotmpin} />
@@ -86,8 +86,8 @@ const fetchdata=()=>{
       <Drawer.Screen options={{ headerShown: false }} name="Bottomtabs" component={Bottomtabs} />
       <Drawer.Screen options={{ headerShown: false }} name="percent" component={Updatepercent} />
       <Drawer.Screen options={{ headerShown: false }} name="hide" component={Updatehide} />
-      <Drawer.Screen options={{ headerShown: false }} name="Goldlogin" component={Goldlogin} />
-      <Drawer.Screen options={{ headerShown: false }} name="Goldregis" component={Goldregister} />
+      {/* <Drawer.Screen options={{ headerShown: false }} name="Goldlogin" component={Goldlogin} /> */}
+      {/* <Drawer.Screen options={{ headerShown: false }} name="Goldregis" component={Goldregister} /> */}
       <Drawer.Screen options={{ headerShown: false }} name="mpin2" component={Entermpin2} />
       <Drawer.Screen options={{ headerShown: false }} name="likedis2" component={Swiper5} />
       <Drawer.Screen options={{ headerShown: false }} name="homebutt" component={HomeBottom} />

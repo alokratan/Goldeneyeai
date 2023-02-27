@@ -85,7 +85,7 @@ const Setmpin = ({navigation}) => {
             setSuccess(true)
             setTimeout(() => {
                 setSuccess(false)
-                navigation.navigate('Goldlogin')
+                navigation.navigate('LoginHome')
             }, 2000);
         }
   

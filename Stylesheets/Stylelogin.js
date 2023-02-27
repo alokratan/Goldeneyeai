@@ -131,7 +131,6 @@ export const styles = StyleSheet.create({
     },
     mediadiv: {
         width: '100%',
-        height: height/10,
     // backgroundColor: 'grey',
         justifyContent: 'center',
         alignItems: 'center',

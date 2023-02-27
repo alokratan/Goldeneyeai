@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
 
         width: '90%',
         position:'absolute',
-       top:6,
+       top:12,
        marginTop: '4%',
         borderTopRightRadius: 6,
         borderTopLeftRadius: 6,
@@ -145,7 +145,7 @@ export const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: '#0011',
         position: 'absolute',
-        marginTop:'20%',
+        marginTop:'22%',
         zIndex: -1,
         borderBottomRightRadius: 6,
         borderBottomLeftRadius: 6,
