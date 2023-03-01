@@ -11,13 +11,13 @@ export default function Drawers() {
     useCallback(
       () => {
         AsyncStorage.getItem('AccessToken').then(value=>{
-          setIslogin2(true);
+         
           if(value ==null){
             console.log("this is value",value);
-            setIslogin(true);
+            setIslogin(false);
           }
     else{
-      setIslogin(false);
+      setIslogin(true);
     }
         })
  
@@ -28,7 +28,7 @@ export default function Drawers() {
 )
 
   const [islogin,setIslogin]=useState(null);
-  const [islogin2,setIslogin2]=useState(null);
+
 
   if(islogin === null){
     return null;
@@ -43,7 +43,7 @@ return(
 
   else{
     return(
-      <Drawerscreens islo={true}/>
+      <Drawerscreens islo={false}/>
   //     <Appstack.Navigator>
          
   //       <Appstack.Screen options={{headerShown:false}} name="Drawerlogin" component={Bottomtabs} />

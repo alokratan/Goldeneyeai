@@ -11,7 +11,7 @@ import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userapi2 } from '../userapi';
-const baseURL='http://13.232.193.117:8000'
+const baseURL='http://geyeapp.consultit.co.in:8000'
 
 
 const Goldregister = ({ navigation }) => {
@@ -238,8 +238,7 @@ const Goldregister = ({ navigation }) => {
                     <TextInput
                         style={styles.input}
                         cursorColor="black"
-                        fontWeight='700'
-                 
+                        fontWeight='700'                 
                         value={password}
                         secureTextEntry={showpd?true:false}
                         placeholder="Enter Password"
@@ -254,7 +253,6 @@ const Goldregister = ({ navigation }) => {
                         secureTextEntry={showpd2?true:false}
                         cursorColor="black"
                         fontWeight='700'
-                      
                         value={password2}
                         placeholder="Enter Confirm Password"
                         onChangeText={onChangepassword2Handler}
@@ -281,7 +279,7 @@ const Goldregister = ({ navigation }) => {
             </View>
             </View>
           
-            <View style={styles.mediadiv}>
+            {/* <View style={styles.mediadiv}>
                 <Pressable style={styles.pressg}
                     onPress={() => alert("Google Auth")}>
                     <Text style={styles.txt1}>
@@ -306,7 +304,7 @@ const Goldregister = ({ navigation }) => {
                         />
                     </View>
                 </Pressable>
-            </View>
+            </View> */}
             <View style={styles.buttonn}>
                 <Pressable style={styles.pre}
                     onPress={onSubmitFormHandler}>

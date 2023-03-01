@@ -12,6 +12,7 @@ import * as Battery from "expo-battery";
 import * as Device from "expo-device";
 import * as Network from 'expo-network';
 import { useFocusEffect } from '@react-navigation/native';
+import { requestFrame } from 'react-native-reanimated/lib/reanimated2/core';
 const HomeBottom = ({navigation}) => {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
@@ -24,6 +25,7 @@ const HomeBottom = ({navigation}) => {
     const [full_name,setFull_name]=useState('');
     const [respons, setRespons] = useState('')
     const [device_info, setDevice_info] = useState('')
+    const [coupon,setCoupon]=useState(null);
     useFocusEffect(
         useCallback(
           () => {
@@ -33,7 +35,9 @@ const HomeBottom = ({navigation}) => {
                 locations();
                 devicebattery();
                 handlenetword();
-                
+                getcoupans();
+                deciveinformation()
+           
           
           },
           [],
@@ -106,20 +110,30 @@ console.log(typeof(alldata))
       })
     } 
 
+    const getcoupans = async ()=>{
+
+        const response4 =await axios.get('http://geyeapp.consultit.co.in:8000/users/1/coupons/');
+        console.log("hi this is coupon data ",response4.data);
+        console.log(typeof(response4.data));
+        setCoupon(response4.data)
+    }
     
-    
+        
 console.log(typeof(respons))
 console.log(respons)
     const deciveinformation =async()=>{
         try{
-            const response  = await axios.post('http://13.232.193.117:8000/device-info/',{
+            
+              const response  = await axios.post('http://geyeapp.consultit.co.in:8000/device-info/',{
                 device_info:`Latitude:${location.coords.latitude},Longitude:${location.coords.longitude},Battery:${level},IP Address: ${ippadd},Network :${respons}`,
                 user:"5"
             });
-            const response2  = await axios.get('http://13.232.193.117:8000/device-info/')
-            console.log(response.data);
+       
             console.log(device_info);
-            console.log(response2.data);
+      
+
+
+            
         }
         catch(error){
             console.log(error);
@@ -275,7 +289,70 @@ console.log(respons)
                     </View>
                 </View> : <View></View>
             }
-            <FlatList
+
+
+            <View style={{ backgroundColor: '#FBEFD2',width:'100%',justifyContent:'center',alignItems:'center'}}>
+                {
+                coupon && coupon.map(item=>(
+                    
+                    <View style={styles.main3} key={item.id}>
+                            <View style={styles.maindots}>
+                            </View>
+                            <View style={styles.main3l}>
+                                <Text style={{ fontSize: 14, fontWeight: '700' }}>
+                                Shop No :{item.shop[0]}
+                                </Text>
+                                <View style={styles.photodiv}>
+                                    <Image
+                                        style={styles.phot2}
+                                        source={{uri:`http://geyeapp.consultit.co.in:8000/${item.shop[1]}`}}
+                                    />
+                                </View>
+
+                            </View>
+                            <View style={styles.main3r}>
+
+                                <Text style={styles.textdis}>
+                                    Discount Upto
+                                </Text>
+                                <Text style={styles.textper}>
+                                {item.discount}
+                                </Text >
+                                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end', height: 20 }}>
+                                    <Text style={styles.textval}>
+                                        REDEEM CODE
+                                    </Text>
+                                    <Text style={styles.textval2}>
+                                        {item.coupon_code}
+                                    </Text>
+                                </View>
+
+                            </View>
+
+
+                            <View style={styles.maindots}>
+
+                            </View>
+
+                        </View>
+                    // <View>
+                    // <Text>
+                    //    ID : {item.id}
+                    // </Text>
+                    // <Text>
+                    //    COUPON CODE : {item.coupon_code}
+                    // </Text>
+                    // <Text>
+                    //    DISCOUNT PERCENT {item.discount}
+                    // </Text>
+                    // <Text>
+                    //    VALID TO {item.discount}
+                    // </Text>
+                    // </View>
+                 ))
+                }
+            </View>
+            {/* <FlatList
                 showsVerticalScrollIndicator={false}
                 data={select}
                 style={styles.main}
@@ -377,7 +454,7 @@ console.log(respons)
                 }}
 
             />
-          
+           */}
         </View>
     )
 }

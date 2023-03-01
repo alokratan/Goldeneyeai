@@ -91,7 +91,7 @@ const Goldlogin = ({ navigation }) => {
                         
                      
                         AsyncStorage.setItem("Accessuserid", JSON.stringify(userid));
-                        console.log(result);
+                        // console.log(result);
                         console.log(result.data.token)
                         console.log(result.data)
                         console.log(result.data.user_id)
@@ -101,7 +101,7 @@ const Goldlogin = ({ navigation }) => {
                             setPhoneval(true)
                             setPassval(true)
                             AsyncStorage.setItem('AccessToken', result.data.token);
-
+                            console.log(result.data.token);
                             ToastAndroid.show('Login Successfully...', 1000)
                             setSuccess(true)
                             setTimeout(() => {
@@ -350,7 +350,7 @@ const Goldlogin = ({ navigation }) => {
 
 
             </View>
-            <View style={styles.mediadiv}>
+            {/* <View style={styles.mediadiv}>
                 <Pressable style={styles.pressg}
                     onPress={() => alert("Google Auth")}
                 >
@@ -380,7 +380,7 @@ const Goldlogin = ({ navigation }) => {
                         />
                     </View>
                 </Pressable>
-            </View>
+            </View> */}
             <View style={styles.buttonn}>
                 <Pressable
                     onPress={loginfun}

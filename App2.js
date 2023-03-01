@@ -14,7 +14,7 @@ const App2 = () => {
             <View style={styles.donebt}>
                 <Text style={{
                color: 'white',
-               fontSize: 20,
+               fontSize: height*0.020,
                textTransform: 'uppercase',
                fontWeight: '700',
              paddingVertical:14,
@@ -35,7 +35,7 @@ const App2 = () => {
             <View style={styles.skipbt}>
                 <Text style={{
                     color: 'black',
-                    fontSize: 20,
+                    fontSize: height*0.020,
                     textDecorationLine: 'underline',
                     textTransform: 'uppercase',
                     fontWeight: '700'
@@ -50,7 +50,7 @@ const App2 = () => {
             <View style={styles.nextbtn}>
                 <Text style={{
                     color: 'white',
-                    fontSize: 20,
+                    fontSize: height*0.020,
                     textTransform: 'uppercase',
                     fontWeight: '700',
                   paddingVertical:14,
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: '900',
-        fontSize: 33,
+        fontSize: height*0.035,
         color: 'black',
         textAlign: 'center',
         marginTop:70,
@@ -138,8 +138,8 @@ const styles = StyleSheet.create({
     mdots: {
 
         backgroundColor: '#FFC400',
-        width: 16,
-        height: 16,
+        width: height*0.020,
+        height: height*0.020,
         borderRadius: 10,
        marginBottom:50
 
@@ -147,8 +147,8 @@ const styles = StyleSheet.create({
     dots: {
 
         backgroundColor: 'black',
-        width: 22,
-        height: 22,
+         width: height*0.021,
+        height: height*0.021,
         borderRadius: 20,
         marginBottom:50
        

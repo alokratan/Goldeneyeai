@@ -5,7 +5,6 @@ import loginimg from '../assets/icons/loginimg.jpg'
 import { MaterialIcons } from '@expo/vector-icons';
 import {styles} from '../Stylesheets/Stylesetmpin';
 const Setmpin2 = ({navigation}) => {
-
     const [mpin,setMpin]=useState('');
     const [mpin2,setMpin2]=useState('');
     const [mpinval,setMpinval]=useState(true);

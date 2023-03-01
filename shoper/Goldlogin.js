@@ -113,7 +113,7 @@ const Goldlogin = ({ navigation }) => {
         ToastAndroid.show('Please Wait...', 1000);
         setTimeout(() => {
             navigation.navigate('Verify')
-        }, 3000);
+        }, 2000);
     }
     return (
 

@@ -48,7 +48,7 @@ const Setmpin = ({navigation}) => {
           }
       
           try {
-            const response = await axios.post('http://13.232.193.117:8000/user/set-mpin/', {
+            const response = await axios.post('http://geyeapp.consultit.co.in:8000/user/set-mpin/', {
               mpin,
               confirm_mpin,
             },{

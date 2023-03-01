@@ -5,7 +5,7 @@ import Dropmultiple from './Multiple2'
 import { styles } from '../Stylesheets/Styleyourprofile'
 import phot from '../assets/icons/imglogo.jpg'
 import axios from 'axios';
-const baseURL = 'http://13.232.193.117:8000'
+const baseURL = 'http://geyeapp.consultit.co.in:8000'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { FontAwesome5, MaterialIcons, MaterialCommunityIcons, Entypo, Ionicons, Feather } from '@expo/vector-icons';
@@ -69,7 +69,7 @@ const YourPro = ({ navigation }) => {
     const logoutfn = async() => {
        
         if(textdelete==='DELETE'){
-            const response = await axios.delete(`http://13.232.193.117:8000/user/register/${idd}`);
+            const response = await axios.delete(`http://geyeapp.consultit.co.in:8000/user/register/${idd}`);
         console.log(response.data);
         ToastAndroid.show('Your Account Delete Successfully', 1000)
             console.log('user account delete') 
