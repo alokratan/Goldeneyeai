@@ -245,6 +245,13 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    successmain2:{ 
+        flex: 0.9,
+    
+        top: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
    
     sucess: {
         backgroundColor: '#0B7B00',
@@ -263,6 +270,27 @@ export const styles = StyleSheet.create({
         shadowOpacity: 1,
         shadowRadius: 3.84,
         elevation: 8,
-    }
+    },
+    sucess2: {
+        backgroundColor: '#F0F0F0',
+        width: '90%',
+        height: height*0.06,
+        borderWidth: 3,
+        paddingHorizontal:10,
+        borderColor:'white',
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        borderRadius:10,
+        shadowColor: "black",
+        shadowOffset: {
+            width: 20,
+            height: 10,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 3.84,
+        elevation: 8,
+    },
+   
 
 })

@@ -287,7 +287,29 @@ export const styles = StyleSheet.create({
         shadowOpacity: 1,
         shadowRadius: 3.84,
         elevation: 8,
-    }
+    },
+    activitybox: {
+        backgroundColor: 'white',
+        width: '30%',
+        height: '10%',
+        borderWidth: 3,
+        borderColor:'white',
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius:10,
+        shadowColor: "black",
+        shadowOffset: {
+            width: 20,
+            height: 10,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 3.84,
+        elevation: 8,
+    },
+    spinnerTextStyle: {
+        color: 'white',
+        fontSize:70
+      },
 
 
 

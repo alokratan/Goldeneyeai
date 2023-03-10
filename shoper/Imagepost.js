@@ -5,57 +5,59 @@ import axios from 'axios';
 export default function Imagepost() {
   const [image, setImage] = useState(null);
 
-  const sendPhotoToApi = async () => {
-    // const formData = new FormData();
-    // formData.append('image', image);
-    // console.log(formData);
-    console.log(image)
-    const imagw=JSON.stringify(image)
-    console.log(imagw);
-      try{
-    const response = await axios.post('http://geyeapp.consultit.co.in:8000/selfie/',{
-        image:"http://13.232.193.117:8000/profile_pic/Screenshot_1.png",
-    }, {
-        
-        method: 'POST',
-        // body: JSON.stringify(image)
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-      });
-    
-    //   const result = await response.json();
-    
-      console.log(response);
-      console.log(result);
-  }
-  catch(err){
-    console.log(err)
-  }
- 
-  };
-  
-
-  const pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+  async function pickImage() {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
+  
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
-      console.log("fjiahfihihfihiewhf",result.assets[0].uri);
+      console.log(result.assets[0].uri);
+      setImage(result.assets[0].uri)
     }
-  };
+  }
+  
+  const anotherf =()=>{
+    uploadImage(image);
+  }
+
+  async function uploadImage(uri) {
+    let formData = new FormData();
+    formData.append('full_name',"alok ji ratan")
+    formData.append('username',"alok000")
+    formData.append('email',"alok23@gmail.com")
+    formData.append('password',"password")
+    formData.append('password2',"password")
+    formData.append('gender',"Male")
+    formData.append('profile_pic', {
+      uri,
+      name: 'profile_pic.jpg',
+      type: 'image/jpeg',
+    });
+  console.log(formData)
+    try {
+      let response = await axios.post('http://13.232.193.117:8000/user/register/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
+
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button title="Pick an image from camera roll" onPress={pickImage} />
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-      <Button title="Send photo to API" onPress={sendPhotoToApi} />
+      <Button title="Upload DATA" onPress={anotherf} />
+      {/* {image && <Image source={{ uri }} style={{ width: 200, height: 200 }} />}
+      <Button title="Send photo to API" onPress={uploadImage} /> */}
     </View>
   );
 }

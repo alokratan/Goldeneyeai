@@ -13,6 +13,7 @@ const HomeBottom = ({navigation}) => {
     const [select, setSelect] = useState(data);
     const [redeemed, setRedeemed] = useState(false);
     const [islog,setIslog]=useState(false);
+    const [profilepic,setProfilepic]=useState('');
     const [full_name,setFull_name]=useState('');
     useFocusEffect(
         useCallback(
@@ -31,6 +32,7 @@ const HomeBottom = ({navigation}) => {
           const bad=JSON.parse(value);
           console.log('userid', typeof(bad));
           setFull_name(bad.full_name)
+          setProfilepic(bad.profile_pic)
                    
       })
     } 
@@ -88,6 +90,7 @@ const HomeBottom = ({navigation}) => {
         ToastAndroid.show('Logout Successfully', 1000)
    
          AsyncStorage.removeItem('AccessToken', (err) => console.log('AccessToken', err));
+         AsyncStorage.removeItem('Accessfileuri', (err) => console.log('Accessfileuri', err));
          AsyncStorage.removeItem('Accessuserid', (err) => console.log('AccessTokendata', err));
       
         setTimeout(() => {
@@ -143,11 +146,13 @@ const HomeBottom = ({navigation}) => {
   
 </Pressable>
             </View>
-
-            <Image
+                <View style={{width:84,height:84,borderRadius:100, justifyContent:'center',alignItems:'center',borderWidth:3,borderColor:'#FFC72C'}}>
+                <Image
                 style={styles.phot}
-                source={phot}
+                source={{uri:`http://13.232.193.117:8000/${profilepic}`}}
             />
+                </View>
+           
             <Text style={styles.h2}>
                 Namaste, {full_name.split(" ")[0]}</Text>
 
@@ -416,9 +421,12 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     phot: {
-        marginTop: 20,
-        width: 65,
-        height: 60,
+        
+        width: 70,
+        borderRadius:100,
+        height: 70,
+        borderWidth:3,
+        borderColor:'black',
 
     },
     phot2: {

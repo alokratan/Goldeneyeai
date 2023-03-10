@@ -18,8 +18,9 @@ import Swiper5 from '../shoper/Animate';
 import Updatepercent from '../shoper/Updatepercent'
 import Updatehide from '../shoper/Upadatehide';
 import { useFocusEffect } from '@react-navigation/native';
-import HomeBottom from '../shoper/Apicoupansget';
+import HomeBottom2 from '../shoper/Apicoupansget';
 import Imagepost from '../shoper/Imagepost';
+import Camerapp from '../shoper/Camera'
 const Drawer = createDrawerNavigator();
 const Drawerscreens = (props) => {
 
@@ -88,11 +89,12 @@ const Drawerscreens = (props) => {
       <Drawer.Screen options={{ headerShown: false }} name="percent" component={Updatepercent} />
       <Drawer.Screen options={{ headerShown: false }} name="hide" component={Updatehide} />
       {/* <Drawer.Screen options={{ headerShown: false }} name="Goldlogin" component={Goldlogin} /> */}
-      {/* <Drawer.Screen options={{ headerShown: false }} name="Goldregis" component={Goldregister} /> */}
+      <Drawer.Screen options={{ headerShown: false }} name="Goldregis" component={Goldregister} />
       <Drawer.Screen options={{ headerShown: false }} name="mpin2" component={Entermpin2} />
       <Drawer.Screen options={{ headerShown: false }} name="likedis2" component={Swiper5} />
-      <Drawer.Screen options={{ headerShown: false }} name="homebutt" component={HomeBottom} />
+      <Drawer.Screen options={{ headerShown: false }} name="homebutt" component={HomeBottom2} />
       <Drawer.Screen options={{ headerShown: false }} name="homebutt2" component={Imagepost} />
+      <Drawer.Screen options={{ headerShown: false }} name="Camerapp" component={Camerapp} />
 
 
     </Drawer.Navigator>

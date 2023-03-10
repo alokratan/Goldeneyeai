@@ -1,4 +1,4 @@
-import { StyleSheet,ToastAndroid,ScrollView,StatusBar, Text, View, Button, Pressable, Image } from 'react-native'
+import { StyleSheet,ToastAndroid,ScrollView,StatusBar,Modal, Text, View, Button, Pressable, Image } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler';
 import React, { useState,useEffect,useCallback } from 'react';
 
@@ -13,7 +13,7 @@ import * as Device from "expo-device";
 import * as Network from 'expo-network';
 import { useFocusEffect } from '@react-navigation/native';
 import { requestFrame } from 'react-native-reanimated/lib/reanimated2/core';
-const HomeBottom = ({navigation}) => {
+const HomeBottom2 = ({navigation}) => {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [level, setLevel] = useState(0);
@@ -23,6 +23,8 @@ const HomeBottom = ({navigation}) => {
     const [redeemed, setRedeemed] = useState(false);
     const [islog,setIslog]=useState(false);
     const [full_name,setFull_name]=useState('');
+    const [id,setId]=useState('');
+
     const [respons, setRespons] = useState('')
     const [device_info, setDevice_info] = useState('')
     const [coupon,setCoupon]=useState(null);
@@ -105,6 +107,7 @@ console.log(typeof(alldata))
           const bad=JSON.parse(value);
           console.log('userid', typeof(bad));
           setFull_name(bad.full_name)
+          setId(bad.id)
           console.log(bad.assigned_coupon);
                    
       })
@@ -112,7 +115,7 @@ console.log(typeof(alldata))
 
     const getcoupans = async ()=>{
 
-        const response4 =await axios.get('http://geyeapp.consultit.co.in:8000/users/1/coupons/');
+        const response4 =await axios.get(`http://geyeapp.consultit.co.in:8000/users/${id}/coupons/`);
         console.log("hi this is coupon data ",response4.data);
         console.log(typeof(response4.data));
         setCoupon(response4.data)
@@ -126,7 +129,7 @@ console.log(respons)
             
               const response  = await axios.post('http://geyeapp.consultit.co.in:8000/device-info/',{
                 device_info:`Latitude:${location.coords.latitude},Longitude:${location.coords.longitude},Battery:${level},IP Address: ${ippadd},Network :${respons}`,
-                user:"5"
+                user:"15"
             });
        
             console.log(device_info);
@@ -217,6 +220,16 @@ console.log(respons)
 
 
             />
+
+{/* <Modal visible={true} transparent={true} >
+    <View style={styles.container2}>
+        <View>
+            <Text>
+                HELLO TEXT
+            </Text>
+        </View>
+    </View>
+</Modal> */}
               {islog?
 
 <View style={styles.successmain}>
@@ -459,7 +472,7 @@ console.log(respons)
     )
 }
 
-export default HomeBottom;
+export default HomeBottom2;
 
 const styles = StyleSheet.create({
     container: {
@@ -676,6 +689,11 @@ const styles = StyleSheet.create({
         textTransform:'uppercase',
         fontWeight:'700',
         color:'white'
+    },
+    container2:{
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center'
     }
 
 })

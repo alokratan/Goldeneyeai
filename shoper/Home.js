@@ -6,6 +6,7 @@ const Home = () => {
         const dataToken =await AsyncStorage.removeItem('AccessToken');
         
         console.log(dataToken);
+        
         }   
   return (
     <View style={{flex:1,justifyContent:'center',backgroundColor:'red',alignItems:'center'}}>

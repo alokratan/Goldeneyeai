@@ -138,17 +138,18 @@ const styles = StyleSheet.create({
     mdots: {
 
         backgroundColor: '#FFC400',
-        width: height*0.020,
-        height: height*0.020,
+        width: height*0.018,
+        height: height*0.018,
         borderRadius: 10,
        marginBottom:50
 
     },
+    
     dots: {
 
         backgroundColor: 'black',
-         width: height*0.021,
-        height: height*0.021,
+         width: height*0.018,
+        height: height*0.018,
         borderRadius: 20,
         marginBottom:50
        
@@ -161,8 +162,6 @@ const styles = StyleSheet.create({
         height:60,
         justifyContent:'center',
         alignItems:'center',
-      
-     
     },
     skipbt:{
         width:'100%',

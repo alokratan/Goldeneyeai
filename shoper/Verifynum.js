@@ -1,7 +1,7 @@
-import { StyleSheet, Text, Pressable,ToastAndroid, TextInput,Dimensions, Image, View } from 'react-native'
+import { StyleSheet, Text, Pressable,ToastAndroid,Modal, TextInput,Dimensions, Image, View, TouchableOpacity } from 'react-native'
 import React, { useRef, useState } from 'react';
  import loginimg from '../assets/icons/loginimg.jpg'
- import { MaterialCommunityIcons } from '@expo/vector-icons';
+ import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import {styles} from '../Stylesheets/Styleverify'
 const Verifynum = ({navigation}) => {
     const pin1Ref = useRef(null);
@@ -14,13 +14,47 @@ const Verifynum = ({navigation}) => {
     const [otp, setOtp] = useState({ 1: '', 2: '', 3: '', 4: '' });
     const [phone_number,setPhone_number]=useState('');
     const [success, setSuccess] = useState(false);
+    const [ismodel, setIsmodel] = useState(false);
     const onChangephone_numberHandler = (phone_number) => {
         setPhone_number(phone_number);
     };
+
+    function Modelfunction(){
+        return(
+            
+            <View style={styles.successmain2}>
+               
+                <View style={styles.sucess2}>
+       
+                    <Text style={{ fontSize: 20, fontWeight: '600', color: 'black' }}>
+                       Your OTP is 2580
+                      
+                  </Text>
+                  <TouchableOpacity style={styles.cross} onPress={()=>setIsmodel(false)}>
+                  <AntDesign name='closecircle' color="red" size={25} />
+                       </TouchableOpacity>
+                  
+                </View>
+            </View>
+    
+        )
+    }
+   
+ 
     function  sendeotpfun(){
         pin5Ref.current.blur()
         if(phone_number.toString().length==10){
             ToastAndroid.show('OTP Send Successfully.',2000);
+            setTimeout(() => {
+
+                setIsmodel(true)
+            }, 2000);
+            setTimeout(() => {
+
+                setIsmodel(false)
+            }, 13000);
+         
+           
             setCorrectphno(true)
             
         }else{
@@ -34,6 +68,8 @@ const Verifynum = ({navigation}) => {
     const abcd = { ...otp }
 
    
+
+
 function loginfun(){
     var bas = Object.values(abcd)
     const abstr = Number(bas.join(''));
@@ -45,7 +81,7 @@ function loginfun(){
         
         setTimeout(() => {
             setSuccess(false)
-            navigation.navigate('RegisterHome')
+            navigation.navigate('Goldregis')
         }, 2000);
   
     // console.log(abstr);
@@ -79,6 +115,9 @@ function loginfun(){
                     </View>
                 </View> : <View></View>
             }
+            <Modal animationType="slide" visible={ismodel} transparent={true} >
+                <Modelfunction/>
+            </Modal>
             <View style={styles.top}>
                 <Text style={styles.title}>Verify</Text>
             </View>
@@ -190,7 +229,7 @@ function loginfun(){
                             
                             }
                     <Pressable style={styles.txt2}
-                        onPress={() => alert("helllo alert")}>
+                        onPress={sendeotpfun}>
                         <Text style={styles.txt3}>
                             Resend OTP
                         </Text>

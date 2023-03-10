@@ -1,4 +1,4 @@
-import { StyleSheet, StatusBar, Text, Pressable, ScrollView, TextInput, ToastAndroid, Image, View } from 'react-native'
+import { StyleSheet, StatusBar, Modal, Text, Pressable, ScrollView, TextInput, ToastAndroid, Image, View } from 'react-native'
 import React, { useState, useEffect } from 'react';
 import Checkbox from 'expo-checkbox';
 import loginimg from '../assets/icons/loginimg.jpg'
@@ -88,8 +88,8 @@ const Goldlogin = ({ navigation }) => {
                 })
                     .then(result => {
                         const userid = result.data.user_id
-                        
-                     
+
+
                         AsyncStorage.setItem("Accessuserid", JSON.stringify(userid));
                         // console.log(result);
                         console.log(result.data.token)
@@ -109,18 +109,18 @@ const Goldlogin = ({ navigation }) => {
                                 setUsername('');
                                 setPassword('');
                                 navigation.navigate('mpin2')
-                                
-                              
+
+
                             }, 1000);
                         }
-                        else if (result.status === 400){
+                        else if (result.status === 400) {
                             console.log('error is 400 or invalid creadentials')
-                         ToastAndroid.show('Please check the login credentials!!!', 1000)
-                       
+                            ToastAndroid.show('Please check the login credentials!!!', 1000)
+
                         }
 
 
-                         else if (!result.status == 200) {
+                        else if (!result.status == 200) {
 
                             setPhoneval(false)
                             setPassval(false)
@@ -128,24 +128,24 @@ const Goldlogin = ({ navigation }) => {
                             ToastAndroid.show('Invalid Credentials', 1000)
 
                         }
-                        
-                      
+
+
 
                     }).catch(err => {
-                         ToastAndroid.show('Please check the login credentials!!!', 1000)
-                       console.log(err);
-                       
+                        ToastAndroid.show('Please check the login credentials!!!', 1000)
+                        console.log(err);
 
-                    // ToastAndroid.show('Make Sure Your Server Is Live', 1000)
-                      if (err.status === 400){
-                        console.log(err.status);
+
+                        // ToastAndroid.show('Make Sure Your Server Is Live', 1000)
+                        if (err.status === 400) {
+                            console.log(err.status);
                             console.log('error is 400 or invalid creadentials')
-                         ToastAndroid.show('Please check the login credentials!!!', 1000)
-                       
+                            ToastAndroid.show('Please check the login credentials!!!', 1000)
+
                         }
-                    
-                 
-                       
+
+
+
                     })
 
             }
@@ -235,17 +235,16 @@ const Goldlogin = ({ navigation }) => {
                     : <View></View>
             }
 
-            {
-                success ? <View style={styles.successmain}>
-
+            <Modal animationType="slide" visible={success} transparent={true} >
+                <View style={styles.successmain}>
                     <View style={styles.sucess}>
                         <Text style={{ fontSize: 26, fontWeight: '900', marginVertical: 20, color: 'white' }}>
                             Login Successfully
                         </Text>
-
                     </View>
-                </View> : <View></View>
-            }
+                </View>
+            </Modal>
+
             <View style={styles.top}>
                 <Text style={styles.title}>Welcome</Text>
             </View>
