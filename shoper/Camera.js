@@ -21,12 +21,15 @@ const navigation =useNavigation();
   
  useEffect(()=>{
   
-  const permissioncam = async()=>{
-    const cameraStatus = await Camera.requestCameraPermissionsAsync();
-    setHasCameraPermission(cameraStatus.status == 'granted');
-    permissioncam();}
+(
+  async()=>{
+    const {status} =await Camera.requestCameraPermissionsAsync();
+    setHasCameraPermission(status==='granted');
 
- },[1])
+  }
+)();
+
+ },[])
 
 
   const takePicture = async () => {
@@ -60,17 +63,17 @@ console.log(image);
     }
   };
 
-  if (hasCameraPermission === false) {  
-    return <View style={styles.accesscamera}>
-      <Text style={{fontSize:26}}>No access to camera
-      </Text>
-      <TouchableOpacity >
-        <Text style={{backgroundColor:'black',borderRadius:10 ,color:'white',fontSize:30,padding:10}} >
-          Give Permission
-        </Text>
-      </TouchableOpacity>
-      </View>
-  }
+  // if (hasCameraPermission === false) {  
+  //   return <View style={styles.accesscamera}>
+  //     <Text style={{fontSize:26}}>No access to camera
+  //     </Text>
+  //     <TouchableOpacity >
+  //       <Text style={{backgroundColor:'black',borderRadius:10 ,color:'white',fontSize:30,padding:10}} >
+  //         Give Permission
+  //       </Text>
+  //     </TouchableOpacity>
+  //     </View>
+  // }
 
   return (
     <View style={styles.container}>
